@@ -1,0 +1,69 @@
+name: yt-transcriber
+
+x-yt-transcriber-common: &yt-transcriber-common
+  build:
+    context: .
+    args:
+      PRELOAD_MODELS: "1"
+  image: yt-transcriber:cuda12.8
+  environment:
+    YT_TRANSCRIBER_DEVICE: cuda
+    YT_TRANSCRIBER_API_KEY: ${YT_TRANSCRIBER_API_KEY:-}
+    YT_TRANSCRIBER_API_KEY_FILE: /data/results/.yt-transcriber-api-key
+    YT_TRANSCRIBER_ROOT_PATH: /yt-transcriber
+    YT_TRANSCRIBER_RESULTS_DIR: /data/results
+    YT_TRANSCRIBER_WORK_DIR: /data/work
+  volumes:
+    - ./results:/data/results
+    - ./_batch_work:/data/work
+  deploy:
+    resources:
+      reservations:
+        devices:
+          - driver: nvidia
+            count: 1
+            capabilities: [gpu]
+  restart: "no"
+
+services:
+  yt-transcriber-api:
+    <<: *yt-transcriber-common
+    container_name: yt-transcriber-api
+    hostname: yt-transcriber-api
+    command: ["api"]
+    networks:
+      - traefik
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 180s
+
+  yt-transcriber-batch:
+    <<: *yt-transcriber-common
+    profiles: ["batch"]
+    container_name: yt-transcriber-batch
+    hostname: yt-transcriber-batch
+    command:
+      - batch
+      - /data/input/videos.txt
+      - --output-dir
+      - /data/results
+      - --work-root
+      - /data/work
+      - --device
+      - cuda
+      - --language
+      - en
+      - --granularity
+      - both
+    volumes:
+      - ./videos.txt:/data/input/videos.txt:ro
+      - ./results:/data/results
+      - ./_batch_work:/data/work
+
+networks:
+  traefik:
+    external: true
+    name: ${TRAEFIK_NETWORK:-traefik}

@@ -1,0 +1,31 @@
+http:
+  routers:
+    yt-transcriber:
+      rule: "Host(`bengee.asigno.ro`) && PathPrefix(`/yt-transcriber`)"
+      priority: 100
+      entryPoints:
+        - websecure
+      service: yt-transcriber-service
+      tls: {}
+      middlewares:
+        - yt-transcriber-strip
+        - yt-transcriber-ratelimit
+        - forward-client-ip@file
+
+  services:
+    yt-transcriber-service:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "http://yt-transcriber-api:8000"
+
+  middlewares:
+    yt-transcriber-strip:
+      stripPrefix:
+        prefixes:
+          - "/yt-transcriber"
+    yt-transcriber-ratelimit:
+      rateLimit:
+        average: 30
+        period: 1m
+        burst: 10

@@ -1,0 +1,12 @@
+.git
+.gitignore
+__pycache__/
+*.py[cod]
+_smoke_run/
+_batch_work/
+results/
+*.json
+*.csv
+videos_kids.txt
+videos_normal.txt
+ai_masters_admissions.md

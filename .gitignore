@@ -1,2 +1,5 @@
 __pycache__
 _smoke_run
+.env
+results
+_batch_work

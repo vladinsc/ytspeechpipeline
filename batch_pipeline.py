@@ -12,6 +12,7 @@ import json
 import logging
 import re
 import shutil
+import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -31,6 +32,30 @@ log = logging.getLogger("batch")
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+
+def nvidia_smi_snapshot() -> dict:
+    """Return a compact, checkpoint-friendly snapshot of visible NVIDIA GPUs."""
+    command = [
+        "nvidia-smi",
+        "--query-gpu=index,name,uuid,driver_version,memory.total,memory.used,utilization.gpu",
+        "--format=csv,noheader,nounits",
+    ]
+    try:
+        process = subprocess.run(command, capture_output=True, text=True, timeout=15)
+    except (FileNotFoundError, subprocess.TimeoutExpired) as exc:
+        return {"available": False, "error": f"{type(exc).__name__}: {exc}"}
+    if process.returncode != 0:
+        return {"available": False, "error": process.stderr.strip() or "nvidia-smi failed"}
+
+    fields = ["index", "name", "uuid", "driver_version", "memory_total_mib",
+              "memory_used_mib", "utilization_percent"]
+    devices = []
+    for line in process.stdout.splitlines():
+        values = [value.strip() for value in line.split(",")]
+        if len(values) == len(fields):
+            devices.append(dict(zip(fields, values)))
+    return {"available": bool(devices), "captured_at": utc_now(), "devices": devices}
 
 
 LABELS = {
@@ -255,6 +280,16 @@ def main(argv: Optional[list[str]] = None) -> int:
         checkpoint["model_status"] = "loading"
         save_checkpoint(checkpoint_path, checkpoint)
         device = resolve_device(args.device)
+        if device == "cuda":
+            checkpoint["gpu"] = nvidia_smi_snapshot()
+            if not checkpoint["gpu"]["available"]:
+                raise RuntimeError(f"CUDA selected but nvidia-smi failed: {checkpoint['gpu'].get('error')}")
+            for gpu in checkpoint["gpu"]["devices"]:
+                log.info(
+                    "NVIDIA GPU %s: %s | driver=%s | memory=%s MiB",
+                    gpu["index"], gpu["name"], gpu["driver_version"], gpu["memory_total_mib"],
+                )
+            save_checkpoint(checkpoint_path, checkpoint)
         isolator = VocalIsolator(device, model_name=args.demucs_model)
         transcriber = GPUTranscriber(
             device,
