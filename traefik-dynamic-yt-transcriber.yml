@@ -1,7 +1,7 @@
 http:
   routers:
     yt-transcriber:
-      rule: "Host(`bengee.asigno.ro`) && PathPrefix(`/yt-transcriber`)"
+      rule: "Host(`ai.asigno.ro`) && PathPrefix(`/yt-transcriber`)"
       priority: 100
       entryPoints:
         - websecure

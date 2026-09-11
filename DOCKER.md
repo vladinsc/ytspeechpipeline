@@ -104,6 +104,9 @@ profile. Do not run it alongside the API on the same GPU:
 docker compose --profile batch run --rm yt-transcriber-batch
 ```
 
+The batch worker reuses the existing `TRAEFIK_NETWORK`; Compose therefore does
+not create a per-project default bridge network on the shared GPU host.
+
 Resume with the same command. To retry failed manifest entries:
 
 ```bash

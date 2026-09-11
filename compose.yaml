@@ -44,6 +44,11 @@ services:
     profiles: ["batch"]
     container_name: yt-transcriber-batch
     hostname: yt-transcriber-batch
+    # Reuse the existing external network. This avoids Compose creating a
+    # project-default bridge network for each batch run on subnet-exhausted
+    # multi-project GPU hosts.
+    networks:
+      - traefik
     command:
       - batch
       - /data/input/videos.txt
