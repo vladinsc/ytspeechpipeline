@@ -8,8 +8,6 @@ x-yt-transcriber-common: &yt-transcriber-common
   image: yt-transcriber:cuda12.8
   environment:
     YT_TRANSCRIBER_DEVICE: cuda
-    YT_TRANSCRIBER_API_KEY: ${YT_TRANSCRIBER_API_KEY:-}
-    YT_TRANSCRIBER_API_KEY_FILE: /data/results/.yt-transcriber-api-key
     YT_TRANSCRIBER_ROOT_PATH: /yt-transcriber
     YT_TRANSCRIBER_RESULTS_DIR: /data/results
     YT_TRANSCRIBER_WORK_DIR: /data/work

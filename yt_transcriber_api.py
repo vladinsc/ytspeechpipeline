@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import asyncio
-import hmac
 import json
 import logging
 import os
@@ -11,9 +10,9 @@ import threading
 import uuid
 from contextlib import asynccontextmanager
 from pathlib import Path
-from typing import Annotated, Literal
+from typing import Literal
 
-from fastapi import Depends, FastAPI, Header, HTTPException, status
+from fastapi import FastAPI, HTTPException, status
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, HttpUrl
 
@@ -193,17 +192,6 @@ ROOT_PATH = os.environ.get("YT_TRANSCRIBER_ROOT_PATH", "").rstrip("/")
 app = FastAPI(title="yt-transcriber", version="1.0.0", root_path=ROOT_PATH, lifespan=lifespan)
 
 
-def require_api_key(x_api_key: Annotated[str | None, Header()] = None) -> None:
-    expected = os.environ.get("YT_TRANSCRIBER_API_KEY", "")
-    if len(expected) < 16:
-        raise HTTPException(status_code=503, detail="Server API key is not configured")
-    if x_api_key is None or not hmac.compare_digest(x_api_key, expected):
-        raise HTTPException(status_code=401, detail="Invalid or missing X-API-Key")
-
-
-Auth = Annotated[None, Depends(require_api_key)]
-
-
 @app.get("/")
 def root() -> dict:
     return {"service": "yt-transcriber", "docs": f"{ROOT_PATH}/docs",
@@ -218,7 +206,7 @@ def health() -> JSONResponse:
 
 
 @app.post("/v1/jobs", status_code=status.HTTP_202_ACCEPTED)
-async def create_job(request: JobRequest, _: Auth) -> dict:
+async def create_job(request: JobRequest) -> dict:
     if not runtime.ready:
         raise HTTPException(status_code=503, detail="Models are not ready")
     if not 40 <= request.pitch_ceiling <= 1200 or not 20 <= request.pitch_floor < request.pitch_ceiling:
@@ -232,13 +220,13 @@ async def create_job(request: JobRequest, _: Auth) -> dict:
 
 
 @app.get("/v1/jobs")
-def list_jobs(_: Auth) -> dict:
+def list_jobs() -> dict:
     jobs = [public_job(job) for job in runtime.store.data["jobs"].values()]
     return {"summary": runtime.store.data["summary"], "jobs": jobs}
 
 
 @app.get("/v1/jobs/{job_id}")
-def get_job(job_id: str, _: Auth) -> dict:
+def get_job(job_id: str) -> dict:
     job = runtime.store.get(job_id)
     if job is None:
         raise HTTPException(status_code=404, detail="Job not found")
@@ -246,7 +234,7 @@ def get_job(job_id: str, _: Auth) -> dict:
 
 
 @app.get("/v1/jobs/{job_id}/result")
-def get_result(job_id: str, _: Auth):
+def get_result(job_id: str):
     job = runtime.store.get(job_id)
     if job is None:
         raise HTTPException(status_code=404, detail="Job not found")

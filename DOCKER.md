@@ -41,15 +41,6 @@ Create the local environment file:
 cp .env.example .env
 ```
 
-When `YT_TRANSCRIBER_API_KEY` is empty, the entrypoint generates a 64-character
-secret once and persists it at `results/.yt-transcriber-api-key`. It reuses that
-secret after restarts. This is the API's own authentication secret, not a
-YouTube or Hugging Face credential. Read it on the host with:
-
-```bash
-cat results/.yt-transcriber-api-key
-```
-
 Ensure the external Docker network named by `TRAEFIK_NETWORK` already contains
 Traefik. Merge `traefik-dynamic-yt-transcriber.yml` into the corresponding
 `http.routers`, `http.services`, and `http.middlewares` sections of your existing
@@ -71,7 +62,6 @@ the command name `yt-transcriber`.
 ```bash
 curl -X POST "https://bengee.asigno.ro/yt-transcriber/v1/jobs" \
   -H "Content-Type: application/json" \
-  -H "X-API-Key: YOUR_GENERATED_SECRET" \
   -d '{"url":"https://www.youtube.com/watch?v=VIDEO_ID","label":"kids","granularity":"both"}'
 ```
 
@@ -79,11 +69,9 @@ The API immediately returns HTTP 202 and a job ID. Check it without holding the
 original request open:
 
 ```bash
-curl -H "X-API-Key: YOUR_GENERATED_SECRET" \
-  "https://bengee.asigno.ro/yt-transcriber/v1/jobs/JOB_ID"
+curl "https://bengee.asigno.ro/yt-transcriber/v1/jobs/JOB_ID"
 
-curl -H "X-API-Key: YOUR_GENERATED_SECRET" \
-  "https://bengee.asigno.ro/yt-transcriber/v1/jobs/JOB_ID/result"
+curl "https://bengee.asigno.ro/yt-transcriber/v1/jobs/JOB_ID/result"
 ```
 
 API job state is persisted in `results/api_jobs.json`; labeled result JSON files
@@ -124,5 +112,6 @@ Inspect progress from the host:
 python -c 'import json; print(json.load(open("results/batch_checkpoint.json"))["summary"])'
 ```
 
+The endpoints are intentionally open and do not require application credentials.
 The container does not include YouTube credentials or Hugging Face tokens. The
 selected videos and model repositories are public.
