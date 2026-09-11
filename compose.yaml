@@ -19,7 +19,8 @@ x-yt-transcriber-common: &yt-transcriber-common
       reservations:
         devices:
           - driver: nvidia
-            count: 1
+            device_ids:
+              - "${YT_TRANSCRIBER_GPU_ID:-0}"
             capabilities: [gpu]
   restart: "no"
 

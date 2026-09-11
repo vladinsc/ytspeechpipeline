@@ -41,6 +41,18 @@ Create the local environment file:
 cp .env.example .env
 ```
 
+Select the physical GPU shown by `nvidia-smi` and the Docker network belonging
+to the Traefik instance that serves `bengee.asigno.ro`:
+
+```dotenv
+YT_TRANSCRIBER_GPU_ID=0
+TRAEFIK_NETWORK=traefik_traefik_net
+```
+
+Compose exposes only that physical GPU to the container. Inside the container it
+is normally renumbered as CUDA device `0`, so keep the pipeline device set to
+`cuda`; do not change it to `cuda:1`.
+
 Ensure the external Docker network named by `TRAEFIK_NETWORK` already contains
 Traefik. Merge `traefik-dynamic-yt-transcriber.yml` into the corresponding
 `http.routers`, `http.services`, and `http.middlewares` sections of your existing
