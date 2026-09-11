@@ -1,8 +1,8 @@
 """Resumable batch runner for the CDS prosody extraction pipeline.
 
-The URL file contains one public YouTube URL per line. Empty lines and lines
-starting with ``#`` are ignored. A JSON checkpoint is atomically updated at every
-major pipeline stage, allowing both live inspection and restart after interruption.
+The URL file contains one public YouTube URL per line under ``# LABEL:`` section
+markers. A JSON checkpoint is atomically updated at every major pipeline stage,
+allowing both live inspection and restart after interruption.
 """
 
 from __future__ import annotations
@@ -33,23 +33,50 @@ def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
-def load_urls(path: Path) -> list[str]:
-    urls: list[str] = []
-    seen: set[str] = set()
+LABELS = {
+    "YOUTUBE_KIDS": "kids",
+    "KIDS": "kids",
+    "NORMAL_YOUTUBE": "normal",
+    "YOUTUBE_NORMAL": "normal",
+    "NORMAL": "normal",
+}
+
+
+def load_manifest(path: Path) -> list[dict[str, str]]:
+    videos: list[dict[str, str]] = []
+    seen: dict[str, str] = {}
+    current_label: Optional[str] = None
     for raw_line in path.read_text(encoding="utf-8-sig").splitlines():
-        url = raw_line.strip()
-        if not url or url.startswith("#"):
+        line = raw_line.strip()
+        label_match = re.match(r"^#\s*LABEL:\s*([A-Z_]+)", line, flags=re.IGNORECASE)
+        if label_match:
+            raw_label = label_match.group(1).upper()
+            if raw_label not in LABELS:
+                raise ValueError(f"Unknown label {raw_label!r} in {path}")
+            current_label = LABELS[raw_label]
             continue
+        if not line or line.startswith("#"):
+            continue
+        url = line
         if not url.startswith(("https://www.youtube.com/", "https://youtube.com/", "https://youtu.be/")):
             raise ValueError(f"Unsupported URL in {path}: {url}")
         if url in seen:
+            if seen[url] != current_label:
+                raise ValueError(f"URL appears under two labels ({seen[url]}, {current_label}): {url}")
             log.warning("Skipping duplicate URL: %s", url)
             continue
-        seen.add(url)
-        urls.append(url)
-    if not urls:
+        if current_label is None:
+            raise ValueError(f"URL appears before a # LABEL: section in {path}: {url}")
+        seen[url] = current_label
+        videos.append({"url": url, "label": current_label})
+    if not videos:
         raise ValueError(f"No YouTube URLs found in {path}")
-    return urls
+    return videos
+
+
+def load_urls(path: Path) -> list[str]:
+    """Compatibility helper returning only URLs from a labeled manifest."""
+    return [video["url"] for video in load_manifest(path)]
 
 
 def video_label(url: str) -> str:
@@ -69,18 +96,20 @@ def atomic_write_json(path: Path, data: dict) -> None:
     temporary.replace(path)
 
 
-def new_entry(index: int, url: str, output_dir: Path, work_root: Path) -> dict:
+def new_entry(index: int, video: dict[str, str], output_dir: Path, work_root: Path) -> dict:
+    url, label = video["url"], video["label"]
     stem = f"video_{index:04d}_{video_label(url)}"
     return {
         "index": index,
         "url": url,
+        "label": label,
         "status": "pending",
         "stage": "waiting",
         "stage_status": "pending",
         "detail": "",
         "attempts": 0,
-        "output_path": str((output_dir / f"{stem}.json").resolve()),
-        "workdir": str((work_root / stem).resolve()),
+        "output_path": str((output_dir / label / f"{stem}.json").resolve()),
+        "workdir": str((work_root / label / stem).resolve()),
         "started_at": None,
         "completed_at": None,
         "updated_at": utc_now(),
@@ -90,7 +119,7 @@ def new_entry(index: int, url: str, output_dir: Path, work_root: Path) -> dict:
 
 
 def load_or_create_checkpoint(
-    path: Path, urls: list[str], urls_file: Path, output_dir: Path, work_root: Path
+    path: Path, videos: list[dict[str, str]], urls_file: Path, output_dir: Path, work_root: Path
 ) -> dict:
     old_entries: dict[str, dict] = {}
     created_at = utc_now()
@@ -100,13 +129,14 @@ def load_or_create_checkpoint(
         created_at = existing.get("created_at", created_at)
 
     entries: list[dict] = []
-    for index, url in enumerate(urls, start=1):
-        fresh = new_entry(index, url, output_dir, work_root)
+    for index, video in enumerate(videos, start=1):
+        url = video["url"]
+        fresh = new_entry(index, video, output_dir, work_root)
         previous = old_entries.get(url)
         if previous:
             # Output/work paths follow the current CLI arguments, while status is resumed.
             fresh.update({key: value for key, value in previous.items()
-                          if key not in {"index", "output_path", "workdir"}})
+                          if key not in {"index", "label", "output_path", "workdir"}})
             fresh["index"] = index
             if fresh["status"] in {"processing", "interrupted"}:
                 fresh["status"] = "pending"
@@ -138,6 +168,16 @@ def update_summary(checkpoint: dict) -> None:
         "completed": sum(entry["status"] == "completed" for entry in entries),
         "failed": sum(entry["status"] == "failed" for entry in entries),
         "interrupted": sum(entry["status"] == "interrupted" for entry in entries),
+        "by_label": {
+            label: {
+                "total": sum(entry["label"] == label for entry in entries),
+                "completed": sum(entry["label"] == label and entry["status"] == "completed"
+                                 for entry in entries),
+                "failed": sum(entry["label"] == label and entry["status"] == "failed"
+                              for entry in entries),
+            }
+            for label in sorted({entry["label"] for entry in entries})
+        },
     }
 
 
@@ -149,7 +189,7 @@ def save_checkpoint(path: Path, checkpoint: dict) -> None:
 def count_records(payload: list[dict] | dict[str, list[dict]]) -> dict[str, int]:
     if isinstance(payload, list):
         return {"records": len(payload)}
-    return {name: len(records) for name, records in payload.items()}
+    return {name: len(records) for name, records in payload.items() if isinstance(records, list)}
 
 
 def parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
@@ -181,9 +221,9 @@ def main(argv: Optional[list[str]] = None) -> int:
     args = parse_args(argv)
     checkpoint_path = args.checkpoint or args.output_dir / "batch_checkpoint.json"
     try:
-        urls = load_urls(args.urls_file)
+        videos = load_manifest(args.urls_file)
         checkpoint = load_or_create_checkpoint(
-            checkpoint_path, urls, args.urls_file, args.output_dir, args.work_root
+            checkpoint_path, videos, args.urls_file, args.output_dir, args.work_root
         )
     except Exception as exc:
         log.error("Cannot initialize batch: %s", exc)
@@ -273,6 +313,7 @@ def main(argv: Optional[list[str]] = None) -> int:
             pitch_ceiling=args.pitch_ceiling,
             keep_workdir=args.keep_workdirs,
             granularity=args.granularity,
+            label=entry["label"],
         )
         try:
             payload = ProsodyPipeline(cfg, device=device).run(

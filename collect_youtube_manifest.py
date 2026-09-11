@@ -37,6 +37,16 @@ KIDS_QUERIES = [
     ("tweens", "TED-Ed kids science English 5 minutes"),
     ("tweens", "Mark Rober kids science 8 minutes"),
     ("tweens", "BrainPOP English 5 minutes"),
+    ("school_age", "The Dad Lab science experiment kids English 6 minutes"),
+    ("school_age", "Homeschool Pop English 5 minutes"),
+    ("early_childhood", "Little Baby Bum English 5 minutes"),
+    ("tweens", "Mocomi kids educational English 6 minutes"),
+    ("school_age", "MinuteEarth kids English 6 minutes"),
+    ("school_age", "Easy Kids Crafts English 6 minutes"),
+    ("early_childhood", "Mother Goose Club English 5 minutes"),
+    ("school_age", "kids educational video English 5 min learning"),
+    ("school_age", "fun facts for kids English 5 minutes"),
+    ("tweens", "kids history lesson English 6 minutes"),
 ]
 
 NORMAL_QUERIES = [
@@ -67,6 +77,21 @@ def clean(value: object) -> str:
     return re.sub(r"\s+", " ", str(value or "")).strip()
 
 
+def kids_genre(query: str) -> str:
+    q = query.lower()
+    for terms, label in [
+        (("song", "rhymes", "music", "bum", "goose"), "music"),
+        (("story", "read aloud", "peppa"), "stories/shows"),
+        (("science", "experiment", "scishow", "nat geo", "national geographic", "brainpop", "minuteearth"), "science/learning"),
+        (("draw", "craft"), "art/crafts"),
+        (("yoga",), "movement/yoga"),
+        (("numberblocks", "math"), "math"),
+    ]:
+        if any(term in q for term in terms):
+            return label
+    return "educational/entertainment"
+
+
 def search_set(ydl: YoutubeDL, queries: list[tuple[str, str]], target: int, source: str) -> list[dict]:
     rows: list[dict] = []
     seen: set[str] = set()
@@ -93,7 +118,7 @@ def search_set(ydl: YoutubeDL, queries: list[tuple[str, str]], target: int, sour
                 "source": source,
                 "classification": "kids_candidate" if source == "youtube_kids" else "normal_youtube",
                 "age_group": group if source == "youtube_kids" else "adult/general",
-                "genre": group,
+                "genre": kids_genre(query) if source == "youtube_kids" else group,
                 "title": title,
                 "channel": clean(item.get("channel") or item.get("uploader")),
                 "duration_seconds": int(duration),

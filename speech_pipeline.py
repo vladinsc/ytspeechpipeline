@@ -501,6 +501,7 @@ class PipelineConfig:
     keep_workdir: bool = True
     asr_sr: int = 16_000
     granularity: str = "word"
+    label: Optional[str] = None
 
 
 class ProsodyPipeline:
@@ -576,6 +577,19 @@ class ProsodyPipeline:
             syllable_payload = [f.to_dict() for f in analyzer.enrich_syllables(words)]
             payload = {"words": word_payload, "syllables": syllable_payload}
             record_count = len(word_payload) + len(syllable_payload)
+        if cfg.label is not None:
+            collections = (
+                {"words": payload} if cfg.granularity == "word"
+                else {"syllables": payload} if cfg.granularity == "syllable"
+                else payload
+            )
+            payload = {
+                "label": cfg.label,
+                "source_url": cfg.url,
+                "language": cfg.language,
+                "granularity": cfg.granularity,
+                **collections,
+            }
         progress("prosody_analysis", "completed", f"{record_count} records")
         progress("save_output", "started", str(cfg.out_path))
         cfg.out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -608,6 +622,8 @@ def parse_args(argv: Optional[list[str]] = None) -> PipelineConfig:
                    help="Raise (e.g. 800) for exaggerated CDS to avoid clipping.")
     p.add_argument("--granularity", choices=["word", "syllable", "both"], default="word",
                    help="Write word records, estimated syllable records, or both.")
+    p.add_argument("--label", choices=["kids", "normal"], default=None,
+                   help="Optional dataset label included in the output JSON.")
     p.add_argument("--clean", action="store_true", help="Delete workdir afterwards.")
     a = p.parse_args(argv)
     return PipelineConfig(
@@ -615,7 +631,7 @@ def parse_args(argv: Optional[list[str]] = None) -> PipelineConfig:
         whisper_model=a.whisper_model, compute_type=a.compute_type,
         demucs_model=a.demucs_model, language=a.language,
         pitch_floor=a.pitch_floor, pitch_ceiling=a.pitch_ceiling,
-        keep_workdir=not a.clean, granularity=a.granularity,
+        keep_workdir=not a.clean, granularity=a.granularity, label=a.label,
     )
 
 
