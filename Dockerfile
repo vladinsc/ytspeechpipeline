@@ -2,6 +2,7 @@
 FROM pytorch/pytorch:2.8.0-cuda12.8-cudnn9-runtime
 
 ARG PRELOAD_MODELS=1
+ARG DENO_VERSION=2.3.3
 
 ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONUNBUFFERED=1 \
@@ -14,8 +15,17 @@ ENV DEBIAN_FRONTEND=noninteractive \
     NVIDIA_DRIVER_CAPABILITIES=compute,utility
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates ffmpeg git \
+    && apt-get install -y --no-install-recommends ca-certificates curl ffmpeg git unzip \
     && rm -rf /var/lib/apt/lists/*
+
+# Current YouTube extraction needs an external JavaScript runtime for the
+# challenge solver used by yt-dlp. Deno is yt-dlp's recommended runtime.
+RUN curl --fail --location --silent --show-error \
+      "https://github.com/denoland/deno/releases/download/v${DENO_VERSION}/deno-x86_64-unknown-linux-gnu.zip" \
+      --output /tmp/deno.zip \
+    && unzip -q /tmp/deno.zip -d /usr/local/bin \
+    && rm /tmp/deno.zip \
+    && deno --version
 
 WORKDIR /app
 

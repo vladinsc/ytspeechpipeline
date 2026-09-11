@@ -4,6 +4,11 @@ The pipeline is packaged as one GPU worker because Demucs, VAD, WhisperX,
 alignment, and Praat run sequentially on the same audio. Model weights are baked
 into the image and reused for every video.
 
+The image also includes Deno and the matching `yt-dlp-ejs` package. They let
+yt-dlp solve the JavaScript challenges currently required by many public
+YouTube streams; no YouTube API token or browser cookie is required for normal
+public videos.
+
 ## GPU server prerequisites
 
 - Linux x86-64
@@ -42,7 +47,7 @@ cp .env.example .env
 ```
 
 Select the physical GPU shown by `nvidia-smi` and the Docker network belonging
-to the Traefik instance that serves `bengee.asigno.ro`:
+to the Traefik instance that serves `ai.asigno.ro`:
 
 ```dotenv
 YT_TRANSCRIBER_GPU_ID=0
@@ -72,7 +77,7 @@ the command name `yt-transcriber`.
 ## Submit an asynchronous job
 
 ```bash
-curl -X POST "https://bengee.asigno.ro/yt-transcriber/v1/jobs" \
+curl -X POST "https://ai.asigno.ro/yt-transcriber/v1/jobs" \
   -H "Content-Type: application/json" \
   -d '{"url":"https://www.youtube.com/watch?v=VIDEO_ID","label":"kids","granularity":"both"}'
 ```
@@ -81,9 +86,9 @@ The API immediately returns HTTP 202 and a job ID. Check it without holding the
 original request open:
 
 ```bash
-curl "https://bengee.asigno.ro/yt-transcriber/v1/jobs/JOB_ID"
+curl "https://ai.asigno.ro/yt-transcriber/v1/jobs/JOB_ID"
 
-curl "https://bengee.asigno.ro/yt-transcriber/v1/jobs/JOB_ID/result"
+curl "https://ai.asigno.ro/yt-transcriber/v1/jobs/JOB_ID/result"
 ```
 
 API job state is persisted in `results/api_jobs.json`; labeled result JSON files

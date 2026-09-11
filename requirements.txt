@@ -12,7 +12,9 @@
 # ---------------------------------------------------------------------------
 
 # --- Ingestion ---
-yt-dlp>=2024.8.6
+# The `default` extra installs yt-dlp-ejs, the matching YouTube JavaScript
+# challenge solver. The Docker image also provides the Deno runtime it needs.
+yt-dlp[default]>=2024.8.6
 # ffmpeg is a SYSTEM binary, not a pip package:
 #   Windows : winget install Gyan.FFmpeg     (or: choco install ffmpeg)
 #   Linux   : sudo apt install ffmpeg
