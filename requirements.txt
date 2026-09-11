@@ -1,0 +1,30 @@
+# ---------------------------------------------------------------------------
+# GPU pipeline requirements  (Python 3.10 or 3.11 recommended)
+#
+# STEP 1 — install a CUDA build of PyTorch FIRST, matched to your CUDA toolkit.
+#          Do NOT let the packages below pull in a CPU-only torch.
+#          CUDA 12.1 example:
+#   pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu121
+#
+# STEP 2 — install the rest:
+#   pip install -r requirements.txt
+# ---------------------------------------------------------------------------
+
+# --- Ingestion ---
+yt-dlp>=2024.8.6
+# ffmpeg is a SYSTEM binary, not a pip package:
+#   Windows : winget install Gyan.FFmpeg     (or: choco install ffmpeg)
+#   Linux   : sudo apt install ffmpeg
+
+# --- Source separation ---
+demucs>=4.0.1
+
+# --- ASR + forced alignment ---
+# whisperX pins ctranslate2 / faster-whisper; install it and let it resolve those.
+whisperx>=3.1.1
+
+# --- Acoustic / prosody ---
+praat-parselmouth>=0.4.3
+numpy>=1.24,<2.0     # ct2/faster-whisper wheels are happiest on numpy 1.x
+
+# torch / torchaudio are installed in STEP 1 above (CUDA wheels), not here.
