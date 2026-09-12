@@ -1,0 +1,278 @@
+{
+  "label": "normal",
+  "source_url": "https://www.youtube.com/watch?v=WK5n5SUrBi8",
+  "language": "en",
+  "granularity": "both",
+  "words": [
+    {
+      "word": "Never.",
+      "start_time": 11.95,
+      "end_time": 12.651,
+      "pitch_mean_hz": 279.79,
+      "pitch_variance": 861.86,
+      "pause_after_sec": 30.423,
+      "speech_rate_sps": 2.853
+    },
+    {
+      "word": "Thank",
+      "start_time": 43.074,
+      "end_time": 43.295,
+      "pitch_mean_hz": 287.76,
+      "pitch_variance": 242.27,
+      "pause_after_sec": 0.16,
+      "speech_rate_sps": 4.525
+    },
+    {
+      "word": "you.",
+      "start_time": 43.455,
+      "end_time": 43.676,
+      "pitch_mean_hz": 391.45,
+      "pitch_variance": 16.83,
+      "pause_after_sec": 70.574,
+      "speech_rate_sps": 4.525
+    },
+    {
+      "word": "Bye.",
+      "start_time": 114.25,
+      "end_time": 114.53,
+      "pitch_mean_hz": 303.06,
+      "pitch_variance": 1399.98,
+      "pause_after_sec": 0.061,
+      "speech_rate_sps": 3.571
+    },
+    {
+      "word": "Bye.",
+      "start_time": 114.591,
+      "end_time": 114.831,
+      "pitch_mean_hz": 293.52,
+      "pitch_variance": 32.12,
+      "pause_after_sec": 30.375,
+      "speech_rate_sps": 4.167
+    },
+    {
+      "word": "Thank",
+      "start_time": 145.206,
+      "end_time": 145.427,
+      "pitch_mean_hz": 288.4,
+      "pitch_variance": 252.71,
+      "pause_after_sec": 0.1,
+      "speech_rate_sps": 4.525
+    },
+    {
+      "word": "you",
+      "start_time": 145.527,
+      "end_time": 146.149,
+      "pitch_mean_hz": 387.9,
+      "pitch_variance": 262.53,
+      "pause_after_sec": 1.003,
+      "speech_rate_sps": 1.608
+    },
+    {
+      "word": "for",
+      "start_time": 147.152,
+      "end_time": 147.473,
+      "pitch_mean_hz": 385.63,
+      "pitch_variance": 172.69,
+      "pause_after_sec": 0.1,
+      "speech_rate_sps": 3.115
+    },
+    {
+      "word": "watching!",
+      "start_time": 147.573,
+      "end_time": 148.054,
+      "pitch_mean_hz": 390.44,
+      "pitch_variance": 15.27,
+      "pause_after_sec": 92.502,
+      "speech_rate_sps": 4.158
+    },
+    {
+      "word": "Bye.",
+      "start_time": 240.556,
+      "end_time": 240.704,
+      "pitch_mean_hz": null,
+      "pitch_variance": null,
+      "pause_after_sec": 56.311,
+      "speech_rate_sps": 6.757
+    },
+    {
+      "word": "Mmm.",
+      "start_time": 297.015,
+      "end_time": 297.1,
+      "pitch_mean_hz": 293.49,
+      "pitch_variance": 6.72,
+      "pause_after_sec": null,
+      "speech_rate_sps": 11.765
+    }
+  ],
+  "syllables": [
+    {
+      "syllable": "Ne",
+      "parent_word": "Never.",
+      "syllable_index": 1,
+      "syllable_count": 2,
+      "start_time": 11.95,
+      "end_time": 12.3,
+      "pitch_mean_hz": 289.22,
+      "pitch_variance": 969.53,
+      "pause_after_sec": 0.0,
+      "speech_rate_sps": 2.853,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "ver",
+      "parent_word": "Never.",
+      "syllable_index": 2,
+      "syllable_count": 2,
+      "start_time": 12.3,
+      "end_time": 12.651,
+      "pitch_mean_hz": 270.36,
+      "pitch_variance": 576.36,
+      "pause_after_sec": 30.423,
+      "speech_rate_sps": 2.853,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "Thank",
+      "parent_word": "Thank",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 43.074,
+      "end_time": 43.295,
+      "pitch_mean_hz": 287.76,
+      "pitch_variance": 242.27,
+      "pause_after_sec": 0.16,
+      "speech_rate_sps": 4.525,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "you",
+      "parent_word": "you.",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 43.455,
+      "end_time": 43.676,
+      "pitch_mean_hz": 391.45,
+      "pitch_variance": 16.83,
+      "pause_after_sec": 70.574,
+      "speech_rate_sps": 4.525,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "Bye",
+      "parent_word": "Bye.",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 114.25,
+      "end_time": 114.53,
+      "pitch_mean_hz": 303.06,
+      "pitch_variance": 1399.98,
+      "pause_after_sec": 0.061,
+      "speech_rate_sps": 3.571,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "Bye",
+      "parent_word": "Bye.",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 114.591,
+      "end_time": 114.831,
+      "pitch_mean_hz": 293.52,
+      "pitch_variance": 32.12,
+      "pause_after_sec": 30.375,
+      "speech_rate_sps": 4.167,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "Thank",
+      "parent_word": "Thank",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 145.206,
+      "end_time": 145.427,
+      "pitch_mean_hz": 288.4,
+      "pitch_variance": 252.71,
+      "pause_after_sec": 0.1,
+      "speech_rate_sps": 4.525,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "you",
+      "parent_word": "you",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 145.527,
+      "end_time": 146.149,
+      "pitch_mean_hz": 387.9,
+      "pitch_variance": 262.53,
+      "pause_after_sec": 1.003,
+      "speech_rate_sps": 1.608,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "for",
+      "parent_word": "for",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 147.152,
+      "end_time": 147.473,
+      "pitch_mean_hz": 385.63,
+      "pitch_variance": 172.69,
+      "pause_after_sec": 0.1,
+      "speech_rate_sps": 3.115,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "watc",
+      "parent_word": "watching!",
+      "syllable_index": 1,
+      "syllable_count": 2,
+      "start_time": 147.573,
+      "end_time": 147.814,
+      "pitch_mean_hz": 389.11,
+      "pitch_variance": 14.16,
+      "pause_after_sec": 0.0,
+      "speech_rate_sps": 4.158,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "hing",
+      "parent_word": "watching!",
+      "syllable_index": 2,
+      "syllable_count": 2,
+      "start_time": 147.814,
+      "end_time": 148.054,
+      "pitch_mean_hz": 391.72,
+      "pitch_variance": 13.0,
+      "pause_after_sec": 92.502,
+      "speech_rate_sps": 4.158,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "Bye",
+      "parent_word": "Bye.",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 240.556,
+      "end_time": 240.704,
+      "pitch_mean_hz": null,
+      "pitch_variance": null,
+      "pause_after_sec": 56.311,
+      "speech_rate_sps": 6.757,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "Mmm",
+      "parent_word": "Mmm.",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 297.015,
+      "end_time": 297.1,
+      "pitch_mean_hz": 293.49,
+      "pitch_variance": 6.72,
+      "pause_after_sec": null,
+      "speech_rate_sps": 11.765,
+      "timing_method": "uniform_within_word"
+    }
+  ]
+}

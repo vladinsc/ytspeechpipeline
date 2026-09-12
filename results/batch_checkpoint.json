@@ -1,0 +1,4058 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-12T13:56:11+00:00",
+  "updated_at": "2026-09-12T16:31:23+00:00",
+  "urls_file": "/data/input/videos.txt",
+  "output_dir": "/data/results",
+  "work_root": "/data/work",
+  "model_status": "loaded",
+  "current_video": null,
+  "summary": {
+    "total": 200,
+    "pending": 0,
+    "processing": 0,
+    "completed": 198,
+    "failed": 2,
+    "interrupted": 0,
+    "by_label": {
+      "kids": {
+        "total": 100,
+        "completed": 100,
+        "failed": 0
+      },
+      "normal": {
+        "total": 100,
+        "completed": 98,
+        "failed": 2
+      }
+    }
+  },
+  "videos": [
+    {
+      "index": 1,
+      "url": "https://www.youtube.com/watch?v=ecngECYO5ZI",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0001_ecngECYO5ZI.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0001_ecngECYO5ZI.json",
+      "workdir": "/data/work/kids/video_0001_ecngECYO5ZI",
+      "started_at": "2026-09-12T13:56:27+00:00",
+      "completed_at": "2026-09-12T13:57:02+00:00",
+      "updated_at": "2026-09-12T13:57:02+00:00",
+      "record_counts": {
+        "words": 347,
+        "syllables": 429
+      },
+      "error": null
+    },
+    {
+      "index": 2,
+      "url": "https://www.youtube.com/watch?v=uNEMKmCjvFM",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0002_uNEMKmCjvFM.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0002_uNEMKmCjvFM.json",
+      "workdir": "/data/work/kids/video_0002_uNEMKmCjvFM",
+      "started_at": "2026-09-12T13:57:02+00:00",
+      "completed_at": "2026-09-12T13:57:42+00:00",
+      "updated_at": "2026-09-12T13:57:42+00:00",
+      "record_counts": {
+        "words": 500,
+        "syllables": 672
+      },
+      "error": null
+    },
+    {
+      "index": 3,
+      "url": "https://www.youtube.com/watch?v=2PTK9r3vuu8",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0003_2PTK9r3vuu8.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0003_2PTK9r3vuu8.json",
+      "workdir": "/data/work/kids/video_0003_2PTK9r3vuu8",
+      "started_at": "2026-09-12T13:57:42+00:00",
+      "completed_at": "2026-09-12T13:58:20+00:00",
+      "updated_at": "2026-09-12T13:58:20+00:00",
+      "record_counts": {
+        "words": 546,
+        "syllables": 757
+      },
+      "error": null
+    },
+    {
+      "index": 4,
+      "url": "https://www.youtube.com/watch?v=GOzrAK4gOSo",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0004_GOzrAK4gOSo.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0004_GOzrAK4gOSo.json",
+      "workdir": "/data/work/kids/video_0004_GOzrAK4gOSo",
+      "started_at": "2026-09-12T13:58:20+00:00",
+      "completed_at": "2026-09-12T13:59:03+00:00",
+      "updated_at": "2026-09-12T13:59:03+00:00",
+      "record_counts": {
+        "words": 797,
+        "syllables": 1038
+      },
+      "error": null
+    },
+    {
+      "index": 5,
+      "url": "https://www.youtube.com/watch?v=ZtyyJFwp4GA",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0005_ZtyyJFwp4GA.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0005_ZtyyJFwp4GA.json",
+      "workdir": "/data/work/kids/video_0005_ZtyyJFwp4GA",
+      "started_at": "2026-09-12T13:59:03+00:00",
+      "completed_at": "2026-09-12T13:59:37+00:00",
+      "updated_at": "2026-09-12T13:59:37+00:00",
+      "record_counts": {
+        "words": 560,
+        "syllables": 692
+      },
+      "error": null
+    },
+    {
+      "index": 6,
+      "url": "https://www.youtube.com/watch?v=4ai7ckER2os",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0006_4ai7ckER2os.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0006_4ai7ckER2os.json",
+      "workdir": "/data/work/kids/video_0006_4ai7ckER2os",
+      "started_at": "2026-09-12T13:59:37+00:00",
+      "completed_at": "2026-09-12T14:00:13+00:00",
+      "updated_at": "2026-09-12T14:00:13+00:00",
+      "record_counts": {
+        "words": 647,
+        "syllables": 810
+      },
+      "error": null
+    },
+    {
+      "index": 7,
+      "url": "https://www.youtube.com/watch?v=zQPjb2gQZIM",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0007_zQPjb2gQZIM.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0007_zQPjb2gQZIM.json",
+      "workdir": "/data/work/kids/video_0007_zQPjb2gQZIM",
+      "started_at": "2026-09-12T14:00:13+00:00",
+      "completed_at": "2026-09-12T14:00:54+00:00",
+      "updated_at": "2026-09-12T14:00:54+00:00",
+      "record_counts": {
+        "words": 628,
+        "syllables": 822
+      },
+      "error": null
+    },
+    {
+      "index": 8,
+      "url": "https://www.youtube.com/watch?v=BNNcpAcF0GM",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0008_BNNcpAcF0GM.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0008_BNNcpAcF0GM.json",
+      "workdir": "/data/work/kids/video_0008_BNNcpAcF0GM",
+      "started_at": "2026-09-12T14:00:54+00:00",
+      "completed_at": "2026-09-12T14:01:30+00:00",
+      "updated_at": "2026-09-12T14:01:30+00:00",
+      "record_counts": {
+        "words": 551,
+        "syllables": 713
+      },
+      "error": null
+    },
+    {
+      "index": 9,
+      "url": "https://www.youtube.com/watch?v=d0dbJj6x0eU",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0009_d0dbJj6x0eU.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0009_d0dbJj6x0eU.json",
+      "workdir": "/data/work/kids/video_0009_d0dbJj6x0eU",
+      "started_at": "2026-09-12T14:01:30+00:00",
+      "completed_at": "2026-09-12T14:02:04+00:00",
+      "updated_at": "2026-09-12T14:02:04+00:00",
+      "record_counts": {
+        "words": 446,
+        "syllables": 595
+      },
+      "error": null
+    },
+    {
+      "index": 10,
+      "url": "https://www.youtube.com/watch?v=4U7xGiLISK0",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0010_4U7xGiLISK0.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0010_4U7xGiLISK0.json",
+      "workdir": "/data/work/kids/video_0010_4U7xGiLISK0",
+      "started_at": "2026-09-12T14:02:04+00:00",
+      "completed_at": "2026-09-12T14:02:52+00:00",
+      "updated_at": "2026-09-12T14:02:52+00:00",
+      "record_counts": {
+        "words": 735,
+        "syllables": 1006
+      },
+      "error": null
+    },
+    {
+      "index": 11,
+      "url": "https://www.youtube.com/watch?v=rJ2D3rl0KZA",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0011_rJ2D3rl0KZA.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0011_rJ2D3rl0KZA.json",
+      "workdir": "/data/work/kids/video_0011_rJ2D3rl0KZA",
+      "started_at": "2026-09-12T14:02:52+00:00",
+      "completed_at": "2026-09-12T14:03:21+00:00",
+      "updated_at": "2026-09-12T14:03:21+00:00",
+      "record_counts": {
+        "words": 245,
+        "syllables": 318
+      },
+      "error": null
+    },
+    {
+      "index": 12,
+      "url": "https://www.youtube.com/watch?v=GBvp9Z9Sq-I",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0012_GBvp9Z9Sq-I.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0012_GBvp9Z9Sq-I.json",
+      "workdir": "/data/work/kids/video_0012_GBvp9Z9Sq-I",
+      "started_at": "2026-09-12T14:03:21+00:00",
+      "completed_at": "2026-09-12T14:04:01+00:00",
+      "updated_at": "2026-09-12T14:04:01+00:00",
+      "record_counts": {
+        "words": 693,
+        "syllables": 920
+      },
+      "error": null
+    },
+    {
+      "index": 13,
+      "url": "https://www.youtube.com/watch?v=b9YllX5eeKY",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0013_b9YllX5eeKY.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0013_b9YllX5eeKY.json",
+      "workdir": "/data/work/kids/video_0013_b9YllX5eeKY",
+      "started_at": "2026-09-12T14:04:01+00:00",
+      "completed_at": "2026-09-12T14:04:39+00:00",
+      "updated_at": "2026-09-12T14:04:39+00:00",
+      "record_counts": {
+        "words": 796,
+        "syllables": 1031
+      },
+      "error": null
+    },
+    {
+      "index": 14,
+      "url": "https://www.youtube.com/watch?v=tFfcXYZV0Ug",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0014_tFfcXYZV0Ug.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0014_tFfcXYZV0Ug.json",
+      "workdir": "/data/work/kids/video_0014_tFfcXYZV0Ug",
+      "started_at": "2026-09-12T14:04:39+00:00",
+      "completed_at": "2026-09-12T14:05:32+00:00",
+      "updated_at": "2026-09-12T14:05:32+00:00",
+      "record_counts": {
+        "words": 711,
+        "syllables": 904
+      },
+      "error": null
+    },
+    {
+      "index": 15,
+      "url": "https://www.youtube.com/watch?v=3WfgYV_xDto",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0015_3WfgYV_xDto.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0015_3WfgYV_xDto.json",
+      "workdir": "/data/work/kids/video_0015_3WfgYV_xDto",
+      "started_at": "2026-09-12T14:05:32+00:00",
+      "completed_at": "2026-09-12T14:06:25+00:00",
+      "updated_at": "2026-09-12T14:06:25+00:00",
+      "record_counts": {
+        "words": 877,
+        "syllables": 1171
+      },
+      "error": null
+    },
+    {
+      "index": 16,
+      "url": "https://www.youtube.com/watch?v=hAP0e7XpG98",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0016_hAP0e7XpG98.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0016_hAP0e7XpG98.json",
+      "workdir": "/data/work/kids/video_0016_hAP0e7XpG98",
+      "started_at": "2026-09-12T14:06:25+00:00",
+      "completed_at": "2026-09-12T14:07:01+00:00",
+      "updated_at": "2026-09-12T14:07:01+00:00",
+      "record_counts": {
+        "words": 448,
+        "syllables": 565
+      },
+      "error": null
+    },
+    {
+      "index": 17,
+      "url": "https://www.youtube.com/watch?v=Hth0C5MODRc",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0017_Hth0C5MODRc.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0017_Hth0C5MODRc.json",
+      "workdir": "/data/work/kids/video_0017_Hth0C5MODRc",
+      "started_at": "2026-09-12T14:07:01+00:00",
+      "completed_at": "2026-09-12T14:07:38+00:00",
+      "updated_at": "2026-09-12T14:07:38+00:00",
+      "record_counts": {
+        "words": 574,
+        "syllables": 784
+      },
+      "error": null
+    },
+    {
+      "index": 18,
+      "url": "https://www.youtube.com/watch?v=XKAfytfIy8c",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0018_XKAfytfIy8c.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0018_XKAfytfIy8c.json",
+      "workdir": "/data/work/kids/video_0018_XKAfytfIy8c",
+      "started_at": "2026-09-12T14:07:38+00:00",
+      "completed_at": "2026-09-12T14:08:14+00:00",
+      "updated_at": "2026-09-12T14:08:14+00:00",
+      "record_counts": {
+        "words": 626,
+        "syllables": 813
+      },
+      "error": null
+    },
+    {
+      "index": 19,
+      "url": "https://www.youtube.com/watch?v=cKEK7K5PKAE",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0019_cKEK7K5PKAE.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0019_cKEK7K5PKAE.json",
+      "workdir": "/data/work/kids/video_0019_cKEK7K5PKAE",
+      "started_at": "2026-09-12T14:08:14+00:00",
+      "completed_at": "2026-09-12T14:08:49+00:00",
+      "updated_at": "2026-09-12T14:08:49+00:00",
+      "record_counts": {
+        "words": 561,
+        "syllables": 725
+      },
+      "error": null
+    },
+    {
+      "index": 20,
+      "url": "https://www.youtube.com/watch?v=yc7cQz3U3Zk",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0020_yc7cQz3U3Zk.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0020_yc7cQz3U3Zk.json",
+      "workdir": "/data/work/kids/video_0020_yc7cQz3U3Zk",
+      "started_at": "2026-09-12T14:08:49+00:00",
+      "completed_at": "2026-09-12T14:09:45+00:00",
+      "updated_at": "2026-09-12T14:09:45+00:00",
+      "record_counts": {
+        "words": 877,
+        "syllables": 1104
+      },
+      "error": null
+    },
+    {
+      "index": 21,
+      "url": "https://www.youtube.com/watch?v=E2MPOr2g0zg",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0021_E2MPOr2g0zg.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0021_E2MPOr2g0zg.json",
+      "workdir": "/data/work/kids/video_0021_E2MPOr2g0zg",
+      "started_at": "2026-09-12T14:09:45+00:00",
+      "completed_at": "2026-09-12T14:10:17+00:00",
+      "updated_at": "2026-09-12T14:10:17+00:00",
+      "record_counts": {
+        "words": 377,
+        "syllables": 477
+      },
+      "error": null
+    },
+    {
+      "index": 22,
+      "url": "https://www.youtube.com/watch?v=hWdLhB2okqA",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0022_hWdLhB2okqA.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0022_hWdLhB2okqA.json",
+      "workdir": "/data/work/kids/video_0022_hWdLhB2okqA",
+      "started_at": "2026-09-12T14:10:17+00:00",
+      "completed_at": "2026-09-12T14:10:50+00:00",
+      "updated_at": "2026-09-12T14:10:50+00:00",
+      "record_counts": {
+        "words": 436,
+        "syllables": 585
+      },
+      "error": null
+    },
+    {
+      "index": 23,
+      "url": "https://www.youtube.com/watch?v=_ZS3ciHF38k",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0023__ZS3ciHF38k.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0023__ZS3ciHF38k.json",
+      "workdir": "/data/work/kids/video_0023__ZS3ciHF38k",
+      "started_at": "2026-09-12T14:10:50+00:00",
+      "completed_at": "2026-09-12T14:11:25+00:00",
+      "updated_at": "2026-09-12T14:11:25+00:00",
+      "record_counts": {
+        "words": 472,
+        "syllables": 600
+      },
+      "error": null
+    },
+    {
+      "index": 24,
+      "url": "https://www.youtube.com/watch?v=oHUVxkx8QRo",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0024_oHUVxkx8QRo.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0024_oHUVxkx8QRo.json",
+      "workdir": "/data/work/kids/video_0024_oHUVxkx8QRo",
+      "started_at": "2026-09-12T14:11:25+00:00",
+      "completed_at": "2026-09-12T14:12:03+00:00",
+      "updated_at": "2026-09-12T14:12:03+00:00",
+      "record_counts": {
+        "words": 809,
+        "syllables": 1044
+      },
+      "error": null
+    },
+    {
+      "index": 25,
+      "url": "https://www.youtube.com/watch?v=GSmBYqmz4Y4",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0025_GSmBYqmz4Y4.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0025_GSmBYqmz4Y4.json",
+      "workdir": "/data/work/kids/video_0025_GSmBYqmz4Y4",
+      "started_at": "2026-09-12T14:12:03+00:00",
+      "completed_at": "2026-09-12T14:12:46+00:00",
+      "updated_at": "2026-09-12T14:12:46+00:00",
+      "record_counts": {
+        "words": 898,
+        "syllables": 1188
+      },
+      "error": null
+    },
+    {
+      "index": 26,
+      "url": "https://www.youtube.com/watch?v=_BluIksqEmM",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0026__BluIksqEmM.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0026__BluIksqEmM.json",
+      "workdir": "/data/work/kids/video_0026__BluIksqEmM",
+      "started_at": "2026-09-12T14:12:46+00:00",
+      "completed_at": "2026-09-12T14:13:26+00:00",
+      "updated_at": "2026-09-12T14:13:26+00:00",
+      "record_counts": {
+        "words": 813,
+        "syllables": 1079
+      },
+      "error": null
+    },
+    {
+      "index": 27,
+      "url": "https://www.youtube.com/watch?v=1tA0nU4zhjI",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0027_1tA0nU4zhjI.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0027_1tA0nU4zhjI.json",
+      "workdir": "/data/work/kids/video_0027_1tA0nU4zhjI",
+      "started_at": "2026-09-12T14:13:26+00:00",
+      "completed_at": "2026-09-12T14:14:04+00:00",
+      "updated_at": "2026-09-12T14:14:04+00:00",
+      "record_counts": {
+        "words": 716,
+        "syllables": 930
+      },
+      "error": null
+    },
+    {
+      "index": 28,
+      "url": "https://www.youtube.com/watch?v=0HhAVNIIpVo",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0028_0HhAVNIIpVo.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0028_0HhAVNIIpVo.json",
+      "workdir": "/data/work/kids/video_0028_0HhAVNIIpVo",
+      "started_at": "2026-09-12T14:14:04+00:00",
+      "completed_at": "2026-09-12T14:14:40+00:00",
+      "updated_at": "2026-09-12T14:14:40+00:00",
+      "record_counts": {
+        "words": 598,
+        "syllables": 843
+      },
+      "error": null
+    },
+    {
+      "index": 29,
+      "url": "https://www.youtube.com/watch?v=_IGbKi9nkoY",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0029__IGbKi9nkoY.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0029__IGbKi9nkoY.json",
+      "workdir": "/data/work/kids/video_0029__IGbKi9nkoY",
+      "started_at": "2026-09-12T14:14:40+00:00",
+      "completed_at": "2026-09-12T14:15:17+00:00",
+      "updated_at": "2026-09-12T14:15:17+00:00",
+      "record_counts": {
+        "words": 579,
+        "syllables": 766
+      },
+      "error": null
+    },
+    {
+      "index": 30,
+      "url": "https://www.youtube.com/watch?v=G8nuZu0VDp4",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0030_G8nuZu0VDp4.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0030_G8nuZu0VDp4.json",
+      "workdir": "/data/work/kids/video_0030_G8nuZu0VDp4",
+      "started_at": "2026-09-12T14:15:17+00:00",
+      "completed_at": "2026-09-12T14:15:56+00:00",
+      "updated_at": "2026-09-12T14:15:56+00:00",
+      "record_counts": {
+        "words": 613,
+        "syllables": 817
+      },
+      "error": null
+    },
+    {
+      "index": 31,
+      "url": "https://www.youtube.com/watch?v=6EcJZPB7Oe4",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0031_6EcJZPB7Oe4.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0031_6EcJZPB7Oe4.json",
+      "workdir": "/data/work/kids/video_0031_6EcJZPB7Oe4",
+      "started_at": "2026-09-12T14:15:56+00:00",
+      "completed_at": "2026-09-12T14:16:28+00:00",
+      "updated_at": "2026-09-12T14:16:28+00:00",
+      "record_counts": {
+        "words": 608,
+        "syllables": 827
+      },
+      "error": null
+    },
+    {
+      "index": 32,
+      "url": "https://www.youtube.com/watch?v=G6gFPwl_lAc",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0032_G6gFPwl_lAc.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0032_G6gFPwl_lAc.json",
+      "workdir": "/data/work/kids/video_0032_G6gFPwl_lAc",
+      "started_at": "2026-09-12T14:16:28+00:00",
+      "completed_at": "2026-09-12T14:17:09+00:00",
+      "updated_at": "2026-09-12T14:17:09+00:00",
+      "record_counts": {
+        "words": 614,
+        "syllables": 826
+      },
+      "error": null
+    },
+    {
+      "index": 33,
+      "url": "https://www.youtube.com/watch?v=d4mutvwGT9I",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0033_d4mutvwGT9I.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0033_d4mutvwGT9I.json",
+      "workdir": "/data/work/kids/video_0033_d4mutvwGT9I",
+      "started_at": "2026-09-12T14:17:09+00:00",
+      "completed_at": "2026-09-12T14:17:49+00:00",
+      "updated_at": "2026-09-12T14:17:49+00:00",
+      "record_counts": {
+        "words": 487,
+        "syllables": 726
+      },
+      "error": null
+    },
+    {
+      "index": 34,
+      "url": "https://www.youtube.com/watch?v=APD_YnZm9NU",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0034_APD_YnZm9NU.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0034_APD_YnZm9NU.json",
+      "workdir": "/data/work/kids/video_0034_APD_YnZm9NU",
+      "started_at": "2026-09-12T14:17:49+00:00",
+      "completed_at": "2026-09-12T14:18:26+00:00",
+      "updated_at": "2026-09-12T14:18:26+00:00",
+      "record_counts": {
+        "words": 610,
+        "syllables": 863
+      },
+      "error": null
+    },
+    {
+      "index": 35,
+      "url": "https://www.youtube.com/watch?v=HuEUTaacy_o",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0035_HuEUTaacy_o.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0035_HuEUTaacy_o.json",
+      "workdir": "/data/work/kids/video_0035_HuEUTaacy_o",
+      "started_at": "2026-09-12T14:18:26+00:00",
+      "completed_at": "2026-09-12T14:19:04+00:00",
+      "updated_at": "2026-09-12T14:19:04+00:00",
+      "record_counts": {
+        "words": 536,
+        "syllables": 687
+      },
+      "error": null
+    },
+    {
+      "index": 36,
+      "url": "https://www.youtube.com/watch?v=O_E5nuzXLS8",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0036_O_E5nuzXLS8.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0036_O_E5nuzXLS8.json",
+      "workdir": "/data/work/kids/video_0036_O_E5nuzXLS8",
+      "started_at": "2026-09-12T14:19:04+00:00",
+      "completed_at": "2026-09-12T14:19:46+00:00",
+      "updated_at": "2026-09-12T14:19:46+00:00",
+      "record_counts": {
+        "words": 638,
+        "syllables": 862
+      },
+      "error": null
+    },
+    {
+      "index": 37,
+      "url": "https://www.youtube.com/watch?v=5ISKUMy1980",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0037_5ISKUMy1980.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0037_5ISKUMy1980.json",
+      "workdir": "/data/work/kids/video_0037_5ISKUMy1980",
+      "started_at": "2026-09-12T14:19:46+00:00",
+      "completed_at": "2026-09-12T14:20:39+00:00",
+      "updated_at": "2026-09-12T14:20:39+00:00",
+      "record_counts": {
+        "words": 806,
+        "syllables": 1052
+      },
+      "error": null
+    },
+    {
+      "index": 38,
+      "url": "https://www.youtube.com/watch?v=YG4wLL40_ws",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0038_YG4wLL40_ws.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0038_YG4wLL40_ws.json",
+      "workdir": "/data/work/kids/video_0038_YG4wLL40_ws",
+      "started_at": "2026-09-12T14:20:39+00:00",
+      "completed_at": "2026-09-12T14:21:33+00:00",
+      "updated_at": "2026-09-12T14:21:33+00:00",
+      "record_counts": {
+        "words": 400,
+        "syllables": 518
+      },
+      "error": null
+    },
+    {
+      "index": 39,
+      "url": "https://www.youtube.com/watch?v=_3sKp6_gA_w",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0039__3sKp6_gA_w.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0039__3sKp6_gA_w.json",
+      "workdir": "/data/work/kids/video_0039__3sKp6_gA_w",
+      "started_at": "2026-09-12T14:21:33+00:00",
+      "completed_at": "2026-09-12T14:22:17+00:00",
+      "updated_at": "2026-09-12T14:22:17+00:00",
+      "record_counts": {
+        "words": 450,
+        "syllables": 540
+      },
+      "error": null
+    },
+    {
+      "index": 40,
+      "url": "https://www.youtube.com/watch?v=6s7aSNUCkiM",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0040_6s7aSNUCkiM.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0040_6s7aSNUCkiM.json",
+      "workdir": "/data/work/kids/video_0040_6s7aSNUCkiM",
+      "started_at": "2026-09-12T14:22:17+00:00",
+      "completed_at": "2026-09-12T14:23:01+00:00",
+      "updated_at": "2026-09-12T14:23:01+00:00",
+      "record_counts": {
+        "words": 518,
+        "syllables": 693
+      },
+      "error": null
+    },
+    {
+      "index": 41,
+      "url": "https://www.youtube.com/watch?v=P2PvXbVvqCc",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0041_P2PvXbVvqCc.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0041_P2PvXbVvqCc.json",
+      "workdir": "/data/work/kids/video_0041_P2PvXbVvqCc",
+      "started_at": "2026-09-12T14:23:01+00:00",
+      "completed_at": "2026-09-12T14:23:44+00:00",
+      "updated_at": "2026-09-12T14:23:44+00:00",
+      "record_counts": {
+        "words": 574,
+        "syllables": 691
+      },
+      "error": null
+    },
+    {
+      "index": 42,
+      "url": "https://www.youtube.com/watch?v=z2lPsxyO9XM",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0042_z2lPsxyO9XM.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0042_z2lPsxyO9XM.json",
+      "workdir": "/data/work/kids/video_0042_z2lPsxyO9XM",
+      "started_at": "2026-09-12T14:23:44+00:00",
+      "completed_at": "2026-09-12T14:24:43+00:00",
+      "updated_at": "2026-09-12T14:24:43+00:00",
+      "record_counts": {
+        "words": 561,
+        "syllables": 700
+      },
+      "error": null
+    },
+    {
+      "index": 43,
+      "url": "https://www.youtube.com/watch?v=iqhBuvcQ1A8",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0043_iqhBuvcQ1A8.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0043_iqhBuvcQ1A8.json",
+      "workdir": "/data/work/kids/video_0043_iqhBuvcQ1A8",
+      "started_at": "2026-09-12T14:24:43+00:00",
+      "completed_at": "2026-09-12T14:25:29+00:00",
+      "updated_at": "2026-09-12T14:25:29+00:00",
+      "record_counts": {
+        "words": 794,
+        "syllables": 1008
+      },
+      "error": null
+    },
+    {
+      "index": 44,
+      "url": "https://www.youtube.com/watch?v=EBO56RtTUbg",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0044_EBO56RtTUbg.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0044_EBO56RtTUbg.json",
+      "workdir": "/data/work/kids/video_0044_EBO56RtTUbg",
+      "started_at": "2026-09-12T14:25:29+00:00",
+      "completed_at": "2026-09-12T14:26:23+00:00",
+      "updated_at": "2026-09-12T14:26:23+00:00",
+      "record_counts": {
+        "words": 903,
+        "syllables": 1138
+      },
+      "error": null
+    },
+    {
+      "index": 45,
+      "url": "https://www.youtube.com/watch?v=5Za4VXhsdUE",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0045_5Za4VXhsdUE.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0045_5Za4VXhsdUE.json",
+      "workdir": "/data/work/kids/video_0045_5Za4VXhsdUE",
+      "started_at": "2026-09-12T14:26:23+00:00",
+      "completed_at": "2026-09-12T14:27:09+00:00",
+      "updated_at": "2026-09-12T14:27:09+00:00",
+      "record_counts": {
+        "words": 1018,
+        "syllables": 1252
+      },
+      "error": null
+    },
+    {
+      "index": 46,
+      "url": "https://www.youtube.com/watch?v=DS_PQYIGrTc",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0046_DS_PQYIGrTc.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0046_DS_PQYIGrTc.json",
+      "workdir": "/data/work/kids/video_0046_DS_PQYIGrTc",
+      "started_at": "2026-09-12T14:27:09+00:00",
+      "completed_at": "2026-09-12T14:28:05+00:00",
+      "updated_at": "2026-09-12T14:28:05+00:00",
+      "record_counts": {
+        "words": 1006,
+        "syllables": 1212
+      },
+      "error": null
+    },
+    {
+      "index": 47,
+      "url": "https://www.youtube.com/watch?v=db1dd9S1_kY",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0047_db1dd9S1_kY.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0047_db1dd9S1_kY.json",
+      "workdir": "/data/work/kids/video_0047_db1dd9S1_kY",
+      "started_at": "2026-09-12T14:28:05+00:00",
+      "completed_at": "2026-09-12T14:28:43+00:00",
+      "updated_at": "2026-09-12T14:28:43+00:00",
+      "record_counts": {
+        "words": 815,
+        "syllables": 992
+      },
+      "error": null
+    },
+    {
+      "index": 48,
+      "url": "https://www.youtube.com/watch?v=i_pQWFkZJrc",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0048_i_pQWFkZJrc.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0048_i_pQWFkZJrc.json",
+      "workdir": "/data/work/kids/video_0048_i_pQWFkZJrc",
+      "started_at": "2026-09-12T14:28:43+00:00",
+      "completed_at": "2026-09-12T14:29:25+00:00",
+      "updated_at": "2026-09-12T14:29:25+00:00",
+      "record_counts": {
+        "words": 968,
+        "syllables": 1206
+      },
+      "error": null
+    },
+    {
+      "index": 49,
+      "url": "https://www.youtube.com/watch?v=JuoOwoimhp4",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0049_JuoOwoimhp4.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0049_JuoOwoimhp4.json",
+      "workdir": "/data/work/kids/video_0049_JuoOwoimhp4",
+      "started_at": "2026-09-12T14:29:25+00:00",
+      "completed_at": "2026-09-12T14:30:08+00:00",
+      "updated_at": "2026-09-12T14:30:08+00:00",
+      "record_counts": {
+        "words": 1022,
+        "syllables": 1317
+      },
+      "error": null
+    },
+    {
+      "index": 50,
+      "url": "https://www.youtube.com/watch?v=PiJkRJgjFBs",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0050_PiJkRJgjFBs.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0050_PiJkRJgjFBs.json",
+      "workdir": "/data/work/kids/video_0050_PiJkRJgjFBs",
+      "started_at": "2026-09-12T14:30:08+00:00",
+      "completed_at": "2026-09-12T14:31:00+00:00",
+      "updated_at": "2026-09-12T14:31:00+00:00",
+      "record_counts": {
+        "words": 1273,
+        "syllables": 1545
+      },
+      "error": null
+    },
+    {
+      "index": 51,
+      "url": "https://www.youtube.com/watch?v=4lc82nvj7bo",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0051_4lc82nvj7bo.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0051_4lc82nvj7bo.json",
+      "workdir": "/data/work/kids/video_0051_4lc82nvj7bo",
+      "started_at": "2026-09-12T14:31:00+00:00",
+      "completed_at": "2026-09-12T14:31:52+00:00",
+      "updated_at": "2026-09-12T14:31:52+00:00",
+      "record_counts": {
+        "words": 1126,
+        "syllables": 1403
+      },
+      "error": null
+    },
+    {
+      "index": 52,
+      "url": "https://www.youtube.com/watch?v=IubXiox8KSQ",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0052_IubXiox8KSQ.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0052_IubXiox8KSQ.json",
+      "workdir": "/data/work/kids/video_0052_IubXiox8KSQ",
+      "started_at": "2026-09-12T14:31:52+00:00",
+      "completed_at": "2026-09-12T14:32:40+00:00",
+      "updated_at": "2026-09-12T14:32:40+00:00",
+      "record_counts": {
+        "words": 1033,
+        "syllables": 1256
+      },
+      "error": null
+    },
+    {
+      "index": 53,
+      "url": "https://www.youtube.com/watch?v=T5lfFW6wVuI",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0053_T5lfFW6wVuI.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0053_T5lfFW6wVuI.json",
+      "workdir": "/data/work/kids/video_0053_T5lfFW6wVuI",
+      "started_at": "2026-09-12T14:32:40+00:00",
+      "completed_at": "2026-09-12T14:33:22+00:00",
+      "updated_at": "2026-09-12T14:33:22+00:00",
+      "record_counts": {
+        "words": 985,
+        "syllables": 1193
+      },
+      "error": null
+    },
+    {
+      "index": 54,
+      "url": "https://www.youtube.com/watch?v=ybPwuaGoa9E",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0054_ybPwuaGoa9E.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0054_ybPwuaGoa9E.json",
+      "workdir": "/data/work/kids/video_0054_ybPwuaGoa9E",
+      "started_at": "2026-09-12T14:33:22+00:00",
+      "completed_at": "2026-09-12T14:33:48+00:00",
+      "updated_at": "2026-09-12T14:33:48+00:00",
+      "record_counts": {
+        "words": 68,
+        "syllables": 104
+      },
+      "error": null
+    },
+    {
+      "index": 55,
+      "url": "https://www.youtube.com/watch?v=QeVh3NVfa0k",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0055_QeVh3NVfa0k.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0055_QeVh3NVfa0k.json",
+      "workdir": "/data/work/kids/video_0055_QeVh3NVfa0k",
+      "started_at": "2026-09-12T14:33:48+00:00",
+      "completed_at": "2026-09-12T14:34:37+00:00",
+      "updated_at": "2026-09-12T14:34:37+00:00",
+      "record_counts": {
+        "words": 920,
+        "syllables": 1110
+      },
+      "error": null
+    },
+    {
+      "index": 56,
+      "url": "https://www.youtube.com/watch?v=OCF6LW1nZok",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0056_OCF6LW1nZok.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0056_OCF6LW1nZok.json",
+      "workdir": "/data/work/kids/video_0056_OCF6LW1nZok",
+      "started_at": "2026-09-12T14:34:37+00:00",
+      "completed_at": "2026-09-12T14:35:16+00:00",
+      "updated_at": "2026-09-12T14:35:16+00:00",
+      "record_counts": {
+        "words": 784,
+        "syllables": 1000
+      },
+      "error": null
+    },
+    {
+      "index": 57,
+      "url": "https://www.youtube.com/watch?v=dnwHDN6Dw7Q",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0057_dnwHDN6Dw7Q.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0057_dnwHDN6Dw7Q.json",
+      "workdir": "/data/work/kids/video_0057_dnwHDN6Dw7Q",
+      "started_at": "2026-09-12T14:35:16+00:00",
+      "completed_at": "2026-09-12T14:35:58+00:00",
+      "updated_at": "2026-09-12T14:35:58+00:00",
+      "record_counts": {
+        "words": 849,
+        "syllables": 1029
+      },
+      "error": null
+    },
+    {
+      "index": 58,
+      "url": "https://www.youtube.com/watch?v=iWowDC3x0hE",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0058_iWowDC3x0hE.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0058_iWowDC3x0hE.json",
+      "workdir": "/data/work/kids/video_0058_iWowDC3x0hE",
+      "started_at": "2026-09-12T14:35:58+00:00",
+      "completed_at": "2026-09-12T14:37:59+00:00",
+      "updated_at": "2026-09-12T14:37:59+00:00",
+      "record_counts": {
+        "words": 1105,
+        "syllables": 1429
+      },
+      "error": null
+    },
+    {
+      "index": 59,
+      "url": "https://www.youtube.com/watch?v=yt-dk7aQhPs",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0059_yt-dk7aQhPs.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0059_yt-dk7aQhPs.json",
+      "workdir": "/data/work/kids/video_0059_yt-dk7aQhPs",
+      "started_at": "2026-09-12T14:37:59+00:00",
+      "completed_at": "2026-09-12T14:38:26+00:00",
+      "updated_at": "2026-09-12T14:38:26+00:00",
+      "record_counts": {
+        "words": 33,
+        "syllables": 47
+      },
+      "error": null
+    },
+    {
+      "index": 60,
+      "url": "https://www.youtube.com/watch?v=S5zjj8FWW04",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0060_S5zjj8FWW04.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0060_S5zjj8FWW04.json",
+      "workdir": "/data/work/kids/video_0060_S5zjj8FWW04",
+      "started_at": "2026-09-12T14:38:26+00:00",
+      "completed_at": "2026-09-12T14:39:03+00:00",
+      "updated_at": "2026-09-12T14:39:03+00:00",
+      "record_counts": {
+        "words": 445,
+        "syllables": 583
+      },
+      "error": null
+    },
+    {
+      "index": 61,
+      "url": "https://www.youtube.com/watch?v=ArAmI5RpOkY",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0061_ArAmI5RpOkY.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0061_ArAmI5RpOkY.json",
+      "workdir": "/data/work/kids/video_0061_ArAmI5RpOkY",
+      "started_at": "2026-09-12T14:39:03+00:00",
+      "completed_at": "2026-09-12T14:39:38+00:00",
+      "updated_at": "2026-09-12T14:39:38+00:00",
+      "record_counts": {
+        "words": 449,
+        "syllables": 544
+      },
+      "error": null
+    },
+    {
+      "index": 62,
+      "url": "https://www.youtube.com/watch?v=-glCltjBDaw",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0062_-glCltjBDaw.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0062_-glCltjBDaw.json",
+      "workdir": "/data/work/kids/video_0062_-glCltjBDaw",
+      "started_at": "2026-09-12T14:39:38+00:00",
+      "completed_at": "2026-09-12T14:40:19+00:00",
+      "updated_at": "2026-09-12T14:40:19+00:00",
+      "record_counts": {
+        "words": 669,
+        "syllables": 914
+      },
+      "error": null
+    },
+    {
+      "index": 63,
+      "url": "https://www.youtube.com/watch?v=1WZsxVDTqcU",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0063_1WZsxVDTqcU.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0063_1WZsxVDTqcU.json",
+      "workdir": "/data/work/kids/video_0063_1WZsxVDTqcU",
+      "started_at": "2026-09-12T14:40:19+00:00",
+      "completed_at": "2026-09-12T14:41:09+00:00",
+      "updated_at": "2026-09-12T14:41:09+00:00",
+      "record_counts": {
+        "words": 1191,
+        "syllables": 1724
+      },
+      "error": null
+    },
+    {
+      "index": 64,
+      "url": "https://www.youtube.com/watch?v=rnIUFrx0DjI",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0064_rnIUFrx0DjI.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0064_rnIUFrx0DjI.json",
+      "workdir": "/data/work/kids/video_0064_rnIUFrx0DjI",
+      "started_at": "2026-09-12T14:41:09+00:00",
+      "completed_at": "2026-09-12T14:41:50+00:00",
+      "updated_at": "2026-09-12T14:41:50+00:00",
+      "record_counts": {
+        "words": 875,
+        "syllables": 1185
+      },
+      "error": null
+    },
+    {
+      "index": 65,
+      "url": "https://www.youtube.com/watch?v=UXsomnDkntI",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0065_UXsomnDkntI.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0065_UXsomnDkntI.json",
+      "workdir": "/data/work/kids/video_0065_UXsomnDkntI",
+      "started_at": "2026-09-12T14:41:50+00:00",
+      "completed_at": "2026-09-12T14:42:31+00:00",
+      "updated_at": "2026-09-12T14:42:31+00:00",
+      "record_counts": {
+        "words": 644,
+        "syllables": 963
+      },
+      "error": null
+    },
+    {
+      "index": 66,
+      "url": "https://www.youtube.com/watch?v=fxJWin195kU",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0066_fxJWin195kU.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0066_fxJWin195kU.json",
+      "workdir": "/data/work/kids/video_0066_fxJWin195kU",
+      "started_at": "2026-09-12T14:42:31+00:00",
+      "completed_at": "2026-09-12T14:43:12+00:00",
+      "updated_at": "2026-09-12T14:43:12+00:00",
+      "record_counts": {
+        "words": 983,
+        "syllables": 1400
+      },
+      "error": null
+    },
+    {
+      "index": 67,
+      "url": "https://www.youtube.com/watch?v=aISXCw0Pi94",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0067_aISXCw0Pi94.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0067_aISXCw0Pi94.json",
+      "workdir": "/data/work/kids/video_0067_aISXCw0Pi94",
+      "started_at": "2026-09-12T14:43:12+00:00",
+      "completed_at": "2026-09-12T14:43:59+00:00",
+      "updated_at": "2026-09-12T14:43:59+00:00",
+      "record_counts": {
+        "words": 716,
+        "syllables": 1003
+      },
+      "error": null
+    },
+    {
+      "index": 68,
+      "url": "https://www.youtube.com/watch?v=Xu-QfE_1ksk",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0068_Xu-QfE_1ksk.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0068_Xu-QfE_1ksk.json",
+      "workdir": "/data/work/kids/video_0068_Xu-QfE_1ksk",
+      "started_at": "2026-09-12T14:43:59+00:00",
+      "completed_at": "2026-09-12T14:44:36+00:00",
+      "updated_at": "2026-09-12T14:44:36+00:00",
+      "record_counts": {
+        "words": 698,
+        "syllables": 1155
+      },
+      "error": null
+    },
+    {
+      "index": 69,
+      "url": "https://www.youtube.com/watch?v=2njn71TqkjA",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0069_2njn71TqkjA.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0069_2njn71TqkjA.json",
+      "workdir": "/data/work/kids/video_0069_2njn71TqkjA",
+      "started_at": "2026-09-12T14:44:36+00:00",
+      "completed_at": "2026-09-12T14:45:12+00:00",
+      "updated_at": "2026-09-12T14:45:12+00:00",
+      "record_counts": {
+        "words": 770,
+        "syllables": 1286
+      },
+      "error": null
+    },
+    {
+      "index": 70,
+      "url": "https://www.youtube.com/watch?v=m4Ics03xzUQ",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0070_m4Ics03xzUQ.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0070_m4Ics03xzUQ.json",
+      "workdir": "/data/work/kids/video_0070_m4Ics03xzUQ",
+      "started_at": "2026-09-12T14:45:12+00:00",
+      "completed_at": "2026-09-12T14:45:51+00:00",
+      "updated_at": "2026-09-12T14:45:51+00:00",
+      "record_counts": {
+        "words": 748,
+        "syllables": 1097
+      },
+      "error": null
+    },
+    {
+      "index": 71,
+      "url": "https://www.youtube.com/watch?v=2W85Dwxx218",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0071_2W85Dwxx218.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0071_2W85Dwxx218.json",
+      "workdir": "/data/work/kids/video_0071_2W85Dwxx218",
+      "started_at": "2026-09-12T14:45:51+00:00",
+      "completed_at": "2026-09-12T14:46:28+00:00",
+      "updated_at": "2026-09-12T14:46:28+00:00",
+      "record_counts": {
+        "words": 806,
+        "syllables": 1303
+      },
+      "error": null
+    },
+    {
+      "index": 72,
+      "url": "https://www.youtube.com/watch?v=6tw_JVz_IEc",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0072_6tw_JVz_IEc.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0072_6tw_JVz_IEc.json",
+      "workdir": "/data/work/kids/video_0072_6tw_JVz_IEc",
+      "started_at": "2026-09-12T14:46:28+00:00",
+      "completed_at": "2026-09-12T14:47:05+00:00",
+      "updated_at": "2026-09-12T14:47:05+00:00",
+      "record_counts": {
+        "words": 726,
+        "syllables": 1171
+      },
+      "error": null
+    },
+    {
+      "index": 73,
+      "url": "https://www.youtube.com/watch?v=I5-dI74zxPg",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0073_I5-dI74zxPg.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0073_I5-dI74zxPg.json",
+      "workdir": "/data/work/kids/video_0073_I5-dI74zxPg",
+      "started_at": "2026-09-12T14:47:05+00:00",
+      "completed_at": "2026-09-12T14:48:08+00:00",
+      "updated_at": "2026-09-12T14:48:08+00:00",
+      "record_counts": {
+        "words": 1690,
+        "syllables": 2321
+      },
+      "error": null
+    },
+    {
+      "index": 74,
+      "url": "https://www.youtube.com/watch?v=M0_U1FHwACk",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0074_M0_U1FHwACk.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0074_M0_U1FHwACk.json",
+      "workdir": "/data/work/kids/video_0074_M0_U1FHwACk",
+      "started_at": "2026-09-12T14:48:08+00:00",
+      "completed_at": "2026-09-12T14:49:11+00:00",
+      "updated_at": "2026-09-12T14:49:11+00:00",
+      "record_counts": {
+        "words": 1494,
+        "syllables": 2056
+      },
+      "error": null
+    },
+    {
+      "index": 75,
+      "url": "https://www.youtube.com/watch?v=D3s14gpmea4",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0075_D3s14gpmea4.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0075_D3s14gpmea4.json",
+      "workdir": "/data/work/kids/video_0075_D3s14gpmea4",
+      "started_at": "2026-09-12T14:49:11+00:00",
+      "completed_at": "2026-09-12T14:50:19+00:00",
+      "updated_at": "2026-09-12T14:50:19+00:00",
+      "record_counts": {
+        "words": 1424,
+        "syllables": 1770
+      },
+      "error": null
+    },
+    {
+      "index": 76,
+      "url": "https://www.youtube.com/watch?v=W4DnuQOtA8E",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0076_W4DnuQOtA8E.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0076_W4DnuQOtA8E.json",
+      "workdir": "/data/work/kids/video_0076_W4DnuQOtA8E",
+      "started_at": "2026-09-12T14:50:19+00:00",
+      "completed_at": "2026-09-12T14:50:56+00:00",
+      "updated_at": "2026-09-12T14:50:56+00:00",
+      "record_counts": {
+        "words": 874,
+        "syllables": 1213
+      },
+      "error": null
+    },
+    {
+      "index": 77,
+      "url": "https://www.youtube.com/watch?v=350Xlkvn0Ko",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0077_350Xlkvn0Ko.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0077_350Xlkvn0Ko.json",
+      "workdir": "/data/work/kids/video_0077_350Xlkvn0Ko",
+      "started_at": "2026-09-12T14:50:56+00:00",
+      "completed_at": "2026-09-12T14:51:56+00:00",
+      "updated_at": "2026-09-12T14:51:56+00:00",
+      "record_counts": {
+        "words": 1535,
+        "syllables": 1978
+      },
+      "error": null
+    },
+    {
+      "index": 78,
+      "url": "https://www.youtube.com/watch?v=GMb6GNYPqXA",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0078_GMb6GNYPqXA.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0078_GMb6GNYPqXA.json",
+      "workdir": "/data/work/kids/video_0078_GMb6GNYPqXA",
+      "started_at": "2026-09-12T14:51:56+00:00",
+      "completed_at": "2026-09-12T14:52:35+00:00",
+      "updated_at": "2026-09-12T14:52:35+00:00",
+      "record_counts": {
+        "words": 946,
+        "syllables": 1255
+      },
+      "error": null
+    },
+    {
+      "index": 79,
+      "url": "https://www.youtube.com/watch?v=My4RA5I0FKs",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0079_My4RA5I0FKs.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0079_My4RA5I0FKs.json",
+      "workdir": "/data/work/kids/video_0079_My4RA5I0FKs",
+      "started_at": "2026-09-12T14:52:35+00:00",
+      "completed_at": "2026-09-12T14:53:32+00:00",
+      "updated_at": "2026-09-12T14:53:32+00:00",
+      "record_counts": {
+        "words": 1190,
+        "syllables": 1591
+      },
+      "error": null
+    },
+    {
+      "index": 80,
+      "url": "https://www.youtube.com/watch?v=nsnyl8llfH4",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0080_nsnyl8llfH4.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0080_nsnyl8llfH4.json",
+      "workdir": "/data/work/kids/video_0080_nsnyl8llfH4",
+      "started_at": "2026-09-12T14:53:32+00:00",
+      "completed_at": "2026-09-12T14:54:40+00:00",
+      "updated_at": "2026-09-12T14:54:40+00:00",
+      "record_counts": {
+        "words": 1652,
+        "syllables": 2228
+      },
+      "error": null
+    },
+    {
+      "index": 81,
+      "url": "https://www.youtube.com/watch?v=t4GJ0KzoGRI",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0081_t4GJ0KzoGRI.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0081_t4GJ0KzoGRI.json",
+      "workdir": "/data/work/kids/video_0081_t4GJ0KzoGRI",
+      "started_at": "2026-09-12T14:54:40+00:00",
+      "completed_at": "2026-09-12T14:55:39+00:00",
+      "updated_at": "2026-09-12T14:55:39+00:00",
+      "record_counts": {
+        "words": 1373,
+        "syllables": 1851
+      },
+      "error": null
+    },
+    {
+      "index": 82,
+      "url": "https://www.youtube.com/watch?v=b0ZYNOc1Tck",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0082_b0ZYNOc1Tck.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0082_b0ZYNOc1Tck.json",
+      "workdir": "/data/work/kids/video_0082_b0ZYNOc1Tck",
+      "started_at": "2026-09-12T14:55:39+00:00",
+      "completed_at": "2026-09-12T14:56:22+00:00",
+      "updated_at": "2026-09-12T14:56:22+00:00",
+      "record_counts": {
+        "words": 678,
+        "syllables": 979
+      },
+      "error": null
+    },
+    {
+      "index": 83,
+      "url": "https://www.youtube.com/watch?v=atZvLpk2NgM",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0083_atZvLpk2NgM.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0083_atZvLpk2NgM.json",
+      "workdir": "/data/work/kids/video_0083_atZvLpk2NgM",
+      "started_at": "2026-09-12T14:56:22+00:00",
+      "completed_at": "2026-09-12T14:57:02+00:00",
+      "updated_at": "2026-09-12T14:57:02+00:00",
+      "record_counts": {
+        "words": 671,
+        "syllables": 1056
+      },
+      "error": null
+    },
+    {
+      "index": 84,
+      "url": "https://www.youtube.com/watch?v=h6RNkQ7lU8Y",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0084_h6RNkQ7lU8Y.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0084_h6RNkQ7lU8Y.json",
+      "workdir": "/data/work/kids/video_0084_h6RNkQ7lU8Y",
+      "started_at": "2026-09-12T14:57:02+00:00",
+      "completed_at": "2026-09-12T14:57:43+00:00",
+      "updated_at": "2026-09-12T14:57:43+00:00",
+      "record_counts": {
+        "words": 700,
+        "syllables": 858
+      },
+      "error": null
+    },
+    {
+      "index": 85,
+      "url": "https://www.youtube.com/watch?v=62DxELjuRec",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0085_62DxELjuRec.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0085_62DxELjuRec.json",
+      "workdir": "/data/work/kids/video_0085_62DxELjuRec",
+      "started_at": "2026-09-12T14:57:43+00:00",
+      "completed_at": "2026-09-12T14:58:28+00:00",
+      "updated_at": "2026-09-12T14:58:28+00:00",
+      "record_counts": {
+        "words": 1260,
+        "syllables": 1893
+      },
+      "error": null
+    },
+    {
+      "index": 86,
+      "url": "https://www.youtube.com/watch?v=-GsolnXOiBg",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0086_-GsolnXOiBg.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0086_-GsolnXOiBg.json",
+      "workdir": "/data/work/kids/video_0086_-GsolnXOiBg",
+      "started_at": "2026-09-12T14:58:28+00:00",
+      "completed_at": "2026-09-12T14:59:08+00:00",
+      "updated_at": "2026-09-12T14:59:08+00:00",
+      "record_counts": {
+        "words": 817,
+        "syllables": 1400
+      },
+      "error": null
+    },
+    {
+      "index": 87,
+      "url": "https://www.youtube.com/watch?v=4MHn9Q5NtdY",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0087_4MHn9Q5NtdY.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0087_4MHn9Q5NtdY.json",
+      "workdir": "/data/work/kids/video_0087_4MHn9Q5NtdY",
+      "started_at": "2026-09-12T14:59:08+00:00",
+      "completed_at": "2026-09-12T14:59:51+00:00",
+      "updated_at": "2026-09-12T14:59:51+00:00",
+      "record_counts": {
+        "words": 895,
+        "syllables": 1129
+      },
+      "error": null
+    },
+    {
+      "index": 88,
+      "url": "https://www.youtube.com/watch?v=z-R3DShHbkA",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0088_z-R3DShHbkA.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0088_z-R3DShHbkA.json",
+      "workdir": "/data/work/kids/video_0088_z-R3DShHbkA",
+      "started_at": "2026-09-12T14:59:51+00:00",
+      "completed_at": "2026-09-12T15:00:27+00:00",
+      "updated_at": "2026-09-12T15:00:27+00:00",
+      "record_counts": {
+        "words": 5,
+        "syllables": 6
+      },
+      "error": null
+    },
+    {
+      "index": 89,
+      "url": "https://www.youtube.com/watch?v=xfT9T9gW32c",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0089_xfT9T9gW32c.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0089_xfT9T9gW32c.json",
+      "workdir": "/data/work/kids/video_0089_xfT9T9gW32c",
+      "started_at": "2026-09-12T15:00:27+00:00",
+      "completed_at": "2026-09-12T15:01:50+00:00",
+      "updated_at": "2026-09-12T15:01:50+00:00",
+      "record_counts": {
+        "words": 1137,
+        "syllables": 1474
+      },
+      "error": null
+    },
+    {
+      "index": 90,
+      "url": "https://www.youtube.com/watch?v=nxtaLqImKH4",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0090_nxtaLqImKH4.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0090_nxtaLqImKH4.json",
+      "workdir": "/data/work/kids/video_0090_nxtaLqImKH4",
+      "started_at": "2026-09-12T15:01:50+00:00",
+      "completed_at": "2026-09-12T15:02:40+00:00",
+      "updated_at": "2026-09-12T15:02:40+00:00",
+      "record_counts": {
+        "words": 884,
+        "syllables": 1050
+      },
+      "error": null
+    },
+    {
+      "index": 91,
+      "url": "https://www.youtube.com/watch?v=jsTB7gSfDPI",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0091_jsTB7gSfDPI.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0091_jsTB7gSfDPI.json",
+      "workdir": "/data/work/kids/video_0091_jsTB7gSfDPI",
+      "started_at": "2026-09-12T15:02:40+00:00",
+      "completed_at": "2026-09-12T15:03:24+00:00",
+      "updated_at": "2026-09-12T15:03:24+00:00",
+      "record_counts": {
+        "words": 696,
+        "syllables": 1069
+      },
+      "error": null
+    },
+    {
+      "index": 92,
+      "url": "https://www.youtube.com/watch?v=4jxXnHSbicY",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0092_4jxXnHSbicY.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0092_4jxXnHSbicY.json",
+      "workdir": "/data/work/kids/video_0092_4jxXnHSbicY",
+      "started_at": "2026-09-12T15:03:24+00:00",
+      "completed_at": "2026-09-12T15:04:34+00:00",
+      "updated_at": "2026-09-12T15:04:34+00:00",
+      "record_counts": {
+        "words": 1007,
+        "syllables": 1345
+      },
+      "error": null
+    },
+    {
+      "index": 93,
+      "url": "https://www.youtube.com/watch?v=c4300UidkFg",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0093_c4300UidkFg.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0093_c4300UidkFg.json",
+      "workdir": "/data/work/kids/video_0093_c4300UidkFg",
+      "started_at": "2026-09-12T15:04:34+00:00",
+      "completed_at": "2026-09-12T15:05:44+00:00",
+      "updated_at": "2026-09-12T15:05:44+00:00",
+      "record_counts": {
+        "words": 1116,
+        "syllables": 1452
+      },
+      "error": null
+    },
+    {
+      "index": 94,
+      "url": "https://www.youtube.com/watch?v=ds0JHxYvkvQ",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0094_ds0JHxYvkvQ.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0094_ds0JHxYvkvQ.json",
+      "workdir": "/data/work/kids/video_0094_ds0JHxYvkvQ",
+      "started_at": "2026-09-12T15:05:44+00:00",
+      "completed_at": "2026-09-12T15:06:40+00:00",
+      "updated_at": "2026-09-12T15:06:40+00:00",
+      "record_counts": {
+        "words": 1135,
+        "syllables": 1435
+      },
+      "error": null
+    },
+    {
+      "index": 95,
+      "url": "https://www.youtube.com/watch?v=GjoYbsvUoO4",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0095_GjoYbsvUoO4.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0095_GjoYbsvUoO4.json",
+      "workdir": "/data/work/kids/video_0095_GjoYbsvUoO4",
+      "started_at": "2026-09-12T15:06:40+00:00",
+      "completed_at": "2026-09-12T15:07:15+00:00",
+      "updated_at": "2026-09-12T15:07:15+00:00",
+      "record_counts": {
+        "words": 695,
+        "syllables": 984
+      },
+      "error": null
+    },
+    {
+      "index": 96,
+      "url": "https://www.youtube.com/watch?v=VdKK4gWFO0c",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0096_VdKK4gWFO0c.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0096_VdKK4gWFO0c.json",
+      "workdir": "/data/work/kids/video_0096_VdKK4gWFO0c",
+      "started_at": "2026-09-12T15:07:15+00:00",
+      "completed_at": "2026-09-12T15:07:58+00:00",
+      "updated_at": "2026-09-12T15:07:58+00:00",
+      "record_counts": {
+        "words": 839,
+        "syllables": 1117
+      },
+      "error": null
+    },
+    {
+      "index": 97,
+      "url": "https://www.youtube.com/watch?v=82G-ZWzUHhU",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0097_82G-ZWzUHhU.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0097_82G-ZWzUHhU.json",
+      "workdir": "/data/work/kids/video_0097_82G-ZWzUHhU",
+      "started_at": "2026-09-12T15:07:58+00:00",
+      "completed_at": "2026-09-12T15:08:46+00:00",
+      "updated_at": "2026-09-12T15:08:46+00:00",
+      "record_counts": {
+        "words": 948,
+        "syllables": 1208
+      },
+      "error": null
+    },
+    {
+      "index": 98,
+      "url": "https://www.youtube.com/watch?v=2diHLxIdRPY",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0098_2diHLxIdRPY.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0098_2diHLxIdRPY.json",
+      "workdir": "/data/work/kids/video_0098_2diHLxIdRPY",
+      "started_at": "2026-09-12T15:08:46+00:00",
+      "completed_at": "2026-09-12T15:09:36+00:00",
+      "updated_at": "2026-09-12T15:09:36+00:00",
+      "record_counts": {
+        "words": 1122,
+        "syllables": 1650
+      },
+      "error": null
+    },
+    {
+      "index": 99,
+      "url": "https://www.youtube.com/watch?v=wHDt4lUP-4k",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0099_wHDt4lUP-4k.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0099_wHDt4lUP-4k.json",
+      "workdir": "/data/work/kids/video_0099_wHDt4lUP-4k",
+      "started_at": "2026-09-12T15:09:36+00:00",
+      "completed_at": "2026-09-12T15:10:09+00:00",
+      "updated_at": "2026-09-12T15:10:09+00:00",
+      "record_counts": {
+        "words": 472,
+        "syllables": 700
+      },
+      "error": null
+    },
+    {
+      "index": 100,
+      "url": "https://www.youtube.com/watch?v=yLW_GWSIQlQ",
+      "label": "kids",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/kids/video_0100_yLW_GWSIQlQ.json",
+      "attempts": 1,
+      "output_path": "/data/results/kids/video_0100_yLW_GWSIQlQ.json",
+      "workdir": "/data/work/kids/video_0100_yLW_GWSIQlQ",
+      "started_at": "2026-09-12T15:10:09+00:00",
+      "completed_at": "2026-09-12T15:10:28+00:00",
+      "updated_at": "2026-09-12T15:10:28+00:00",
+      "record_counts": {
+        "words": 5,
+        "syllables": 6
+      },
+      "error": null
+    },
+    {
+      "index": 101,
+      "url": "https://www.youtube.com/watch?v=ecF1y2bI2T4",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0101_ecF1y2bI2T4.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0101_ecF1y2bI2T4.json",
+      "workdir": "/data/work/normal/video_0101_ecF1y2bI2T4",
+      "started_at": "2026-09-12T15:10:28+00:00",
+      "completed_at": "2026-09-12T15:11:21+00:00",
+      "updated_at": "2026-09-12T15:11:21+00:00",
+      "record_counts": {
+        "words": 1308,
+        "syllables": 1631
+      },
+      "error": null
+    },
+    {
+      "index": 102,
+      "url": "https://www.youtube.com/watch?v=JnJBHDWIsNM",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0102_JnJBHDWIsNM.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0102_JnJBHDWIsNM.json",
+      "workdir": "/data/work/normal/video_0102_JnJBHDWIsNM",
+      "started_at": "2026-09-12T15:11:21+00:00",
+      "completed_at": "2026-09-12T15:11:58+00:00",
+      "updated_at": "2026-09-12T15:11:58+00:00",
+      "record_counts": {
+        "words": 520,
+        "syllables": 737
+      },
+      "error": null
+    },
+    {
+      "index": 103,
+      "url": "https://www.youtube.com/watch?v=LrD4QxIkaPA",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0103_LrD4QxIkaPA.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0103_LrD4QxIkaPA.json",
+      "workdir": "/data/work/normal/video_0103_LrD4QxIkaPA",
+      "started_at": "2026-09-12T15:11:58+00:00",
+      "completed_at": "2026-09-12T15:12:42+00:00",
+      "updated_at": "2026-09-12T15:12:42+00:00",
+      "record_counts": {
+        "words": 857,
+        "syllables": 1115
+      },
+      "error": null
+    },
+    {
+      "index": 104,
+      "url": "https://www.youtube.com/watch?v=a99sMKsgoNI",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0104_a99sMKsgoNI.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0104_a99sMKsgoNI.json",
+      "workdir": "/data/work/normal/video_0104_a99sMKsgoNI",
+      "started_at": "2026-09-12T15:12:42+00:00",
+      "completed_at": "2026-09-12T15:13:25+00:00",
+      "updated_at": "2026-09-12T15:13:25+00:00",
+      "record_counts": {
+        "words": 490,
+        "syllables": 591
+      },
+      "error": null
+    },
+    {
+      "index": 105,
+      "url": "https://www.youtube.com/watch?v=G9fcVL15ZVQ",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0105_G9fcVL15ZVQ.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0105_G9fcVL15ZVQ.json",
+      "workdir": "/data/work/normal/video_0105_G9fcVL15ZVQ",
+      "started_at": "2026-09-12T15:13:25+00:00",
+      "completed_at": "2026-09-12T15:14:19+00:00",
+      "updated_at": "2026-09-12T15:14:19+00:00",
+      "record_counts": {
+        "words": 879,
+        "syllables": 1126
+      },
+      "error": null
+    },
+    {
+      "index": 106,
+      "url": "https://www.youtube.com/watch?v=IMZoaNejsok",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0106_IMZoaNejsok.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0106_IMZoaNejsok.json",
+      "workdir": "/data/work/normal/video_0106_IMZoaNejsok",
+      "started_at": "2026-09-12T15:14:19+00:00",
+      "completed_at": "2026-09-12T15:15:16+00:00",
+      "updated_at": "2026-09-12T15:15:16+00:00",
+      "record_counts": {
+        "words": 1269,
+        "syllables": 1746
+      },
+      "error": null
+    },
+    {
+      "index": 107,
+      "url": "https://www.youtube.com/watch?v=9YlnNnlMhKg",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0107_9YlnNnlMhKg.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0107_9YlnNnlMhKg.json",
+      "workdir": "/data/work/normal/video_0107_9YlnNnlMhKg",
+      "started_at": "2026-09-12T15:15:16+00:00",
+      "completed_at": "2026-09-12T15:15:55+00:00",
+      "updated_at": "2026-09-12T15:15:55+00:00",
+      "record_counts": {
+        "words": 5,
+        "syllables": 5
+      },
+      "error": null
+    },
+    {
+      "index": 108,
+      "url": "https://www.youtube.com/watch?v=JgB6-RWnV9M",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0108_JgB6-RWnV9M.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0108_JgB6-RWnV9M.json",
+      "workdir": "/data/work/normal/video_0108_JgB6-RWnV9M",
+      "started_at": "2026-09-12T15:15:55+00:00",
+      "completed_at": "2026-09-12T15:16:27+00:00",
+      "updated_at": "2026-09-12T15:16:27+00:00",
+      "record_counts": {
+        "words": 581,
+        "syllables": 753
+      },
+      "error": null
+    },
+    {
+      "index": 109,
+      "url": "https://www.youtube.com/watch?v=2DLCvsAIs_8",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0109_2DLCvsAIs_8.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0109_2DLCvsAIs_8.json",
+      "workdir": "/data/work/normal/video_0109_2DLCvsAIs_8",
+      "started_at": "2026-09-12T15:16:27+00:00",
+      "completed_at": "2026-09-12T15:17:03+00:00",
+      "updated_at": "2026-09-12T15:17:03+00:00",
+      "record_counts": {
+        "words": 28,
+        "syllables": 38
+      },
+      "error": null
+    },
+    {
+      "index": 110,
+      "url": "https://www.youtube.com/watch?v=0Txc6YsyNXk",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0110_0Txc6YsyNXk.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0110_0Txc6YsyNXk.json",
+      "workdir": "/data/work/normal/video_0110_0Txc6YsyNXk",
+      "started_at": "2026-09-12T15:17:03+00:00",
+      "completed_at": "2026-09-12T15:17:45+00:00",
+      "updated_at": "2026-09-12T15:17:45+00:00",
+      "record_counts": {
+        "words": 787,
+        "syllables": 1096
+      },
+      "error": null
+    },
+    {
+      "index": 111,
+      "url": "https://www.youtube.com/watch?v=Ni5Xd8FQH2A",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0111_Ni5Xd8FQH2A.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0111_Ni5Xd8FQH2A.json",
+      "workdir": "/data/work/normal/video_0111_Ni5Xd8FQH2A",
+      "started_at": "2026-09-12T15:17:45+00:00",
+      "completed_at": "2026-09-12T15:18:29+00:00",
+      "updated_at": "2026-09-12T15:18:29+00:00",
+      "record_counts": {
+        "words": 142,
+        "syllables": 227
+      },
+      "error": null
+    },
+    {
+      "index": 112,
+      "url": "https://www.youtube.com/watch?v=UbQ69ndF8T0",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0112_UbQ69ndF8T0.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0112_UbQ69ndF8T0.json",
+      "workdir": "/data/work/normal/video_0112_UbQ69ndF8T0",
+      "started_at": "2026-09-12T15:18:29+00:00",
+      "completed_at": "2026-09-12T15:19:09+00:00",
+      "updated_at": "2026-09-12T15:19:09+00:00",
+      "record_counts": {
+        "words": 58,
+        "syllables": 67
+      },
+      "error": null
+    },
+    {
+      "index": 113,
+      "url": "https://www.youtube.com/watch?v=pXyWI_WbpeE",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0113_pXyWI_WbpeE.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0113_pXyWI_WbpeE.json",
+      "workdir": "/data/work/normal/video_0113_pXyWI_WbpeE",
+      "started_at": "2026-09-12T15:19:09+00:00",
+      "completed_at": "2026-09-12T15:19:33+00:00",
+      "updated_at": "2026-09-12T15:19:33+00:00",
+      "record_counts": {
+        "words": 12,
+        "syllables": 12
+      },
+      "error": null
+    },
+    {
+      "index": 114,
+      "url": "https://www.youtube.com/watch?v=Kpgv2wm3Rbg",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0114_Kpgv2wm3Rbg.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0114_Kpgv2wm3Rbg.json",
+      "workdir": "/data/work/normal/video_0114_Kpgv2wm3Rbg",
+      "started_at": "2026-09-12T15:19:33+00:00",
+      "completed_at": "2026-09-12T15:20:08+00:00",
+      "updated_at": "2026-09-12T15:20:08+00:00",
+      "record_counts": {
+        "words": 0,
+        "syllables": 0
+      },
+      "error": null
+    },
+    {
+      "index": 115,
+      "url": "https://www.youtube.com/watch?v=3GF2uA22RSI",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0115_3GF2uA22RSI.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0115_3GF2uA22RSI.json",
+      "workdir": "/data/work/normal/video_0115_3GF2uA22RSI",
+      "started_at": "2026-09-12T15:20:08+00:00",
+      "completed_at": "2026-09-12T15:20:39+00:00",
+      "updated_at": "2026-09-12T15:20:39+00:00",
+      "record_counts": {
+        "words": 27,
+        "syllables": 30
+      },
+      "error": null
+    },
+    {
+      "index": 116,
+      "url": "https://www.youtube.com/watch?v=wXCbPsNcsfA",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0116_wXCbPsNcsfA.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0116_wXCbPsNcsfA.json",
+      "workdir": "/data/work/normal/video_0116_wXCbPsNcsfA",
+      "started_at": "2026-09-12T15:20:39+00:00",
+      "completed_at": "2026-09-12T15:21:30+00:00",
+      "updated_at": "2026-09-12T15:21:30+00:00",
+      "record_counts": {
+        "words": 1049,
+        "syllables": 1367
+      },
+      "error": null
+    },
+    {
+      "index": 117,
+      "url": "https://www.youtube.com/watch?v=WK5n5SUrBi8",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0117_WK5n5SUrBi8.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0117_WK5n5SUrBi8.json",
+      "workdir": "/data/work/normal/video_0117_WK5n5SUrBi8",
+      "started_at": "2026-09-12T15:21:30+00:00",
+      "completed_at": "2026-09-12T15:22:00+00:00",
+      "updated_at": "2026-09-12T15:22:00+00:00",
+      "record_counts": {
+        "words": 11,
+        "syllables": 13
+      },
+      "error": null
+    },
+    {
+      "index": 118,
+      "url": "https://www.youtube.com/watch?v=1etaZ5ITXlg",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0118_1etaZ5ITXlg.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0118_1etaZ5ITXlg.json",
+      "workdir": "/data/work/normal/video_0118_1etaZ5ITXlg",
+      "started_at": "2026-09-12T15:22:00+00:00",
+      "completed_at": "2026-09-12T15:22:28+00:00",
+      "updated_at": "2026-09-12T15:22:28+00:00",
+      "record_counts": {
+        "words": 2,
+        "syllables": 2
+      },
+      "error": null
+    },
+    {
+      "index": 119,
+      "url": "https://www.youtube.com/watch?v=6wiTZZ5EbQ4",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0119_6wiTZZ5EbQ4.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0119_6wiTZZ5EbQ4.json",
+      "workdir": "/data/work/normal/video_0119_6wiTZZ5EbQ4",
+      "started_at": "2026-09-12T15:22:28+00:00",
+      "completed_at": "2026-09-12T15:23:32+00:00",
+      "updated_at": "2026-09-12T15:23:32+00:00",
+      "record_counts": {
+        "words": 1211,
+        "syllables": 2032
+      },
+      "error": null
+    },
+    {
+      "index": 120,
+      "url": "https://www.youtube.com/watch?v=NQOD8oBfZjs",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0120_NQOD8oBfZjs.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0120_NQOD8oBfZjs.json",
+      "workdir": "/data/work/normal/video_0120_NQOD8oBfZjs",
+      "started_at": "2026-09-12T15:23:32+00:00",
+      "completed_at": "2026-09-12T15:24:27+00:00",
+      "updated_at": "2026-09-12T15:24:27+00:00",
+      "record_counts": {
+        "words": 780,
+        "syllables": 1058
+      },
+      "error": null
+    },
+    {
+      "index": 121,
+      "url": "https://www.youtube.com/watch?v=BFwMRVwrKcA",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0121_BFwMRVwrKcA.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0121_BFwMRVwrKcA.json",
+      "workdir": "/data/work/normal/video_0121_BFwMRVwrKcA",
+      "started_at": "2026-09-12T15:24:27+00:00",
+      "completed_at": "2026-09-12T15:25:36+00:00",
+      "updated_at": "2026-09-12T15:25:36+00:00",
+      "record_counts": {
+        "words": 2279,
+        "syllables": 3197
+      },
+      "error": null
+    },
+    {
+      "index": 122,
+      "url": "https://www.youtube.com/watch?v=62wEk02YKs0",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0122_62wEk02YKs0.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0122_62wEk02YKs0.json",
+      "workdir": "/data/work/normal/video_0122_62wEk02YKs0",
+      "started_at": "2026-09-12T15:25:36+00:00",
+      "completed_at": "2026-09-12T15:26:16+00:00",
+      "updated_at": "2026-09-12T15:26:16+00:00",
+      "record_counts": {
+        "words": 801,
+        "syllables": 1287
+      },
+      "error": null
+    },
+    {
+      "index": 123,
+      "url": "https://www.youtube.com/watch?v=Y681hXWwhQY",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0123_Y681hXWwhQY.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0123_Y681hXWwhQY.json",
+      "workdir": "/data/work/normal/video_0123_Y681hXWwhQY",
+      "started_at": "2026-09-12T15:26:16+00:00",
+      "completed_at": "2026-09-12T15:26:59+00:00",
+      "updated_at": "2026-09-12T15:26:59+00:00",
+      "record_counts": {
+        "words": 934,
+        "syllables": 1346
+      },
+      "error": null
+    },
+    {
+      "index": 124,
+      "url": "https://www.youtube.com/watch?v=X1L1Hd3xfrU",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0124_X1L1Hd3xfrU.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0124_X1L1Hd3xfrU.json",
+      "workdir": "/data/work/normal/video_0124_X1L1Hd3xfrU",
+      "started_at": "2026-09-12T15:26:59+00:00",
+      "completed_at": "2026-09-12T15:27:38+00:00",
+      "updated_at": "2026-09-12T15:27:38+00:00",
+      "record_counts": {
+        "words": 797,
+        "syllables": 1320
+      },
+      "error": null
+    },
+    {
+      "index": 125,
+      "url": "https://www.youtube.com/watch?v=Efi9tB75cZs",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0125_Efi9tB75cZs.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0125_Efi9tB75cZs.json",
+      "workdir": "/data/work/normal/video_0125_Efi9tB75cZs",
+      "started_at": "2026-09-12T15:27:38+00:00",
+      "completed_at": "2026-09-12T15:28:22+00:00",
+      "updated_at": "2026-09-12T15:28:22+00:00",
+      "record_counts": {
+        "words": 956,
+        "syllables": 1389
+      },
+      "error": null
+    },
+    {
+      "index": 126,
+      "url": "https://www.youtube.com/watch?v=SlsmMFnKg3Q",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0126_SlsmMFnKg3Q.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0126_SlsmMFnKg3Q.json",
+      "workdir": "/data/work/normal/video_0126_SlsmMFnKg3Q",
+      "started_at": "2026-09-12T15:28:22+00:00",
+      "completed_at": "2026-09-12T15:29:07+00:00",
+      "updated_at": "2026-09-12T15:29:07+00:00",
+      "record_counts": {
+        "words": 898,
+        "syllables": 1470
+      },
+      "error": null
+    },
+    {
+      "index": 127,
+      "url": "https://www.youtube.com/watch?v=x0G5mbbNdBM",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0127_x0G5mbbNdBM.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0127_x0G5mbbNdBM.json",
+      "workdir": "/data/work/normal/video_0127_x0G5mbbNdBM",
+      "started_at": "2026-09-12T15:29:07+00:00",
+      "completed_at": "2026-09-12T15:29:38+00:00",
+      "updated_at": "2026-09-12T15:29:38+00:00",
+      "record_counts": {
+        "words": 528,
+        "syllables": 752
+      },
+      "error": null
+    },
+    {
+      "index": 128,
+      "url": "https://www.youtube.com/watch?v=26PrgjTboVQ",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0128_26PrgjTboVQ.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0128_26PrgjTboVQ.json",
+      "workdir": "/data/work/normal/video_0128_26PrgjTboVQ",
+      "started_at": "2026-09-12T15:29:38+00:00",
+      "completed_at": "2026-09-12T15:30:20+00:00",
+      "updated_at": "2026-09-12T15:30:20+00:00",
+      "record_counts": {
+        "words": 912,
+        "syllables": 1331
+      },
+      "error": null
+    },
+    {
+      "index": 129,
+      "url": "https://www.youtube.com/watch?v=h_pvijqmolQ",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0129_h_pvijqmolQ.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0129_h_pvijqmolQ.json",
+      "workdir": "/data/work/normal/video_0129_h_pvijqmolQ",
+      "started_at": "2026-09-12T15:30:20+00:00",
+      "completed_at": "2026-09-12T15:31:02+00:00",
+      "updated_at": "2026-09-12T15:31:02+00:00",
+      "record_counts": {
+        "words": 885,
+        "syllables": 1328
+      },
+      "error": null
+    },
+    {
+      "index": 130,
+      "url": "https://www.youtube.com/watch?v=LXrh2AJa8nU",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0130_LXrh2AJa8nU.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0130_LXrh2AJa8nU.json",
+      "workdir": "/data/work/normal/video_0130_LXrh2AJa8nU",
+      "started_at": "2026-09-12T15:31:02+00:00",
+      "completed_at": "2026-09-12T15:31:47+00:00",
+      "updated_at": "2026-09-12T15:31:47+00:00",
+      "record_counts": {
+        "words": 945,
+        "syllables": 1256
+      },
+      "error": null
+    },
+    {
+      "index": 131,
+      "url": "https://www.youtube.com/watch?v=j2PdEQpu5js",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0131_j2PdEQpu5js.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0131_j2PdEQpu5js.json",
+      "workdir": "/data/work/normal/video_0131_j2PdEQpu5js",
+      "started_at": "2026-09-12T15:31:47+00:00",
+      "completed_at": "2026-09-12T15:32:29+00:00",
+      "updated_at": "2026-09-12T15:32:29+00:00",
+      "record_counts": {
+        "words": 944,
+        "syllables": 1340
+      },
+      "error": null
+    },
+    {
+      "index": 132,
+      "url": "https://www.youtube.com/watch?v=pDyece8CQF8",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0132_pDyece8CQF8.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0132_pDyece8CQF8.json",
+      "workdir": "/data/work/normal/video_0132_pDyece8CQF8",
+      "started_at": "2026-09-12T15:32:29+00:00",
+      "completed_at": "2026-09-12T15:33:31+00:00",
+      "updated_at": "2026-09-12T15:33:31+00:00",
+      "record_counts": {
+        "words": 1530,
+        "syllables": 2402
+      },
+      "error": null
+    },
+    {
+      "index": 133,
+      "url": "https://www.youtube.com/watch?v=IEyjbNFkFVQ",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0133_IEyjbNFkFVQ.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0133_IEyjbNFkFVQ.json",
+      "workdir": "/data/work/normal/video_0133_IEyjbNFkFVQ",
+      "started_at": "2026-09-12T15:33:31+00:00",
+      "completed_at": "2026-09-12T15:34:33+00:00",
+      "updated_at": "2026-09-12T15:34:33+00:00",
+      "record_counts": {
+        "words": 1480,
+        "syllables": 2777
+      },
+      "error": null
+    },
+    {
+      "index": 134,
+      "url": "https://www.youtube.com/watch?v=u8R9MtM42P8",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0134_u8R9MtM42P8.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0134_u8R9MtM42P8.json",
+      "workdir": "/data/work/normal/video_0134_u8R9MtM42P8",
+      "started_at": "2026-09-12T15:34:33+00:00",
+      "completed_at": "2026-09-12T15:35:32+00:00",
+      "updated_at": "2026-09-12T15:35:32+00:00",
+      "record_counts": {
+        "words": 1521,
+        "syllables": 2541
+      },
+      "error": null
+    },
+    {
+      "index": 135,
+      "url": "https://www.youtube.com/watch?v=ExvEIOWB-H0",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0135_ExvEIOWB-H0.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0135_ExvEIOWB-H0.json",
+      "workdir": "/data/work/normal/video_0135_ExvEIOWB-H0",
+      "started_at": "2026-09-12T15:35:32+00:00",
+      "completed_at": "2026-09-12T15:36:51+00:00",
+      "updated_at": "2026-09-12T15:36:51+00:00",
+      "record_counts": {
+        "words": 2257,
+        "syllables": 3426
+      },
+      "error": null
+    },
+    {
+      "index": 136,
+      "url": "https://www.youtube.com/watch?v=fQktE-YKlJg",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0136_fQktE-YKlJg.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0136_fQktE-YKlJg.json",
+      "workdir": "/data/work/normal/video_0136_fQktE-YKlJg",
+      "started_at": "2026-09-12T15:36:51+00:00",
+      "completed_at": "2026-09-12T15:38:05+00:00",
+      "updated_at": "2026-09-12T15:38:05+00:00",
+      "record_counts": {
+        "words": 2129,
+        "syllables": 3469
+      },
+      "error": null
+    },
+    {
+      "index": 137,
+      "url": "https://www.youtube.com/watch?v=Mh5LY4Mz15o",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0137_Mh5LY4Mz15o.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0137_Mh5LY4Mz15o.json",
+      "workdir": "/data/work/normal/video_0137_Mh5LY4Mz15o",
+      "started_at": "2026-09-12T15:38:05+00:00",
+      "completed_at": "2026-09-12T15:39:19+00:00",
+      "updated_at": "2026-09-12T15:39:19+00:00",
+      "record_counts": {
+        "words": 2075,
+        "syllables": 2949
+      },
+      "error": null
+    },
+    {
+      "index": 138,
+      "url": "https://www.youtube.com/watch?v=3Rf0dIk_Eec",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0138_3Rf0dIk_Eec.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0138_3Rf0dIk_Eec.json",
+      "workdir": "/data/work/normal/video_0138_3Rf0dIk_Eec",
+      "started_at": "2026-09-12T15:39:19+00:00",
+      "completed_at": "2026-09-12T15:39:52+00:00",
+      "updated_at": "2026-09-12T15:39:52+00:00",
+      "record_counts": {
+        "words": 8,
+        "syllables": 10
+      },
+      "error": null
+    },
+    {
+      "index": 139,
+      "url": "https://www.youtube.com/watch?v=0Puv0Pss33M",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0139_0Puv0Pss33M.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0139_0Puv0Pss33M.json",
+      "workdir": "/data/work/normal/video_0139_0Puv0Pss33M",
+      "started_at": "2026-09-12T15:39:52+00:00",
+      "completed_at": "2026-09-12T15:40:41+00:00",
+      "updated_at": "2026-09-12T15:40:41+00:00",
+      "record_counts": {
+        "words": 818,
+        "syllables": 1249
+      },
+      "error": null
+    },
+    {
+      "index": 140,
+      "url": "https://www.youtube.com/watch?v=hkBhJxZupeE",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0140_hkBhJxZupeE.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0140_hkBhJxZupeE.json",
+      "workdir": "/data/work/normal/video_0140_hkBhJxZupeE",
+      "started_at": "2026-09-12T15:40:41+00:00",
+      "completed_at": "2026-09-12T15:41:29+00:00",
+      "updated_at": "2026-09-12T15:41:29+00:00",
+      "record_counts": {
+        "words": 5,
+        "syllables": 6
+      },
+      "error": null
+    },
+    {
+      "index": 141,
+      "url": "https://www.youtube.com/watch?v=QGlAtxe3GAA",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0141_QGlAtxe3GAA.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0141_QGlAtxe3GAA.json",
+      "workdir": "/data/work/normal/video_0141_QGlAtxe3GAA",
+      "started_at": "2026-09-12T15:41:29+00:00",
+      "completed_at": "2026-09-12T15:42:08+00:00",
+      "updated_at": "2026-09-12T15:42:08+00:00",
+      "record_counts": {
+        "words": 776,
+        "syllables": 1084
+      },
+      "error": null
+    },
+    {
+      "index": 142,
+      "url": "https://www.youtube.com/watch?v=OLOYCFoleZg",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0142_OLOYCFoleZg.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0142_OLOYCFoleZg.json",
+      "workdir": "/data/work/normal/video_0142_OLOYCFoleZg",
+      "started_at": "2026-09-12T15:42:08+00:00",
+      "completed_at": "2026-09-12T15:43:01+00:00",
+      "updated_at": "2026-09-12T15:43:01+00:00",
+      "record_counts": {
+        "words": 1161,
+        "syllables": 2072
+      },
+      "error": null
+    },
+    {
+      "index": 143,
+      "url": "https://www.youtube.com/watch?v=SO0q_RM4nSk",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0143_SO0q_RM4nSk.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0143_SO0q_RM4nSk.json",
+      "workdir": "/data/work/normal/video_0143_SO0q_RM4nSk",
+      "started_at": "2026-09-12T15:43:01+00:00",
+      "completed_at": "2026-09-12T15:43:57+00:00",
+      "updated_at": "2026-09-12T15:43:57+00:00",
+      "record_counts": {
+        "words": 1316,
+        "syllables": 1715
+      },
+      "error": null
+    },
+    {
+      "index": 144,
+      "url": "https://www.youtube.com/watch?v=MrrxN6GZJaU",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0144_MrrxN6GZJaU.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0144_MrrxN6GZJaU.json",
+      "workdir": "/data/work/normal/video_0144_MrrxN6GZJaU",
+      "started_at": "2026-09-12T15:43:57+00:00",
+      "completed_at": "2026-09-12T15:44:41+00:00",
+      "updated_at": "2026-09-12T15:44:41+00:00",
+      "record_counts": {
+        "words": 547,
+        "syllables": 703
+      },
+      "error": null
+    },
+    {
+      "index": 145,
+      "url": "https://www.youtube.com/watch?v=7U3nFtnFjek",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0145_7U3nFtnFjek.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0145_7U3nFtnFjek.json",
+      "workdir": "/data/work/normal/video_0145_7U3nFtnFjek",
+      "started_at": "2026-09-12T15:44:41+00:00",
+      "completed_at": "2026-09-12T15:45:57+00:00",
+      "updated_at": "2026-09-12T15:45:57+00:00",
+      "record_counts": {
+        "words": 1089,
+        "syllables": 1613
+      },
+      "error": null
+    },
+    {
+      "index": 146,
+      "url": "https://www.youtube.com/watch?v=cCNEgxnnR5k",
+      "label": "normal",
+      "status": "failed",
+      "stage": "download",
+      "stage_status": "failed",
+      "detail": "https://www.youtube.com/watch?v=cCNEgxnnR5k",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0146_cCNEgxnnR5k.json",
+      "workdir": "/data/work/normal/video_0146_cCNEgxnnR5k",
+      "started_at": "2026-09-12T15:45:57+00:00",
+      "completed_at": null,
+      "updated_at": "2026-09-12T15:45:59+00:00",
+      "record_counts": null,
+      "error": "RuntimeError: Command failed (1): yt-dlp -f bestaudio/best --extract-audio --audio-format m4a --audio-quality 0 --no-playlist -o /data/work/normal/video_0146_cCNEgxnnR5k/download.%(ext)s https://www.youtube.com/watch?v=cCNEgxnnR5k\nstderr:\nERROR: unable to download video data: HTTP Error 403: Forbidden\n"
+    },
+    {
+      "index": 147,
+      "url": "https://www.youtube.com/watch?v=TLFdzxD7dWY",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0147_TLFdzxD7dWY.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0147_TLFdzxD7dWY.json",
+      "workdir": "/data/work/normal/video_0147_TLFdzxD7dWY",
+      "started_at": "2026-09-12T15:45:59+00:00",
+      "completed_at": "2026-09-12T15:47:03+00:00",
+      "updated_at": "2026-09-12T15:47:03+00:00",
+      "record_counts": {
+        "words": 1504,
+        "syllables": 2097
+      },
+      "error": null
+    },
+    {
+      "index": 148,
+      "url": "https://www.youtube.com/watch?v=8-Kioh2vVrg",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0148_8-Kioh2vVrg.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0148_8-Kioh2vVrg.json",
+      "workdir": "/data/work/normal/video_0148_8-Kioh2vVrg",
+      "started_at": "2026-09-12T15:47:03+00:00",
+      "completed_at": "2026-09-12T15:48:05+00:00",
+      "updated_at": "2026-09-12T15:48:05+00:00",
+      "record_counts": {
+        "words": 1268,
+        "syllables": 2084
+      },
+      "error": null
+    },
+    {
+      "index": 149,
+      "url": "https://www.youtube.com/watch?v=E2ERbOUE3Ak",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0149_E2ERbOUE3Ak.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0149_E2ERbOUE3Ak.json",
+      "workdir": "/data/work/normal/video_0149_E2ERbOUE3Ak",
+      "started_at": "2026-09-12T15:48:05+00:00",
+      "completed_at": "2026-09-12T15:49:04+00:00",
+      "updated_at": "2026-09-12T15:49:04+00:00",
+      "record_counts": {
+        "words": 1247,
+        "syllables": 1845
+      },
+      "error": null
+    },
+    {
+      "index": 150,
+      "url": "https://www.youtube.com/watch?v=LezARmLDu6U",
+      "label": "normal",
+      "status": "failed",
+      "stage": "download",
+      "stage_status": "failed",
+      "detail": "https://www.youtube.com/watch?v=LezARmLDu6U",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0150_LezARmLDu6U.json",
+      "workdir": "/data/work/normal/video_0150_LezARmLDu6U",
+      "started_at": "2026-09-12T15:49:04+00:00",
+      "completed_at": null,
+      "updated_at": "2026-09-12T15:49:07+00:00",
+      "record_counts": null,
+      "error": "RuntimeError: Command failed (1): yt-dlp -f bestaudio/best --extract-audio --audio-format m4a --audio-quality 0 --no-playlist -o /data/work/normal/video_0150_LezARmLDu6U/download.%(ext)s https://www.youtube.com/watch?v=LezARmLDu6U\nstderr:\nERROR: [youtube] LezARmLDu6U: Sign in to confirm your age. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies\n"
+    },
+    {
+      "index": 151,
+      "url": "https://www.youtube.com/watch?v=yubzJw0uiE4",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0151_yubzJw0uiE4.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0151_yubzJw0uiE4.json",
+      "workdir": "/data/work/normal/video_0151_yubzJw0uiE4",
+      "started_at": "2026-09-12T15:49:07+00:00",
+      "completed_at": "2026-09-12T15:49:55+00:00",
+      "updated_at": "2026-09-12T15:49:55+00:00",
+      "record_counts": {
+        "words": 1103,
+        "syllables": 1665
+      },
+      "error": null
+    },
+    {
+      "index": 152,
+      "url": "https://www.youtube.com/watch?v=KtoQnFWEgMY",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0152_KtoQnFWEgMY.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0152_KtoQnFWEgMY.json",
+      "workdir": "/data/work/normal/video_0152_KtoQnFWEgMY",
+      "started_at": "2026-09-12T15:49:55+00:00",
+      "completed_at": "2026-09-12T15:50:51+00:00",
+      "updated_at": "2026-09-12T15:50:51+00:00",
+      "record_counts": {
+        "words": 1391,
+        "syllables": 2047
+      },
+      "error": null
+    },
+    {
+      "index": 153,
+      "url": "https://www.youtube.com/watch?v=y7NfjndVOSY",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0153_y7NfjndVOSY.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0153_y7NfjndVOSY.json",
+      "workdir": "/data/work/normal/video_0153_y7NfjndVOSY",
+      "started_at": "2026-09-12T15:50:51+00:00",
+      "completed_at": "2026-09-12T15:51:45+00:00",
+      "updated_at": "2026-09-12T15:51:45+00:00",
+      "record_counts": {
+        "words": 1406,
+        "syllables": 2139
+      },
+      "error": null
+    },
+    {
+      "index": 154,
+      "url": "https://www.youtube.com/watch?v=7OQPY6KuPs4",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0154_7OQPY6KuPs4.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0154_7OQPY6KuPs4.json",
+      "workdir": "/data/work/normal/video_0154_7OQPY6KuPs4",
+      "started_at": "2026-09-12T15:51:45+00:00",
+      "completed_at": "2026-09-12T15:52:32+00:00",
+      "updated_at": "2026-09-12T15:52:32+00:00",
+      "record_counts": {
+        "words": 1074,
+        "syllables": 1898
+      },
+      "error": null
+    },
+    {
+      "index": 155,
+      "url": "https://www.youtube.com/watch?v=7F1iJZr-p4E",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0155_7F1iJZr-p4E.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0155_7F1iJZr-p4E.json",
+      "workdir": "/data/work/normal/video_0155_7F1iJZr-p4E",
+      "started_at": "2026-09-12T15:52:32+00:00",
+      "completed_at": "2026-09-12T15:53:14+00:00",
+      "updated_at": "2026-09-12T15:53:14+00:00",
+      "record_counts": {
+        "words": 900,
+        "syllables": 1316
+      },
+      "error": null
+    },
+    {
+      "index": 156,
+      "url": "https://www.youtube.com/watch?v=we4KiShNjlA",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0156_we4KiShNjlA.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0156_we4KiShNjlA.json",
+      "workdir": "/data/work/normal/video_0156_we4KiShNjlA",
+      "started_at": "2026-09-12T15:53:14+00:00",
+      "completed_at": "2026-09-12T15:53:58+00:00",
+      "updated_at": "2026-09-12T15:53:58+00:00",
+      "record_counts": {
+        "words": 1052,
+        "syllables": 1566
+      },
+      "error": null
+    },
+    {
+      "index": 157,
+      "url": "https://www.youtube.com/watch?v=j-yjm_rSZW4",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0157_j-yjm_rSZW4.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0157_j-yjm_rSZW4.json",
+      "workdir": "/data/work/normal/video_0157_j-yjm_rSZW4",
+      "started_at": "2026-09-12T15:53:58+00:00",
+      "completed_at": "2026-09-12T15:54:57+00:00",
+      "updated_at": "2026-09-12T15:54:57+00:00",
+      "record_counts": {
+        "words": 1543,
+        "syllables": 2497
+      },
+      "error": null
+    },
+    {
+      "index": 158,
+      "url": "https://www.youtube.com/watch?v=yz0oYPfON2g",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0158_yz0oYPfON2g.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0158_yz0oYPfON2g.json",
+      "workdir": "/data/work/normal/video_0158_yz0oYPfON2g",
+      "started_at": "2026-09-12T15:54:57+00:00",
+      "completed_at": "2026-09-12T15:55:39+00:00",
+      "updated_at": "2026-09-12T15:55:39+00:00",
+      "record_counts": {
+        "words": 889,
+        "syllables": 1419
+      },
+      "error": null
+    },
+    {
+      "index": 159,
+      "url": "https://www.youtube.com/watch?v=inWWhr5tnEA",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0159_inWWhr5tnEA.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0159_inWWhr5tnEA.json",
+      "workdir": "/data/work/normal/video_0159_inWWhr5tnEA",
+      "started_at": "2026-09-12T15:55:39+00:00",
+      "completed_at": "2026-09-12T15:56:27+00:00",
+      "updated_at": "2026-09-12T15:56:27+00:00",
+      "record_counts": {
+        "words": 1019,
+        "syllables": 1773
+      },
+      "error": null
+    },
+    {
+      "index": 160,
+      "url": "https://www.youtube.com/watch?v=rCrfyX5aANA",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0160_rCrfyX5aANA.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0160_rCrfyX5aANA.json",
+      "workdir": "/data/work/normal/video_0160_rCrfyX5aANA",
+      "started_at": "2026-09-12T15:56:27+00:00",
+      "completed_at": "2026-09-12T15:57:09+00:00",
+      "updated_at": "2026-09-12T15:57:09+00:00",
+      "record_counts": {
+        "words": 855,
+        "syllables": 1192
+      },
+      "error": null
+    },
+    {
+      "index": 161,
+      "url": "https://www.youtube.com/watch?v=vq2x7k_nofw",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0161_vq2x7k_nofw.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0161_vq2x7k_nofw.json",
+      "workdir": "/data/work/normal/video_0161_vq2x7k_nofw",
+      "started_at": "2026-09-12T15:57:09+00:00",
+      "completed_at": "2026-09-12T15:57:53+00:00",
+      "updated_at": "2026-09-12T15:57:53+00:00",
+      "record_counts": {
+        "words": 989,
+        "syllables": 1418
+      },
+      "error": null
+    },
+    {
+      "index": 162,
+      "url": "https://www.youtube.com/watch?v=QdE63sYqwd8",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0162_QdE63sYqwd8.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0162_QdE63sYqwd8.json",
+      "workdir": "/data/work/normal/video_0162_QdE63sYqwd8",
+      "started_at": "2026-09-12T15:57:53+00:00",
+      "completed_at": "2026-09-12T15:58:38+00:00",
+      "updated_at": "2026-09-12T15:58:38+00:00",
+      "record_counts": {
+        "words": 995,
+        "syllables": 1433
+      },
+      "error": null
+    },
+    {
+      "index": 163,
+      "url": "https://www.youtube.com/watch?v=_t3pBsFMBVU",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0163__t3pBsFMBVU.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0163__t3pBsFMBVU.json",
+      "workdir": "/data/work/normal/video_0163__t3pBsFMBVU",
+      "started_at": "2026-09-12T15:58:38+00:00",
+      "completed_at": "2026-09-12T15:59:36+00:00",
+      "updated_at": "2026-09-12T15:59:36+00:00",
+      "record_counts": {
+        "words": 1294,
+        "syllables": 1899
+      },
+      "error": null
+    },
+    {
+      "index": 164,
+      "url": "https://www.youtube.com/watch?v=YjwHsdFZPxE",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0164_YjwHsdFZPxE.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0164_YjwHsdFZPxE.json",
+      "workdir": "/data/work/normal/video_0164_YjwHsdFZPxE",
+      "started_at": "2026-09-12T15:59:36+00:00",
+      "completed_at": "2026-09-12T16:00:18+00:00",
+      "updated_at": "2026-09-12T16:00:18+00:00",
+      "record_counts": {
+        "words": 949,
+        "syllables": 1438
+      },
+      "error": null
+    },
+    {
+      "index": 165,
+      "url": "https://www.youtube.com/watch?v=WsKg6HsoDaw",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0165_WsKg6HsoDaw.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0165_WsKg6HsoDaw.json",
+      "workdir": "/data/work/normal/video_0165_WsKg6HsoDaw",
+      "started_at": "2026-09-12T16:00:18+00:00",
+      "completed_at": "2026-09-12T16:01:01+00:00",
+      "updated_at": "2026-09-12T16:01:01+00:00",
+      "record_counts": {
+        "words": 981,
+        "syllables": 1449
+      },
+      "error": null
+    },
+    {
+      "index": 166,
+      "url": "https://www.youtube.com/watch?v=c1KFqXL0I0Q",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0166_c1KFqXL0I0Q.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0166_c1KFqXL0I0Q.json",
+      "workdir": "/data/work/normal/video_0166_c1KFqXL0I0Q",
+      "started_at": "2026-09-12T16:01:01+00:00",
+      "completed_at": "2026-09-12T16:01:38+00:00",
+      "updated_at": "2026-09-12T16:01:38+00:00",
+      "record_counts": {
+        "words": 742,
+        "syllables": 975
+      },
+      "error": null
+    },
+    {
+      "index": 167,
+      "url": "https://www.youtube.com/watch?v=VUzlCG_eoFs",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0167_VUzlCG_eoFs.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0167_VUzlCG_eoFs.json",
+      "workdir": "/data/work/normal/video_0167_VUzlCG_eoFs",
+      "started_at": "2026-09-12T16:01:38+00:00",
+      "completed_at": "2026-09-12T16:02:27+00:00",
+      "updated_at": "2026-09-12T16:02:27+00:00",
+      "record_counts": {
+        "words": 1194,
+        "syllables": 1771
+      },
+      "error": null
+    },
+    {
+      "index": 168,
+      "url": "https://www.youtube.com/watch?v=6bJTEZnTT5A",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0168_6bJTEZnTT5A.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0168_6bJTEZnTT5A.json",
+      "workdir": "/data/work/normal/video_0168_6bJTEZnTT5A",
+      "started_at": "2026-09-12T16:02:27+00:00",
+      "completed_at": "2026-09-12T16:03:30+00:00",
+      "updated_at": "2026-09-12T16:03:30+00:00",
+      "record_counts": {
+        "words": 1619,
+        "syllables": 2325
+      },
+      "error": null
+    },
+    {
+      "index": 169,
+      "url": "https://www.youtube.com/watch?v=kayOhGRcNt4",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0169_kayOhGRcNt4.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0169_kayOhGRcNt4.json",
+      "workdir": "/data/work/normal/video_0169_kayOhGRcNt4",
+      "started_at": "2026-09-12T16:03:30+00:00",
+      "completed_at": "2026-09-12T16:04:20+00:00",
+      "updated_at": "2026-09-12T16:04:20+00:00",
+      "record_counts": {
+        "words": 1246,
+        "syllables": 1811
+      },
+      "error": null
+    },
+    {
+      "index": 170,
+      "url": "https://www.youtube.com/watch?v=LCWr-TJrc0k",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0170_LCWr-TJrc0k.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0170_LCWr-TJrc0k.json",
+      "workdir": "/data/work/normal/video_0170_LCWr-TJrc0k",
+      "started_at": "2026-09-12T16:04:20+00:00",
+      "completed_at": "2026-09-12T16:05:12+00:00",
+      "updated_at": "2026-09-12T16:05:12+00:00",
+      "record_counts": {
+        "words": 1314,
+        "syllables": 1850
+      },
+      "error": null
+    },
+    {
+      "index": 171,
+      "url": "https://www.youtube.com/watch?v=JhHMJCUmq28",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0171_JhHMJCUmq28.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0171_JhHMJCUmq28.json",
+      "workdir": "/data/work/normal/video_0171_JhHMJCUmq28",
+      "started_at": "2026-09-12T16:05:12+00:00",
+      "completed_at": "2026-09-12T16:06:02+00:00",
+      "updated_at": "2026-09-12T16:06:02+00:00",
+      "record_counts": {
+        "words": 1187,
+        "syllables": 1926
+      },
+      "error": null
+    },
+    {
+      "index": 172,
+      "url": "https://www.youtube.com/watch?v=s2HCrhNVfak",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0172_s2HCrhNVfak.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0172_s2HCrhNVfak.json",
+      "workdir": "/data/work/normal/video_0172_s2HCrhNVfak",
+      "started_at": "2026-09-12T16:06:02+00:00",
+      "completed_at": "2026-09-12T16:06:56+00:00",
+      "updated_at": "2026-09-12T16:06:56+00:00",
+      "record_counts": {
+        "words": 1163,
+        "syllables": 1862
+      },
+      "error": null
+    },
+    {
+      "index": 173,
+      "url": "https://www.youtube.com/watch?v=cLAiQP56msk",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0173_cLAiQP56msk.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0173_cLAiQP56msk.json",
+      "workdir": "/data/work/normal/video_0173_cLAiQP56msk",
+      "started_at": "2026-09-12T16:06:56+00:00",
+      "completed_at": "2026-09-12T16:07:50+00:00",
+      "updated_at": "2026-09-12T16:07:50+00:00",
+      "record_counts": {
+        "words": 1116,
+        "syllables": 1752
+      },
+      "error": null
+    },
+    {
+      "index": 174,
+      "url": "https://www.youtube.com/watch?v=uPsUjKLHLAg",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0174_uPsUjKLHLAg.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0174_uPsUjKLHLAg.json",
+      "workdir": "/data/work/normal/video_0174_uPsUjKLHLAg",
+      "started_at": "2026-09-12T16:07:50+00:00",
+      "completed_at": "2026-09-12T16:08:27+00:00",
+      "updated_at": "2026-09-12T16:08:27+00:00",
+      "record_counts": {
+        "words": 808,
+        "syllables": 1182
+      },
+      "error": null
+    },
+    {
+      "index": 175,
+      "url": "https://www.youtube.com/watch?v=nrhxNNH5lt0",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0175_nrhxNNH5lt0.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0175_nrhxNNH5lt0.json",
+      "workdir": "/data/work/normal/video_0175_nrhxNNH5lt0",
+      "started_at": "2026-09-12T16:08:27+00:00",
+      "completed_at": "2026-09-12T16:09:21+00:00",
+      "updated_at": "2026-09-12T16:09:21+00:00",
+      "record_counts": {
+        "words": 1191,
+        "syllables": 2032
+      },
+      "error": null
+    },
+    {
+      "index": 176,
+      "url": "https://www.youtube.com/watch?v=DaZj0McZx1Y",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0176_DaZj0McZx1Y.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0176_DaZj0McZx1Y.json",
+      "workdir": "/data/work/normal/video_0176_DaZj0McZx1Y",
+      "started_at": "2026-09-12T16:09:21+00:00",
+      "completed_at": "2026-09-12T16:10:19+00:00",
+      "updated_at": "2026-09-12T16:10:19+00:00",
+      "record_counts": {
+        "words": 1359,
+        "syllables": 2315
+      },
+      "error": null
+    },
+    {
+      "index": 177,
+      "url": "https://www.youtube.com/watch?v=mo1lNRKnayA",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0177_mo1lNRKnayA.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0177_mo1lNRKnayA.json",
+      "workdir": "/data/work/normal/video_0177_mo1lNRKnayA",
+      "started_at": "2026-09-12T16:10:19+00:00",
+      "completed_at": "2026-09-12T16:11:07+00:00",
+      "updated_at": "2026-09-12T16:11:07+00:00",
+      "record_counts": {
+        "words": 1084,
+        "syllables": 1768
+      },
+      "error": null
+    },
+    {
+      "index": 178,
+      "url": "https://www.youtube.com/watch?v=4GSCWDa1qcE",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0178_4GSCWDa1qcE.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0178_4GSCWDa1qcE.json",
+      "workdir": "/data/work/normal/video_0178_4GSCWDa1qcE",
+      "started_at": "2026-09-12T16:11:07+00:00",
+      "completed_at": "2026-09-12T16:11:56+00:00",
+      "updated_at": "2026-09-12T16:11:56+00:00",
+      "record_counts": {
+        "words": 1034,
+        "syllables": 1525
+      },
+      "error": null
+    },
+    {
+      "index": 179,
+      "url": "https://www.youtube.com/watch?v=ktlTxC4QG8g",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0179_ktlTxC4QG8g.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0179_ktlTxC4QG8g.json",
+      "workdir": "/data/work/normal/video_0179_ktlTxC4QG8g",
+      "started_at": "2026-09-12T16:11:56+00:00",
+      "completed_at": "2026-09-12T16:12:43+00:00",
+      "updated_at": "2026-09-12T16:12:43+00:00",
+      "record_counts": {
+        "words": 1089,
+        "syllables": 1529
+      },
+      "error": null
+    },
+    {
+      "index": 180,
+      "url": "https://www.youtube.com/watch?v=wbl0ILaANnc",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0180_wbl0ILaANnc.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0180_wbl0ILaANnc.json",
+      "workdir": "/data/work/normal/video_0180_wbl0ILaANnc",
+      "started_at": "2026-09-12T16:12:43+00:00",
+      "completed_at": "2026-09-12T16:13:52+00:00",
+      "updated_at": "2026-09-12T16:13:52+00:00",
+      "record_counts": {
+        "words": 1238,
+        "syllables": 2068
+      },
+      "error": null
+    },
+    {
+      "index": 181,
+      "url": "https://www.youtube.com/watch?v=qoSStmQuisM",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0181_qoSStmQuisM.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0181_qoSStmQuisM.json",
+      "workdir": "/data/work/normal/video_0181_qoSStmQuisM",
+      "started_at": "2026-09-12T16:13:52+00:00",
+      "completed_at": "2026-09-12T16:14:46+00:00",
+      "updated_at": "2026-09-12T16:14:46+00:00",
+      "record_counts": {
+        "words": 1209,
+        "syllables": 1835
+      },
+      "error": null
+    },
+    {
+      "index": 182,
+      "url": "https://www.youtube.com/watch?v=8fzPJUtstn4",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0182_8fzPJUtstn4.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0182_8fzPJUtstn4.json",
+      "workdir": "/data/work/normal/video_0182_8fzPJUtstn4",
+      "started_at": "2026-09-12T16:14:46+00:00",
+      "completed_at": "2026-09-12T16:15:36+00:00",
+      "updated_at": "2026-09-12T16:15:36+00:00",
+      "record_counts": {
+        "words": 1138,
+        "syllables": 1662
+      },
+      "error": null
+    },
+    {
+      "index": 183,
+      "url": "https://www.youtube.com/watch?v=38MsEkhdECM",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0183_38MsEkhdECM.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0183_38MsEkhdECM.json",
+      "workdir": "/data/work/normal/video_0183_38MsEkhdECM",
+      "started_at": "2026-09-12T16:15:36+00:00",
+      "completed_at": "2026-09-12T16:16:23+00:00",
+      "updated_at": "2026-09-12T16:16:23+00:00",
+      "record_counts": {
+        "words": 857,
+        "syllables": 1302
+      },
+      "error": null
+    },
+    {
+      "index": 184,
+      "url": "https://www.youtube.com/watch?v=F1jBN00zda8",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0184_F1jBN00zda8.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0184_F1jBN00zda8.json",
+      "workdir": "/data/work/normal/video_0184_F1jBN00zda8",
+      "started_at": "2026-09-12T16:16:23+00:00",
+      "completed_at": "2026-09-12T16:17:06+00:00",
+      "updated_at": "2026-09-12T16:17:06+00:00",
+      "record_counts": {
+        "words": 684,
+        "syllables": 1120
+      },
+      "error": null
+    },
+    {
+      "index": 185,
+      "url": "https://www.youtube.com/watch?v=T9-SJ6ikuj0",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0185_T9-SJ6ikuj0.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0185_T9-SJ6ikuj0.json",
+      "workdir": "/data/work/normal/video_0185_T9-SJ6ikuj0",
+      "started_at": "2026-09-12T16:17:06+00:00",
+      "completed_at": "2026-09-12T16:18:01+00:00",
+      "updated_at": "2026-09-12T16:18:01+00:00",
+      "record_counts": {
+        "words": 1393,
+        "syllables": 2106
+      },
+      "error": null
+    },
+    {
+      "index": 186,
+      "url": "https://www.youtube.com/watch?v=9TycLR0TqFA",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0186_9TycLR0TqFA.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0186_9TycLR0TqFA.json",
+      "workdir": "/data/work/normal/video_0186_9TycLR0TqFA",
+      "started_at": "2026-09-12T16:18:01+00:00",
+      "completed_at": "2026-09-12T16:18:54+00:00",
+      "updated_at": "2026-09-12T16:18:54+00:00",
+      "record_counts": {
+        "words": 1175,
+        "syllables": 1742
+      },
+      "error": null
+    },
+    {
+      "index": 187,
+      "url": "https://www.youtube.com/watch?v=PL_izvWJVLU",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0187_PL_izvWJVLU.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0187_PL_izvWJVLU.json",
+      "workdir": "/data/work/normal/video_0187_PL_izvWJVLU",
+      "started_at": "2026-09-12T16:18:54+00:00",
+      "completed_at": "2026-09-12T16:19:58+00:00",
+      "updated_at": "2026-09-12T16:19:58+00:00",
+      "record_counts": {
+        "words": 1872,
+        "syllables": 2651
+      },
+      "error": null
+    },
+    {
+      "index": 188,
+      "url": "https://www.youtube.com/watch?v=DfF8nIdNwhw",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0188_DfF8nIdNwhw.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0188_DfF8nIdNwhw.json",
+      "workdir": "/data/work/normal/video_0188_DfF8nIdNwhw",
+      "started_at": "2026-09-12T16:19:58+00:00",
+      "completed_at": "2026-09-12T16:21:03+00:00",
+      "updated_at": "2026-09-12T16:21:03+00:00",
+      "record_counts": {
+        "words": 1048,
+        "syllables": 1368
+      },
+      "error": null
+    },
+    {
+      "index": 189,
+      "url": "https://www.youtube.com/watch?v=So8aseCO3hY",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0189_So8aseCO3hY.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0189_So8aseCO3hY.json",
+      "workdir": "/data/work/normal/video_0189_So8aseCO3hY",
+      "started_at": "2026-09-12T16:21:03+00:00",
+      "completed_at": "2026-09-12T16:22:13+00:00",
+      "updated_at": "2026-09-12T16:22:13+00:00",
+      "record_counts": {
+        "words": 1908,
+        "syllables": 2623
+      },
+      "error": null
+    },
+    {
+      "index": 190,
+      "url": "https://www.youtube.com/watch?v=2lxvNnGkdTo",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0190_2lxvNnGkdTo.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0190_2lxvNnGkdTo.json",
+      "workdir": "/data/work/normal/video_0190_2lxvNnGkdTo",
+      "started_at": "2026-09-12T16:22:13+00:00",
+      "completed_at": "2026-09-12T16:22:56+00:00",
+      "updated_at": "2026-09-12T16:22:56+00:00",
+      "record_counts": {
+        "words": 935,
+        "syllables": 1393
+      },
+      "error": null
+    },
+    {
+      "index": 191,
+      "url": "https://www.youtube.com/watch?v=g7vp-Xxh3iA",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0191_g7vp-Xxh3iA.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0191_g7vp-Xxh3iA.json",
+      "workdir": "/data/work/normal/video_0191_g7vp-Xxh3iA",
+      "started_at": "2026-09-12T16:22:56+00:00",
+      "completed_at": "2026-09-12T16:24:13+00:00",
+      "updated_at": "2026-09-12T16:24:13+00:00",
+      "record_counts": {
+        "words": 1116,
+        "syllables": 1752
+      },
+      "error": null
+    },
+    {
+      "index": 192,
+      "url": "https://www.youtube.com/watch?v=2K2gB8b7qUw",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0192_2K2gB8b7qUw.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0192_2K2gB8b7qUw.json",
+      "workdir": "/data/work/normal/video_0192_2K2gB8b7qUw",
+      "started_at": "2026-09-12T16:24:14+00:00",
+      "completed_at": "2026-09-12T16:25:16+00:00",
+      "updated_at": "2026-09-12T16:25:16+00:00",
+      "record_counts": {
+        "words": 921,
+        "syllables": 1432
+      },
+      "error": null
+    },
+    {
+      "index": 193,
+      "url": "https://www.youtube.com/watch?v=qoNRZKgLDhg",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0193_qoNRZKgLDhg.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0193_qoNRZKgLDhg.json",
+      "workdir": "/data/work/normal/video_0193_qoNRZKgLDhg",
+      "started_at": "2026-09-12T16:25:16+00:00",
+      "completed_at": "2026-09-12T16:25:58+00:00",
+      "updated_at": "2026-09-12T16:25:58+00:00",
+      "record_counts": {
+        "words": 917,
+        "syllables": 1475
+      },
+      "error": null
+    },
+    {
+      "index": 194,
+      "url": "https://www.youtube.com/watch?v=zIbNJCSCEjk",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0194_zIbNJCSCEjk.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0194_zIbNJCSCEjk.json",
+      "workdir": "/data/work/normal/video_0194_zIbNJCSCEjk",
+      "started_at": "2026-09-12T16:25:58+00:00",
+      "completed_at": "2026-09-12T16:27:04+00:00",
+      "updated_at": "2026-09-12T16:27:04+00:00",
+      "record_counts": {
+        "words": 1820,
+        "syllables": 2486
+      },
+      "error": null
+    },
+    {
+      "index": 195,
+      "url": "https://www.youtube.com/watch?v=0UOdAKVdbMo",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0195_0UOdAKVdbMo.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0195_0UOdAKVdbMo.json",
+      "workdir": "/data/work/normal/video_0195_0UOdAKVdbMo",
+      "started_at": "2026-09-12T16:27:04+00:00",
+      "completed_at": "2026-09-12T16:27:47+00:00",
+      "updated_at": "2026-09-12T16:27:47+00:00",
+      "record_counts": {
+        "words": 946,
+        "syllables": 1413
+      },
+      "error": null
+    },
+    {
+      "index": 196,
+      "url": "https://www.youtube.com/watch?v=pzmO6RWy1v8",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0196_pzmO6RWy1v8.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0196_pzmO6RWy1v8.json",
+      "workdir": "/data/work/normal/video_0196_pzmO6RWy1v8",
+      "started_at": "2026-09-12T16:27:47+00:00",
+      "completed_at": "2026-09-12T16:28:31+00:00",
+      "updated_at": "2026-09-12T16:28:31+00:00",
+      "record_counts": {
+        "words": 919,
+        "syllables": 1552
+      },
+      "error": null
+    },
+    {
+      "index": 197,
+      "url": "https://www.youtube.com/watch?v=b_LkRYYefv0",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0197_b_LkRYYefv0.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0197_b_LkRYYefv0.json",
+      "workdir": "/data/work/normal/video_0197_b_LkRYYefv0",
+      "started_at": "2026-09-12T16:28:31+00:00",
+      "completed_at": "2026-09-12T16:29:14+00:00",
+      "updated_at": "2026-09-12T16:29:14+00:00",
+      "record_counts": {
+        "words": 869,
+        "syllables": 1504
+      },
+      "error": null
+    },
+    {
+      "index": 198,
+      "url": "https://www.youtube.com/watch?v=1MqRALnIvWY",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0198_1MqRALnIvWY.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0198_1MqRALnIvWY.json",
+      "workdir": "/data/work/normal/video_0198_1MqRALnIvWY",
+      "started_at": "2026-09-12T16:29:14+00:00",
+      "completed_at": "2026-09-12T16:29:56+00:00",
+      "updated_at": "2026-09-12T16:29:56+00:00",
+      "record_counts": {
+        "words": 942,
+        "syllables": 1446
+      },
+      "error": null
+    },
+    {
+      "index": 199,
+      "url": "https://www.youtube.com/watch?v=NrU4Cx2gAoU",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0199_NrU4Cx2gAoU.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0199_NrU4Cx2gAoU.json",
+      "workdir": "/data/work/normal/video_0199_NrU4Cx2gAoU",
+      "started_at": "2026-09-12T16:29:56+00:00",
+      "completed_at": "2026-09-12T16:30:40+00:00",
+      "updated_at": "2026-09-12T16:30:40+00:00",
+      "record_counts": {
+        "words": 953,
+        "syllables": 1441
+      },
+      "error": null
+    },
+    {
+      "index": 200,
+      "url": "https://www.youtube.com/watch?v=jnFeXaL02Fg",
+      "label": "normal",
+      "status": "completed",
+      "stage": "finished",
+      "stage_status": "completed",
+      "detail": "/data/results/normal/video_0200_jnFeXaL02Fg.json",
+      "attempts": 1,
+      "output_path": "/data/results/normal/video_0200_jnFeXaL02Fg.json",
+      "workdir": "/data/work/normal/video_0200_jnFeXaL02Fg",
+      "started_at": "2026-09-12T16:30:40+00:00",
+      "completed_at": "2026-09-12T16:31:23+00:00",
+      "updated_at": "2026-09-12T16:31:23+00:00",
+      "record_counts": {
+        "words": 929,
+        "syllables": 1418
+      },
+      "error": null
+    }
+  ],
+  "gpu": {
+    "available": true,
+    "captured_at": "2026-09-12T13:56:13+00:00",
+    "devices": [
+      {
+        "index": "0",
+        "name": "NVIDIA A100-SXM4-40GB",
+        "uuid": "GPU-0abf45e4-edb7-deba-47d9-5563caa43964",
+        "driver_version": "570.211.01",
+        "memory_total_mib": "40960",
+        "memory_used_mib": "34327",
+        "utilization_percent": "0"
+      },
+      {
+        "index": "1",
+        "name": "NVIDIA A100-SXM4-40GB",
+        "uuid": "GPU-a3b2aada-a417-8f61-67da-e387f6653f55",
+        "driver_version": "570.211.01",
+        "memory_total_mib": "40960",
+        "memory_used_mib": "34326",
+        "utilization_percent": "0"
+      }
+    ]
+  },
+  "device": "cuda",
+  "devices": {
+    "whisperx": "cuda",
+    "demucs": "cuda:1",
+    "alignment": "cuda:1",
+    "silero": "cpu",
+    "praat": "cpu"
+  }
+}

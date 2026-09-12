@@ -1,0 +1,133 @@
+{
+  "label": "kids",
+  "source_url": "https://www.youtube.com/watch?v=yLW_GWSIQlQ",
+  "language": "en",
+  "granularity": "both",
+  "words": [
+    {
+      "word": "Okay.",
+      "start_time": 127.098,
+      "end_time": 127.379,
+      "pitch_mean_hz": null,
+      "pitch_variance": null,
+      "pause_after_sec": 86.776,
+      "speech_rate_sps": 7.117
+    },
+    {
+      "word": "No,",
+      "start_time": 214.155,
+      "end_time": 214.299,
+      "pitch_mean_hz": 193.26,
+      "pitch_variance": 36.01,
+      "pause_after_sec": 0.062,
+      "speech_rate_sps": 6.944
+    },
+    {
+      "word": "thanks.",
+      "start_time": 214.361,
+      "end_time": 214.711,
+      "pitch_mean_hz": null,
+      "pitch_variance": null,
+      "pause_after_sec": 80.94,
+      "speech_rate_sps": 2.857
+    },
+    {
+      "word": "Thank",
+      "start_time": 295.651,
+      "end_time": 295.754,
+      "pitch_mean_hz": null,
+      "pitch_variance": null,
+      "pause_after_sec": 0.061,
+      "speech_rate_sps": 9.709
+    },
+    {
+      "word": "you.",
+      "start_time": 295.815,
+      "end_time": 295.979,
+      "pitch_mean_hz": null,
+      "pitch_variance": null,
+      "pause_after_sec": null,
+      "speech_rate_sps": 6.098
+    }
+  ],
+  "syllables": [
+    {
+      "syllable": "O",
+      "parent_word": "Okay.",
+      "syllable_index": 1,
+      "syllable_count": 2,
+      "start_time": 127.098,
+      "end_time": 127.239,
+      "pitch_mean_hz": null,
+      "pitch_variance": null,
+      "pause_after_sec": 0.0,
+      "speech_rate_sps": 7.117,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "kay",
+      "parent_word": "Okay.",
+      "syllable_index": 2,
+      "syllable_count": 2,
+      "start_time": 127.239,
+      "end_time": 127.379,
+      "pitch_mean_hz": null,
+      "pitch_variance": null,
+      "pause_after_sec": 86.776,
+      "speech_rate_sps": 7.117,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "No",
+      "parent_word": "No,",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 214.155,
+      "end_time": 214.299,
+      "pitch_mean_hz": 193.26,
+      "pitch_variance": 36.01,
+      "pause_after_sec": 0.062,
+      "speech_rate_sps": 6.944,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "thanks",
+      "parent_word": "thanks.",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 214.361,
+      "end_time": 214.711,
+      "pitch_mean_hz": null,
+      "pitch_variance": null,
+      "pause_after_sec": 80.94,
+      "speech_rate_sps": 2.857,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "Thank",
+      "parent_word": "Thank",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 295.651,
+      "end_time": 295.754,
+      "pitch_mean_hz": null,
+      "pitch_variance": null,
+      "pause_after_sec": 0.061,
+      "speech_rate_sps": 9.709,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "you",
+      "parent_word": "you.",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 295.815,
+      "end_time": 295.979,
+      "pitch_mean_hz": null,
+      "pitch_variance": null,
+      "pause_after_sec": null,
+      "speech_rate_sps": 6.098,
+      "timing_method": "uniform_within_word"
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "label": "normal",
+  "source_url": "https://www.youtube.com/watch?v=9YlnNnlMhKg",
+  "language": "en",
+  "granularity": "both",
+  "words": [
+    {
+      "word": "Bye.",
+      "start_time": 264.874,
+      "end_time": 265.256,
+      "pitch_mean_hz": 311.71,
+      "pitch_variance": 355.56,
+      "pause_after_sec": 0.04,
+      "speech_rate_sps": 2.618
+    },
+    {
+      "word": "Bye.",
+      "start_time": 265.296,
+      "end_time": 265.578,
+      "pitch_mean_hz": 304.09,
+      "pitch_variance": 152.17,
+      "pause_after_sec": 39.448,
+      "speech_rate_sps": 3.546
+    },
+    {
+      "word": "Thank",
+      "start_time": 305.026,
+      "end_time": 305.149,
+      "pitch_mean_hz": null,
+      "pitch_variance": null,
+      "pause_after_sec": 0.021,
+      "speech_rate_sps": 8.13
+    },
+    {
+      "word": "you.",
+      "start_time": 305.17,
+      "end_time": 305.293,
+      "pitch_mean_hz": null,
+      "pitch_variance": null,
+      "pause_after_sec": 48.372,
+      "speech_rate_sps": 8.13
+    },
+    {
+      "word": "Four.",
+      "start_time": 353.665,
+      "end_time": 353.791,
+      "pitch_mean_hz": 234.84,
+      "pitch_variance": 11.19,
+      "pause_after_sec": null,
+      "speech_rate_sps": 7.937
+    }
+  ],
+  "syllables": [
+    {
+      "syllable": "Bye",
+      "parent_word": "Bye.",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 264.874,
+      "end_time": 265.256,
+      "pitch_mean_hz": 311.71,
+      "pitch_variance": 355.56,
+      "pause_after_sec": 0.04,
+      "speech_rate_sps": 2.618,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "Bye",
+      "parent_word": "Bye.",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 265.296,
+      "end_time": 265.578,
+      "pitch_mean_hz": 304.09,
+      "pitch_variance": 152.17,
+      "pause_after_sec": 39.448,
+      "speech_rate_sps": 3.546,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "Thank",
+      "parent_word": "Thank",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 305.026,
+      "end_time": 305.149,
+      "pitch_mean_hz": null,
+      "pitch_variance": null,
+      "pause_after_sec": 0.021,
+      "speech_rate_sps": 8.13,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "you",
+      "parent_word": "you.",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 305.17,
+      "end_time": 305.293,
+      "pitch_mean_hz": null,
+      "pitch_variance": null,
+      "pause_after_sec": 48.372,
+      "speech_rate_sps": 8.13,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "Four",
+      "parent_word": "Four.",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 353.665,
+      "end_time": 353.791,
+      "pitch_mean_hz": 234.84,
+      "pitch_variance": 11.19,
+      "pause_after_sec": null,
+      "speech_rate_sps": 7.937,
+      "timing_method": "uniform_within_word"
+    }
+  ]
+}

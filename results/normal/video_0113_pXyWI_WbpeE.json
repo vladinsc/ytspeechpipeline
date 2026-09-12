@@ -1,0 +1,274 @@
+{
+  "label": "normal",
+  "source_url": "https://www.youtube.com/watch?v=pXyWI_WbpeE",
+  "language": "en",
+  "granularity": "both",
+  "words": [
+    {
+      "word": "That's",
+      "start_time": 53.89,
+      "end_time": 54.033,
+      "pitch_mean_hz": 106.37,
+      "pitch_variance": 13.95,
+      "pause_after_sec": 0.041,
+      "speech_rate_sps": 6.993
+    },
+    {
+      "word": "how",
+      "start_time": 54.074,
+      "end_time": 54.176,
+      "pitch_mean_hz": 152.71,
+      "pitch_variance": 10.79,
+      "pause_after_sec": 0.02,
+      "speech_rate_sps": 9.804
+    },
+    {
+      "word": "you",
+      "start_time": 54.196,
+      "end_time": 54.298,
+      "pitch_mean_hz": 123.7,
+      "pitch_variance": 113.19,
+      "pause_after_sec": 0.021,
+      "speech_rate_sps": 9.804
+    },
+    {
+      "word": "write",
+      "start_time": 54.319,
+      "end_time": 54.441,
+      "pitch_mean_hz": 92.13,
+      "pitch_variance": 15.83,
+      "pause_after_sec": 0.041,
+      "speech_rate_sps": 8.197
+    },
+    {
+      "word": "it.",
+      "start_time": 54.482,
+      "end_time": 54.564,
+      "pitch_mean_hz": 88.09,
+      "pitch_variance": 0.0,
+      "pause_after_sec": 127.805,
+      "speech_rate_sps": 12.195
+    },
+    {
+      "word": "Wow,",
+      "start_time": 182.369,
+      "end_time": 182.671,
+      "pitch_mean_hz": 176.07,
+      "pitch_variance": 168.19,
+      "pause_after_sec": 0.182,
+      "speech_rate_sps": 3.311
+    },
+    {
+      "word": "I",
+      "start_time": 182.853,
+      "end_time": 182.954,
+      "pitch_mean_hz": 205.46,
+      "pitch_variance": 12.27,
+      "pause_after_sec": 0.04,
+      "speech_rate_sps": 9.901
+    },
+    {
+      "word": "love",
+      "start_time": 182.994,
+      "end_time": 183.195,
+      "pitch_mean_hz": 141.97,
+      "pitch_variance": 501.92,
+      "pause_after_sec": 0.061,
+      "speech_rate_sps": 4.975
+    },
+    {
+      "word": "it.",
+      "start_time": 183.256,
+      "end_time": 183.337,
+      "pitch_mean_hz": 177.86,
+      "pitch_variance": 14637.57,
+      "pause_after_sec": 152.429,
+      "speech_rate_sps": 12.346
+    },
+    {
+      "word": "What?",
+      "start_time": 335.766,
+      "end_time": 336.487,
+      "pitch_mean_hz": 309.68,
+      "pitch_variance": 16880.54,
+      "pause_after_sec": 0.02,
+      "speech_rate_sps": 1.387
+    },
+    {
+      "word": "What?",
+      "start_time": 336.507,
+      "end_time": 336.868,
+      "pitch_mean_hz": 257.45,
+      "pitch_variance": 701.4,
+      "pause_after_sec": 0.04,
+      "speech_rate_sps": 2.77
+    },
+    {
+      "word": "What?",
+      "start_time": 336.908,
+      "end_time": 337.128,
+      "pitch_mean_hz": 263.99,
+      "pitch_variance": 369.19,
+      "pause_after_sec": null,
+      "speech_rate_sps": 4.545
+    }
+  ],
+  "syllables": [
+    {
+      "syllable": "Thats",
+      "parent_word": "That's",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 53.89,
+      "end_time": 54.033,
+      "pitch_mean_hz": 106.37,
+      "pitch_variance": 13.95,
+      "pause_after_sec": 0.041,
+      "speech_rate_sps": 6.993,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "how",
+      "parent_word": "how",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 54.074,
+      "end_time": 54.176,
+      "pitch_mean_hz": 152.71,
+      "pitch_variance": 10.79,
+      "pause_after_sec": 0.02,
+      "speech_rate_sps": 9.804,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "you",
+      "parent_word": "you",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 54.196,
+      "end_time": 54.298,
+      "pitch_mean_hz": 123.7,
+      "pitch_variance": 113.19,
+      "pause_after_sec": 0.021,
+      "speech_rate_sps": 9.804,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "write",
+      "parent_word": "write",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 54.319,
+      "end_time": 54.441,
+      "pitch_mean_hz": 92.13,
+      "pitch_variance": 15.83,
+      "pause_after_sec": 0.041,
+      "speech_rate_sps": 8.197,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "it",
+      "parent_word": "it.",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 54.482,
+      "end_time": 54.564,
+      "pitch_mean_hz": 88.09,
+      "pitch_variance": 0.0,
+      "pause_after_sec": 127.805,
+      "speech_rate_sps": 12.195,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "Wow",
+      "parent_word": "Wow,",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 182.369,
+      "end_time": 182.671,
+      "pitch_mean_hz": 176.07,
+      "pitch_variance": 168.19,
+      "pause_after_sec": 0.182,
+      "speech_rate_sps": 3.311,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "I",
+      "parent_word": "I",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 182.853,
+      "end_time": 182.954,
+      "pitch_mean_hz": 205.46,
+      "pitch_variance": 12.27,
+      "pause_after_sec": 0.04,
+      "speech_rate_sps": 9.901,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "love",
+      "parent_word": "love",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 182.994,
+      "end_time": 183.195,
+      "pitch_mean_hz": 141.97,
+      "pitch_variance": 501.92,
+      "pause_after_sec": 0.061,
+      "speech_rate_sps": 4.975,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "it",
+      "parent_word": "it.",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 183.256,
+      "end_time": 183.337,
+      "pitch_mean_hz": 177.86,
+      "pitch_variance": 14637.57,
+      "pause_after_sec": 152.429,
+      "speech_rate_sps": 12.346,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "What",
+      "parent_word": "What?",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 335.766,
+      "end_time": 336.487,
+      "pitch_mean_hz": 309.68,
+      "pitch_variance": 16880.54,
+      "pause_after_sec": 0.02,
+      "speech_rate_sps": 1.387,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "What",
+      "parent_word": "What?",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 336.507,
+      "end_time": 336.868,
+      "pitch_mean_hz": 257.45,
+      "pitch_variance": 701.4,
+      "pause_after_sec": 0.04,
+      "speech_rate_sps": 2.77,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "What",
+      "parent_word": "What?",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 336.908,
+      "end_time": 337.128,
+      "pitch_mean_hz": 263.99,
+      "pitch_variance": 369.19,
+      "pause_after_sec": null,
+      "speech_rate_sps": 4.545,
+      "timing_method": "uniform_within_word"
+    }
+  ]
+}

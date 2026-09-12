@@ -1,0 +1,133 @@
+{
+  "label": "kids",
+  "source_url": "https://www.youtube.com/watch?v=z-R3DShHbkA",
+  "language": "en",
+  "granularity": "both",
+  "words": [
+    {
+      "word": "Welcome",
+      "start_time": 1.282,
+      "end_time": 1.665,
+      "pitch_mean_hz": 324.21,
+      "pitch_variance": 725.29,
+      "pause_after_sec": 0.021,
+      "speech_rate_sps": 5.222
+    },
+    {
+      "word": "to",
+      "start_time": 1.686,
+      "end_time": 1.766,
+      "pitch_mean_hz": 311.66,
+      "pitch_variance": 64.38,
+      "pause_after_sec": 0.061,
+      "speech_rate_sps": 12.5
+    },
+    {
+      "word": "Crafts",
+      "start_time": 1.827,
+      "end_time": 2.231,
+      "pitch_mean_hz": 286.0,
+      "pitch_variance": 53.44,
+      "pause_after_sec": 0.08,
+      "speech_rate_sps": 2.475
+    },
+    {
+      "word": "for",
+      "start_time": 2.311,
+      "end_time": 2.453,
+      "pitch_mean_hz": 283.16,
+      "pitch_variance": 218.59,
+      "pause_after_sec": 0.06,
+      "speech_rate_sps": 7.042
+    },
+    {
+      "word": "Kids.",
+      "start_time": 2.513,
+      "end_time": 2.877,
+      "pitch_mean_hz": 245.55,
+      "pitch_variance": 1723.47,
+      "pause_after_sec": null,
+      "speech_rate_sps": 2.747
+    }
+  ],
+  "syllables": [
+    {
+      "syllable": "Wel",
+      "parent_word": "Welcome",
+      "syllable_index": 1,
+      "syllable_count": 2,
+      "start_time": 1.282,
+      "end_time": 1.474,
+      "pitch_mean_hz": 301.8,
+      "pitch_variance": 73.22,
+      "pause_after_sec": 0.0,
+      "speech_rate_sps": 5.222,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "come",
+      "parent_word": "Welcome",
+      "syllable_index": 2,
+      "syllable_count": 2,
+      "start_time": 1.474,
+      "end_time": 1.665,
+      "pitch_mean_hz": 349.62,
+      "pitch_variance": 249.66,
+      "pause_after_sec": 0.021,
+      "speech_rate_sps": 5.222,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "to",
+      "parent_word": "to",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 1.686,
+      "end_time": 1.766,
+      "pitch_mean_hz": 311.66,
+      "pitch_variance": 64.38,
+      "pause_after_sec": 0.061,
+      "speech_rate_sps": 12.5,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "Crafts",
+      "parent_word": "Crafts",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 1.827,
+      "end_time": 2.231,
+      "pitch_mean_hz": 286.0,
+      "pitch_variance": 53.44,
+      "pause_after_sec": 0.08,
+      "speech_rate_sps": 2.475,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "for",
+      "parent_word": "for",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 2.311,
+      "end_time": 2.453,
+      "pitch_mean_hz": 283.16,
+      "pitch_variance": 218.59,
+      "pause_after_sec": 0.06,
+      "speech_rate_sps": 7.042,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "Kids",
+      "parent_word": "Kids.",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 2.513,
+      "end_time": 2.877,
+      "pitch_mean_hz": 245.55,
+      "pitch_variance": 1723.47,
+      "pause_after_sec": null,
+      "speech_rate_sps": 2.747,
+      "timing_method": "uniform_within_word"
+    }
+  ]
+}

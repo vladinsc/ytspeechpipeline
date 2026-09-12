@@ -1,0 +1,54 @@
+{
+  "label": "normal",
+  "source_url": "https://www.youtube.com/watch?v=1etaZ5ITXlg",
+  "language": "en",
+  "granularity": "both",
+  "words": [
+    {
+      "word": "All",
+      "start_time": 159.235,
+      "end_time": 159.316,
+      "pitch_mean_hz": null,
+      "pitch_variance": null,
+      "pause_after_sec": 0.204,
+      "speech_rate_sps": 12.346
+    },
+    {
+      "word": "right.",
+      "start_time": 159.52,
+      "end_time": 159.663,
+      "pitch_mean_hz": null,
+      "pitch_variance": null,
+      "pause_after_sec": null,
+      "speech_rate_sps": 6.993
+    }
+  ],
+  "syllables": [
+    {
+      "syllable": "All",
+      "parent_word": "All",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 159.235,
+      "end_time": 159.316,
+      "pitch_mean_hz": null,
+      "pitch_variance": null,
+      "pause_after_sec": 0.204,
+      "speech_rate_sps": 12.346,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "right",
+      "parent_word": "right.",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 159.52,
+      "end_time": 159.663,
+      "pitch_mean_hz": null,
+      "pitch_variance": null,
+      "pause_after_sec": null,
+      "speech_rate_sps": 6.993,
+      "timing_method": "uniform_within_word"
+    }
+  ]
+}

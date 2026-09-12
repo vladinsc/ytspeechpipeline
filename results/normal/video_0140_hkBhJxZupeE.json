@@ -1,0 +1,133 @@
+{
+  "label": "normal",
+  "source_url": "https://www.youtube.com/watch?v=hkBhJxZupeE",
+  "language": "en",
+  "granularity": "both",
+  "words": [
+    {
+      "word": "All",
+      "start_time": 136.714,
+      "end_time": 136.834,
+      "pitch_mean_hz": 173.43,
+      "pitch_variance": 15.08,
+      "pause_after_sec": 18.079,
+      "speech_rate_sps": 8.333
+    },
+    {
+      "word": "right.",
+      "start_time": 154.913,
+      "end_time": 155.374,
+      "pitch_mean_hz": 208.48,
+      "pitch_variance": 46.68,
+      "pause_after_sec": 87.134,
+      "speech_rate_sps": 2.169
+    },
+    {
+      "word": "Amen.",
+      "start_time": 242.508,
+      "end_time": 242.677,
+      "pitch_mean_hz": null,
+      "pitch_variance": null,
+      "pause_after_sec": 49.882,
+      "speech_rate_sps": 11.834
+    },
+    {
+      "word": "Thank",
+      "start_time": 292.559,
+      "end_time": 292.899,
+      "pitch_mean_hz": 215.82,
+      "pitch_variance": 13.23,
+      "pause_after_sec": 0.841,
+      "speech_rate_sps": 2.941
+    },
+    {
+      "word": "you.",
+      "start_time": 293.74,
+      "end_time": 294.14,
+      "pitch_mean_hz": 148.72,
+      "pitch_variance": 0.03,
+      "pause_after_sec": null,
+      "speech_rate_sps": 2.5
+    }
+  ],
+  "syllables": [
+    {
+      "syllable": "All",
+      "parent_word": "All",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 136.714,
+      "end_time": 136.834,
+      "pitch_mean_hz": 173.43,
+      "pitch_variance": 15.08,
+      "pause_after_sec": 18.079,
+      "speech_rate_sps": 8.333,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "right",
+      "parent_word": "right.",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 154.913,
+      "end_time": 155.374,
+      "pitch_mean_hz": 208.48,
+      "pitch_variance": 46.68,
+      "pause_after_sec": 87.134,
+      "speech_rate_sps": 2.169,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "A",
+      "parent_word": "Amen.",
+      "syllable_index": 1,
+      "syllable_count": 2,
+      "start_time": 242.508,
+      "end_time": 242.593,
+      "pitch_mean_hz": null,
+      "pitch_variance": null,
+      "pause_after_sec": 0.0,
+      "speech_rate_sps": 11.834,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "men",
+      "parent_word": "Amen.",
+      "syllable_index": 2,
+      "syllable_count": 2,
+      "start_time": 242.593,
+      "end_time": 242.677,
+      "pitch_mean_hz": null,
+      "pitch_variance": null,
+      "pause_after_sec": 49.882,
+      "speech_rate_sps": 11.834,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "Thank",
+      "parent_word": "Thank",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 292.559,
+      "end_time": 292.899,
+      "pitch_mean_hz": 215.82,
+      "pitch_variance": 13.23,
+      "pause_after_sec": 0.841,
+      "speech_rate_sps": 2.941,
+      "timing_method": "uniform_within_word"
+    },
+    {
+      "syllable": "you",
+      "parent_word": "you.",
+      "syllable_index": 1,
+      "syllable_count": 1,
+      "start_time": 293.74,
+      "end_time": 294.14,
+      "pitch_mean_hz": 148.72,
+      "pitch_variance": 0.03,
+      "pause_after_sec": null,
+      "speech_rate_sps": 2.5,
+      "timing_method": "uniform_within_word"
+    }
+  ]
+}
