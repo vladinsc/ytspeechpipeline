@@ -170,7 +170,7 @@ async def lifespan(_: FastAPI):
             raise RuntimeError(f"nvidia-smi unavailable: {gpu.get('error')}")
         runtime.isolator = await asyncio.to_thread(VocalIsolator, runtime.device, DEMUCS_MODEL)
         runtime.transcriber = await asyncio.to_thread(
-            GPUTranscriber, runtime.device, WHISPER_MODEL, COMPUTE_TYPE, 16, "en"
+            GPUTranscriber, runtime.device, WHISPER_MODEL, COMPUTE_TYPE, 1, "en"
         )
         runtime.worker_task = asyncio.create_task(worker())
         for job in runtime.store.data["jobs"].values():

@@ -227,6 +227,13 @@ def parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
     parser.add_argument("--device", default="auto", choices=["auto", "cuda", "cpu"])
     parser.add_argument("--whisper-model", default="large-v3")
     parser.add_argument("--compute-type", default="float16")
+    parser.add_argument(
+        "--batch-size",
+        type=int,
+        choices=[1],
+        default=1,
+        help="WhisperX transcription batch size (fixed at 1 to limit GPU memory use).",
+    )
     parser.add_argument("--demucs-model", default="htdemucs")
     parser.add_argument("--language", default="en")
     parser.add_argument("--pitch-floor", type=float, default=75.0)
@@ -295,6 +302,7 @@ def main(argv: Optional[list[str]] = None) -> int:
             device,
             model_size=args.whisper_model,
             compute_type=args.compute_type,
+            batch_size=args.batch_size,
             language=args.language,
         )
         checkpoint["model_status"] = "loaded"

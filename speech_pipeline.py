@@ -241,7 +241,7 @@ class GPUTranscriber:
         device: str,
         model_size: str = "large-v3",
         compute_type: str = "float16",
-        batch_size: int = 16,
+        batch_size: int = 1,
         language: Optional[str] = None,
     ):
         self.device = device
