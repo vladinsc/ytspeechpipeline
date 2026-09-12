@@ -24,9 +24,11 @@ RESULTS_DIR = Path(os.environ.get("YT_TRANSCRIBER_RESULTS_DIR", "/data/results")
 WORK_DIR = Path(os.environ.get("YT_TRANSCRIBER_WORK_DIR", "/data/work"))
 JOBS_PATH = RESULTS_DIR / "api_jobs.json"
 DEVICE_REQUEST = os.environ.get("YT_TRANSCRIBER_DEVICE", "cuda")
+DEMUCS_DEVICE_REQUEST = os.environ.get("YT_TRANSCRIBER_DEMUCS_DEVICE", DEVICE_REQUEST)
+ALIGNMENT_DEVICE_REQUEST = os.environ.get("YT_TRANSCRIBER_ALIGNMENT_DEVICE", DEVICE_REQUEST)
 WHISPER_MODEL = os.environ.get("YT_TRANSCRIBER_WHISPER_MODEL", "large-v3")
 DEMUCS_MODEL = os.environ.get("YT_TRANSCRIBER_DEMUCS_MODEL", "htdemucs")
-COMPUTE_TYPE = os.environ.get("YT_TRANSCRIBER_COMPUTE_TYPE", "float16")
+COMPUTE_TYPE = os.environ.get("YT_TRANSCRIBER_COMPUTE_TYPE", "int8")
 
 
 class JobRequest(BaseModel):
@@ -126,6 +128,7 @@ def process_job(job_id: str) -> None:
     cfg = PipelineConfig(
         url=job["url"], out_path=Path(job["output_path"]), workdir=Path(job["workdir"]),
         device=runtime.device, whisper_model=WHISPER_MODEL, compute_type=COMPUTE_TYPE,
+        demucs_device=runtime.demucs_device, alignment_device=runtime.alignment_device,
         demucs_model=DEMUCS_MODEL, language="en", pitch_floor=float(job["pitch_floor"]),
         pitch_ceiling=float(job["pitch_ceiling"]), keep_workdir=False,
         granularity=job["granularity"], label=job["label"],
@@ -163,14 +166,28 @@ async def lifespan(_: FastAPI):
     runtime.queue = asyncio.Queue()
     try:
         runtime.device = resolve_device(DEVICE_REQUEST)
+        runtime.demucs_device = DEMUCS_DEVICE_REQUEST
+        runtime.alignment_device = ALIGNMENT_DEVICE_REQUEST
         gpu = nvidia_smi_snapshot()
         runtime.store.data["gpu"] = gpu
         runtime.store.save()
         if runtime.device == "cuda" and not gpu["available"]:
             raise RuntimeError(f"nvidia-smi unavailable: {gpu.get('error')}")
-        runtime.isolator = await asyncio.to_thread(VocalIsolator, runtime.device, DEMUCS_MODEL)
+        log.info(
+            "Stage devices: WhisperX=%s, Demucs=%s, alignment=%s, Silero/Praat=cpu",
+            runtime.device, runtime.demucs_device, runtime.alignment_device,
+        )
+        runtime.isolator = await asyncio.to_thread(
+            VocalIsolator, runtime.demucs_device, DEMUCS_MODEL
+        )
         runtime.transcriber = await asyncio.to_thread(
-            GPUTranscriber, runtime.device, WHISPER_MODEL, COMPUTE_TYPE, 1, "en"
+            GPUTranscriber,
+            runtime.device,
+            WHISPER_MODEL,
+            COMPUTE_TYPE,
+            1,
+            "en",
+            runtime.alignment_device,
         )
         runtime.worker_task = asyncio.create_task(worker())
         for job in runtime.store.data["jobs"].values():

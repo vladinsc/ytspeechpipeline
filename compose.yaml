@@ -8,6 +8,9 @@ x-yt-transcriber-common: &yt-transcriber-common
   image: yt-transcriber:cuda12.8
   environment:
     YT_TRANSCRIBER_DEVICE: cuda
+    YT_TRANSCRIBER_DEMUCS_DEVICE: cuda:1
+    YT_TRANSCRIBER_ALIGNMENT_DEVICE: cuda:1
+    YT_TRANSCRIBER_COMPUTE_TYPE: int8
     YT_TRANSCRIBER_ROOT_PATH: /yt-transcriber
     YT_TRANSCRIBER_RESULTS_DIR: /data/results
     YT_TRANSCRIBER_WORK_DIR: /data/work
@@ -21,6 +24,7 @@ x-yt-transcriber-common: &yt-transcriber-common
           - driver: nvidia
             device_ids:
               - "${YT_TRANSCRIBER_GPU_ID:-0}"
+              - "${YT_TRANSCRIBER_SECONDARY_GPU_ID:-1}"
             capabilities: [gpu]
   restart: "no"
 
@@ -58,6 +62,12 @@ services:
       - /data/work
       - --device
       - cuda
+      - --demucs-device
+      - cuda:1
+      - --alignment-device
+      - cuda:1
+      - --compute-type
+      - int8
       - --language
       - en
       - --batch-size

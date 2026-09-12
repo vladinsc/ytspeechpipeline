@@ -10,7 +10,7 @@ Stages
 ------
 1. AudioDownloader  : yt-dlp -> ffmpeg -> WAV
 2. VocalIsolator    : Demucs (htdemucs) on CUDA  -> isolated vocals
-3. GPUTranscriber   : WhisperX (large-v3, fp16) + explicit VAD + forced alignment
+3. GPUTranscriber   : WhisperX (large-v3) + explicit VAD + forced alignment
                     -> word timestamps
 4. AcousticAnalyzer : Parselmouth (Praat) F0 + pause + speech-rate per word
 
@@ -243,8 +243,10 @@ class GPUTranscriber:
         compute_type: str = "float16",
         batch_size: int = 1,
         language: Optional[str] = None,
+        alignment_device: Optional[str] = None,
     ):
         self.device = device
+        self.alignment_device = alignment_device or device
         self.batch_size = batch_size
         self.language = language
 
@@ -255,10 +257,20 @@ class GPUTranscriber:
         if device == "cpu" and compute_type == "float16":
             log.warning("float16 unsupported on CPU; using int8.")
             compute_type = "int8"
-        log.info("Loading WhisperX '%s' (%s) on %s with Silero VAD", model_size, compute_type, device)
+        backend_device = device
+        device_index = 0
+        cuda_match = re.fullmatch(r"cuda(?::(\d+))?", device)
+        if cuda_match:
+            backend_device = "cuda"
+            device_index = int(cuda_match.group(1) or 0)
+        log.info(
+            "Loading WhisperX '%s' (%s) on %s with Silero VAD; alignment on %s",
+            model_size, compute_type, device, self.alignment_device,
+        )
         self.model = whisperx.load_model(
             model_size,
-            device,
+            backend_device,
+            device_index=device_index,
             compute_type=compute_type,
             language=language,
             vad_method="silero",
@@ -276,13 +288,15 @@ class GPUTranscriber:
         log.info("Detected language: %s", lang)
 
         log.info("Loading alignment model and running forced alignment ...")
-        align_model, metadata = wx.load_align_model(language_code=lang, device=self.device)
+        align_model, metadata = wx.load_align_model(
+            language_code=lang, device=self.alignment_device
+        )
         aligned = wx.align(
             result["segments"],
             align_model,
             metadata,
             audio,
-            self.device,
+            self.alignment_device,
             return_char_alignments=False,
         )
 
@@ -492,6 +506,8 @@ class PipelineConfig:
     out_path: Path
     workdir: Path
     device: str = "auto"
+    demucs_device: Optional[str] = None
+    alignment_device: Optional[str] = None
     whisper_model: str = "large-v3"
     compute_type: str = "float16"
     demucs_model: str = "htdemucs"
@@ -508,6 +524,8 @@ class ProsodyPipeline:
     def __init__(self, cfg: PipelineConfig, device: Optional[str] = None):
         self.cfg = cfg
         self.device = device or resolve_device(cfg.device)
+        self.demucs_device = cfg.demucs_device or self.device
+        self.alignment_device = cfg.alignment_device or self.device
         cfg.workdir.mkdir(parents=True, exist_ok=True)
 
     def _downsample_for_asr(self, vocals_hi: Path) -> Path:
@@ -539,7 +557,9 @@ class ProsodyPipeline:
 
         # 2. Isolate vocals (stays @44.1k for pitch fidelity)
         progress("vocal_isolation", "started", cfg.demucs_model)
-        isolator = isolator or VocalIsolator(self.device, model_name=cfg.demucs_model)
+        isolator = isolator or VocalIsolator(
+            self.demucs_device, model_name=cfg.demucs_model
+        )
         vocals_hi = isolator.isolate(raw_wav, cfg.workdir / "vocals_44100.wav")
         progress("vocal_isolation", "completed", vocals_hi.name)
 
@@ -553,6 +573,7 @@ class ProsodyPipeline:
             model_size=cfg.whisper_model,
             compute_type=cfg.compute_type,
             language=cfg.language,
+            alignment_device=self.alignment_device,
         )
         words = transcriber.transcribe(vocals_16k)
         progress("transcription_alignment", "completed", f"{len(words)} aligned words")
@@ -616,6 +637,10 @@ def parse_args(argv: Optional[list[str]] = None) -> PipelineConfig:
     p.add_argument("--whisper-model", default="large-v3")
     p.add_argument("--compute-type", default="float16")
     p.add_argument("--demucs-model", default="htdemucs")
+    p.add_argument("--demucs-device", default=None,
+                   help="Device for Demucs (default: same as --device).")
+    p.add_argument("--alignment-device", default=None,
+                   help="Device for forced alignment (default: same as --device).")
     p.add_argument("--language", default=None, help="Force language code (e.g. 'en').")
     p.add_argument("--pitch-floor", type=float, default=75.0)
     p.add_argument("--pitch-ceiling", type=float, default=600.0,
@@ -628,6 +653,7 @@ def parse_args(argv: Optional[list[str]] = None) -> PipelineConfig:
     a = p.parse_args(argv)
     return PipelineConfig(
         url=a.url, out_path=a.out, workdir=a.workdir, device=a.device,
+        demucs_device=a.demucs_device, alignment_device=a.alignment_device,
         whisper_model=a.whisper_model, compute_type=a.compute_type,
         demucs_model=a.demucs_model, language=a.language,
         pitch_floor=a.pitch_floor, pitch_ceiling=a.pitch_ceiling,

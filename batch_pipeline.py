@@ -226,7 +226,7 @@ def parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
                         help="Checkpoint JSON path (default: OUTPUT_DIR/batch_checkpoint.json).")
     parser.add_argument("--device", default="auto", choices=["auto", "cuda", "cpu"])
     parser.add_argument("--whisper-model", default="large-v3")
-    parser.add_argument("--compute-type", default="float16")
+    parser.add_argument("--compute-type", default="int8")
     parser.add_argument(
         "--batch-size",
         type=int,
@@ -235,6 +235,14 @@ def parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
         help="WhisperX transcription batch size (fixed at 1 to limit GPU memory use).",
     )
     parser.add_argument("--demucs-model", default="htdemucs")
+    parser.add_argument(
+        "--demucs-device", default=None,
+        help="Device for Demucs (default: same as --device; e.g. cuda:1).",
+    )
+    parser.add_argument(
+        "--alignment-device", default=None,
+        help="Device for forced alignment (default: same as --device; e.g. cuda:1).",
+    )
     parser.add_argument("--language", default="en")
     parser.add_argument("--pitch-floor", type=float, default=75.0)
     parser.add_argument("--pitch-ceiling", type=float, default=600.0)
@@ -287,7 +295,10 @@ def main(argv: Optional[list[str]] = None) -> int:
         checkpoint["model_status"] = "loading"
         save_checkpoint(checkpoint_path, checkpoint)
         device = resolve_device(args.device)
-        if device == "cuda":
+        demucs_device = args.demucs_device or device
+        alignment_device = args.alignment_device or device
+        if any(str(value).startswith("cuda") for value in
+               (device, demucs_device, alignment_device)):
             checkpoint["gpu"] = nvidia_smi_snapshot()
             if not checkpoint["gpu"]["available"]:
                 raise RuntimeError(f"CUDA selected but nvidia-smi failed: {checkpoint['gpu'].get('error')}")
@@ -297,16 +308,28 @@ def main(argv: Optional[list[str]] = None) -> int:
                     gpu["index"], gpu["name"], gpu["driver_version"], gpu["memory_total_mib"],
                 )
             save_checkpoint(checkpoint_path, checkpoint)
-        isolator = VocalIsolator(device, model_name=args.demucs_model)
+        log.info(
+            "Stage devices: WhisperX=%s, Demucs=%s, alignment=%s, Silero/Praat=cpu",
+            device, demucs_device, alignment_device,
+        )
+        isolator = VocalIsolator(demucs_device, model_name=args.demucs_model)
         transcriber = GPUTranscriber(
             device,
             model_size=args.whisper_model,
             compute_type=args.compute_type,
             batch_size=args.batch_size,
             language=args.language,
+            alignment_device=alignment_device,
         )
         checkpoint["model_status"] = "loaded"
         checkpoint["device"] = device
+        checkpoint["devices"] = {
+            "whisperx": device,
+            "demucs": demucs_device,
+            "alignment": alignment_device,
+            "silero": "cpu",
+            "praat": "cpu",
+        }
         save_checkpoint(checkpoint_path, checkpoint)
     except Exception as exc:
         checkpoint["model_status"] = "load_failed"
@@ -348,6 +371,8 @@ def main(argv: Optional[list[str]] = None) -> int:
             out_path=Path(entry["output_path"]),
             workdir=Path(entry["workdir"]),
             device=device,
+            demucs_device=demucs_device,
+            alignment_device=alignment_device,
             whisper_model=args.whisper_model,
             compute_type=args.compute_type,
             demucs_model=args.demucs_model,

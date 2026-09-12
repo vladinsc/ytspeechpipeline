@@ -1,8 +1,9 @@
 # GPU container
 
-The pipeline is packaged as one GPU worker because Demucs, VAD, WhisperX,
-alignment, and Praat run sequentially on the same audio. Model weights are baked
-into the image and reused for every video.
+The pipeline is packaged as one worker spanning two GPUs. WhisperX runs with
+INT8 quantization and batch size 1 on the primary GPU. Demucs and forced
+alignment run on the secondary GPU. Silero VAD and Praat run on CPU. Model
+weights are baked into the image and reused for every video.
 
 The image also includes Deno and the matching `yt-dlp-ejs` package. They let
 yt-dlp solve the JavaScript challenges currently required by many public
@@ -46,17 +47,19 @@ Create the local environment file:
 cp .env.example .env
 ```
 
-Select the physical GPU shown by `nvidia-smi` and the Docker network belonging
+Select two physical GPUs shown by `nvidia-smi` and the Docker network belonging
 to the Traefik instance that serves `ai.asigno.ro`:
 
 ```dotenv
-YT_TRANSCRIBER_GPU_ID=0
+YT_TRANSCRIBER_GPU_ID=6
+YT_TRANSCRIBER_SECONDARY_GPU_ID=7
 TRAEFIK_NETWORK=traefik_traefik_net
 ```
 
-Compose exposes only that physical GPU to the container. Inside the container it
-is normally renumbered as CUDA device `0`, so keep the pipeline device set to
-`cuda`; do not change it to `cuda:1`.
+Compose exposes the two physical GPUs in that order. Inside the container, the
+primary GPU is renumbered as CUDA device `0` and the secondary GPU as `1`.
+Compose assigns WhisperX to `cuda:0` (written as `cuda`), and Demucs plus forced
+alignment to `cuda:1`.
 
 Ensure the external Docker network named by `TRAEFIK_NETWORK` already contains
 Traefik. Merge `traefik-dynamic-yt-transcriber.yml` into the corresponding
@@ -98,7 +101,8 @@ removed automatically.
 ## Run the manifest batch
 
 The original labeled `videos.txt` workflow remains available as a separate
-profile. Do not run it alongside the API on the same GPU:
+profile. Do not run it alongside the API because both services use the same two
+GPUs:
 
 ```bash
 docker compose --profile batch run --rm yt-transcriber-batch
@@ -114,7 +118,9 @@ docker compose --profile batch run --rm yt-transcriber-batch \
   batch /data/input/videos.txt \
   --output-dir /data/results \
   --work-root /data/work \
-  --device cuda --language en --granularity both --retry-failed
+  --device cuda --demucs-device cuda:1 --alignment-device cuda:1 \
+  --compute-type int8 --batch-size 1 \
+  --language en --granularity both --retry-failed
 ```
 
 At startup, the container runs `nvidia-smi` and a PyTorch CUDA check. It exits
