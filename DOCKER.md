@@ -141,3 +141,10 @@ python -c 'import json; print(json.load(open("results/batch_checkpoint.json"))["
 The endpoints are intentionally open and do not require application credentials.
 The container does not include YouTube credentials or Hugging Face tokens. The
 selected videos and model repositories are public.
+
+## Four-GPU Bengee batch
+
+For the four-GPU deployment, use the dedicated Compose file and instructions in
+[`BENGEE.md`](BENGEE.md). It runs four independent copies of this same pipeline,
+with quantized Whisper `large-v3` and batch size 1, rather than splitting one
+model across four devices.

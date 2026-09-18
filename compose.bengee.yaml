@@ -1,0 +1,174 @@
+name: yt-transcriber-bengee
+
+x-bengee-batch-common: &bengee-batch-common
+  build:
+    context: .
+    args:
+      PRELOAD_MODELS: "1"
+  image: yt-transcriber:cuda12.8
+  volumes:
+    - ./videos.txt:/data/input/videos.txt:ro
+    - ./results:/data/results
+    - ./_batch_work:/data/work
+  restart: "no"
+
+services:
+  yt-transcriber-batch-0:
+    <<: *bengee-batch-common
+    container_name: yt-transcriber-bengee-0
+    command:
+      - batch
+      - /data/input/videos.txt
+      - --output-dir
+      - /data/results
+      - --work-root
+      - /data/work/worker-0
+      - --checkpoint
+      - /data/results/batch_checkpoint_bengee_0.json
+      - --device
+      - cuda
+      - --demucs-device
+      - cuda
+      - --alignment-device
+      - cuda
+      - --whisper-model
+      - large-v3
+      - --compute-type
+      - int8
+      - --batch-size
+      - "1"
+      - --language
+      - en
+      - --granularity
+      - both
+      - --shard-count
+      - "4"
+      - --shard-index
+      - "0"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["${BENGEE_GPU_0:-0}"]
+              capabilities: [gpu]
+
+  yt-transcriber-batch-1:
+    <<: *bengee-batch-common
+    container_name: yt-transcriber-bengee-1
+    command:
+      - batch
+      - /data/input/videos.txt
+      - --output-dir
+      - /data/results
+      - --work-root
+      - /data/work/worker-1
+      - --checkpoint
+      - /data/results/batch_checkpoint_bengee_1.json
+      - --device
+      - cuda
+      - --demucs-device
+      - cuda
+      - --alignment-device
+      - cuda
+      - --whisper-model
+      - large-v3
+      - --compute-type
+      - int8
+      - --batch-size
+      - "1"
+      - --language
+      - en
+      - --granularity
+      - both
+      - --shard-count
+      - "4"
+      - --shard-index
+      - "1"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["${BENGEE_GPU_1:-1}"]
+              capabilities: [gpu]
+
+  yt-transcriber-batch-2:
+    <<: *bengee-batch-common
+    container_name: yt-transcriber-bengee-2
+    command:
+      - batch
+      - /data/input/videos.txt
+      - --output-dir
+      - /data/results
+      - --work-root
+      - /data/work/worker-2
+      - --checkpoint
+      - /data/results/batch_checkpoint_bengee_2.json
+      - --device
+      - cuda
+      - --demucs-device
+      - cuda
+      - --alignment-device
+      - cuda
+      - --whisper-model
+      - large-v3
+      - --compute-type
+      - int8
+      - --batch-size
+      - "1"
+      - --language
+      - en
+      - --granularity
+      - both
+      - --shard-count
+      - "4"
+      - --shard-index
+      - "2"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["${BENGEE_GPU_2:-2}"]
+              capabilities: [gpu]
+
+  yt-transcriber-batch-3:
+    <<: *bengee-batch-common
+    container_name: yt-transcriber-bengee-3
+    command:
+      - batch
+      - /data/input/videos.txt
+      - --output-dir
+      - /data/results
+      - --work-root
+      - /data/work/worker-3
+      - --checkpoint
+      - /data/results/batch_checkpoint_bengee_3.json
+      - --device
+      - cuda
+      - --demucs-device
+      - cuda
+      - --alignment-device
+      - cuda
+      - --whisper-model
+      - large-v3
+      - --compute-type
+      - int8
+      - --batch-size
+      - "1"
+      - --language
+      - en
+      - --granularity
+      - both
+      - --shard-count
+      - "4"
+      - --shard-index
+      - "3"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["${BENGEE_GPU_3:-3}"]
+              capabilities: [gpu]

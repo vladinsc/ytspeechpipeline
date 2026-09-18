@@ -104,6 +104,25 @@ def load_urls(path: Path) -> list[str]:
     return [video["url"] for video in load_manifest(path)]
 
 
+def shard_manifest(
+    videos: list[dict[str, str]], shard_count: int, shard_index: int
+) -> list[dict]:
+    """Select one deterministic shard while retaining global manifest indexes."""
+    if shard_count < 1:
+        raise ValueError("--shard-count must be at least 1")
+    if not 0 <= shard_index < shard_count:
+        raise ValueError(
+            f"--shard-index must be between 0 and {shard_count - 1} "
+            f"for --shard-count {shard_count}"
+        )
+
+    selected: list[dict] = []
+    for manifest_index, video in enumerate(videos, start=1):
+        if (manifest_index - 1) % shard_count == shard_index:
+            selected.append({**video, "manifest_index": manifest_index})
+    return selected
+
+
 def video_label(url: str) -> str:
     parsed = urlparse(url)
     if parsed.netloc.endswith("youtu.be"):
@@ -154,7 +173,8 @@ def load_or_create_checkpoint(
         created_at = existing.get("created_at", created_at)
 
     entries: list[dict] = []
-    for index, video in enumerate(videos, start=1):
+    for position, video in enumerate(videos, start=1):
+        index = int(video.get("manifest_index", position))
         url = video["url"]
         fresh = new_entry(index, video, output_dir, work_root)
         previous = old_entries.get(url)
@@ -217,13 +237,23 @@ def count_records(payload: list[dict] | dict[str, list[dict]]) -> dict[str, int]
     return {name: len(records) for name, records in payload.items() if isinstance(records, list)}
 
 
+def default_checkpoint_path(output_dir: Path, shard_count: int, shard_index: int) -> Path:
+    if shard_count == 1:
+        return output_dir / "batch_checkpoint.json"
+    return output_dir / f"batch_checkpoint_shard_{shard_index}_of_{shard_count}.json"
+
+
 def parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Process a resumable list of public YouTube videos.")
     parser.add_argument("urls_file", type=Path, help="Text file containing one YouTube URL per line.")
     parser.add_argument("--output-dir", type=Path, default=Path("./results"))
     parser.add_argument("--work-root", type=Path, default=Path("./_batch_work"))
     parser.add_argument("--checkpoint", type=Path, default=None,
-                        help="Checkpoint JSON path (default: OUTPUT_DIR/batch_checkpoint.json).")
+                        help="Checkpoint JSON path (default: a shard-specific file in OUTPUT_DIR).")
+    parser.add_argument("--shard-count", type=int, default=1,
+                        help="Number of parallel manifest shards (default: 1).")
+    parser.add_argument("--shard-index", type=int, default=0,
+                        help="Zero-based shard handled by this process (default: 0).")
     parser.add_argument("--device", default="auto", choices=["auto", "cuda", "cpu"])
     parser.add_argument("--whisper-model", default="large-v3")
     parser.add_argument("--compute-type", default="int8")
@@ -259,15 +289,29 @@ def parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
 
 def main(argv: Optional[list[str]] = None) -> int:
     args = parse_args(argv)
-    checkpoint_path = args.checkpoint or args.output_dir / "batch_checkpoint.json"
+    checkpoint_path = args.checkpoint or default_checkpoint_path(
+        args.output_dir, args.shard_count, args.shard_index
+    )
     try:
-        videos = load_manifest(args.urls_file)
+        all_videos = load_manifest(args.urls_file)
+        videos = shard_manifest(all_videos, args.shard_count, args.shard_index)
         checkpoint = load_or_create_checkpoint(
             checkpoint_path, videos, args.urls_file, args.output_dir, args.work_root
         )
+        checkpoint["shard"] = {
+            "index": args.shard_index,
+            "count": args.shard_count,
+            "videos": len(videos),
+            "manifest_videos": len(all_videos),
+        }
     except Exception as exc:
         log.error("Cannot initialize batch: %s", exc)
         return 2
+
+    log.info(
+        "Manifest shard %d/%d contains %d of %d videos",
+        args.shard_index + 1, args.shard_count, len(videos), len(all_videos),
+    )
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     args.work_root.mkdir(parents=True, exist_ok=True)
