@@ -46,6 +46,38 @@ physical indexes. `BENGEE_WHISPER_BATCH_SIZE` defaults to 4. Real measurements
 with two batch-8 workers reached 36-37 GB on 40 GB A100s and left too little
 headroom for transient allocations.
 
+## YouTube cookies
+
+If YouTube responds with "Sign in to confirm you're not a bot", export only
+`youtube.com` cookies in Netscape format and treat the file like a password.
+The yt-dlp guidance recommends exporting from a private/incognito YouTube
+session and warns that automated use can put the account at risk; a dedicated
+account is safer.
+
+Store the exported file outside Git and restrict its permissions:
+
+```bash
+mkdir -p .secrets
+install -m 600 /path/to/youtube-cookies.txt .secrets/youtube-cookies.txt
+```
+
+Enable it in the ignored `.env` file:
+
+```dotenv
+YT_DLP_COOKIES_FILE=/run/secrets/youtube-cookies.txt
+```
+
+Compose mounts `.secrets` read-only. The directory is excluded from both Git
+and the Docker build context, so cookies are not committed or copied into an
+image. Test the cookie before restarting the batch:
+
+```bash
+docker compose -f compose.bengee.yaml run --rm \
+  yt-transcriber-batch-0 shell -lc \
+  'yt-dlp --cookies /run/secrets/youtube-cookies.txt --simulate \
+  "https://www.youtube.com/watch?v=2vYqjQnm3WY"'
+```
+
 ## Output and checkpoints
 
 Successful output files use globally unique manifest indexes:

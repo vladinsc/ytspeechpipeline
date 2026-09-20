@@ -7,6 +7,7 @@ x-bengee-environment: &bengee-environment
   BENGEE_COMPUTE_TYPE: "${BENGEE_COMPUTE_TYPE:-int8}"
   BENGEE_LANGUAGE: "${BENGEE_LANGUAGE:-en}"
   BENGEE_GRANULARITY: "${BENGEE_GRANULARITY:-both}"
+  YT_DLP_COOKIES_FILE: "${YT_DLP_COOKIES_FILE:-}"
 
 x-bengee-worker: &bengee-worker
   build:
@@ -24,6 +25,7 @@ x-bengee-worker: &bengee-worker
     - ./artifacts/videos_selected_youtube_1000.txt:/data/input/videos_normal.txt:ro
     - ./results:/data/results
     - ./_batch_work:/data/work
+    - ./.secrets:/run/secrets:ro
   restart: "no"
 
 x-gpu-0: &gpu-0

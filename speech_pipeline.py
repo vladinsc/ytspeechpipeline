@@ -40,6 +40,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import os
 import re
 import shutil
 import subprocess
@@ -145,16 +146,28 @@ class AudioDownloader:
 
         log.info("Downloading audio: %s", url)
         # Let yt-dlp own the extension via %(ext)s; the post-processor decides it.
-        _run([
+        download_cmd = [
             "yt-dlp",
             "-f", "bestaudio/best",
             "--extract-audio",
             "--audio-format", "m4a",
             "--audio-quality", "0",
             "--no-playlist",
+        ]
+        cookies_file = os.environ.get("YT_DLP_COOKIES_FILE", "").strip()
+        if cookies_file:
+            cookies_path = Path(cookies_file)
+            if not cookies_path.is_file():
+                raise FileNotFoundError(
+                    "YT_DLP_COOKIES_FILE does not point to a readable file: "
+                    f"{cookies_path}"
+                )
+            download_cmd.extend(["--cookies", str(cookies_path)])
+        download_cmd.extend([
             "-o", str(self.workdir / "download.%(ext)s"),
             url,
         ])
+        _run(download_cmd)
         # Pick the produced media file (ignore .part / .ytdl leftovers).
         candidates = [
             p for p in self.workdir.glob("download.*")

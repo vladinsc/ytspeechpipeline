@@ -1,5 +1,6 @@
 .git
 .gitignore
+.secrets/
 __pycache__/
 *.py[cod]
 _smoke_run/
