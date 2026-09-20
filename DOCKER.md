@@ -147,5 +147,5 @@ selected videos and model repositories are public.
 
 For the four-GPU deployment, use the dedicated Compose file and instructions in
 [`BENGEE.md`](BENGEE.md). It runs eight independent copies of this same pipeline,
-two per A100, with quantized Whisper `large-v3`, batch size 8, cached English
+two per A100, with quantized Whisper `large-v3`, batch size 4, cached English
 alignment models, and shard-specific local JSON checkpoints.

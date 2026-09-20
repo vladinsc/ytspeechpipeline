@@ -58,7 +58,7 @@ case "$mode" in
       --alignment-device cuda \
       --whisper-model "${BENGEE_WHISPER_MODEL:-large-v3}" \
       --compute-type "${BENGEE_COMPUTE_TYPE:-int8}" \
-      --batch-size "${BENGEE_WHISPER_BATCH_SIZE:-8}" \
+      --batch-size "${BENGEE_WHISPER_BATCH_SIZE:-4}" \
       --language "${BENGEE_LANGUAGE:-en}" \
       --granularity "${BENGEE_GRANULARITY:-both}" \
       "$@"

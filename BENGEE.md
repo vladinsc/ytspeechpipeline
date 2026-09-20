@@ -1,6 +1,6 @@
 # Bengee four-A100 local JSON batch
 
-This deployment runs eight independent workers: two batch-8 workers on each of
+This deployment runs eight independent workers: two batch-4 workers on each of
 four 40 GB A100 GPUs. Every worker loads its own Demucs, Whisper `large-v3`, and
 cached English alignment models. Silero VAD and Praat remain on CPU.
 
@@ -42,7 +42,9 @@ The default GPU mapping is:
 | 3 | 6, 7 |
 
 Override `BENGEE_GPU_0` through `BENGEE_GPU_3` if `nvidia-smi` reports different
-physical indexes. `BENGEE_WHISPER_BATCH_SIZE` defaults to 8.
+physical indexes. `BENGEE_WHISPER_BATCH_SIZE` defaults to 4. Real measurements
+with two batch-8 workers reached 36-37 GB on 40 GB A100s and left too little
+headroom for transient allocations.
 
 ## Output and checkpoints
 
