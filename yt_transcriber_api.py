@@ -1,4 +1,4 @@
-"""Authenticated asynchronous API for the GPU transcription pipeline."""
+"""Local-JSON-backed asynchronous API for the GPU transcription pipeline."""
 
 from __future__ import annotations
 
@@ -6,6 +6,7 @@ import asyncio
 import json
 import logging
 import os
+import shutil
 import threading
 import uuid
 from contextlib import asynccontextmanager
@@ -29,6 +30,8 @@ ALIGNMENT_DEVICE_REQUEST = os.environ.get("YT_TRANSCRIBER_ALIGNMENT_DEVICE", DEV
 WHISPER_MODEL = os.environ.get("YT_TRANSCRIBER_WHISPER_MODEL", "large-v3")
 DEMUCS_MODEL = os.environ.get("YT_TRANSCRIBER_DEMUCS_MODEL", "htdemucs")
 COMPUTE_TYPE = os.environ.get("YT_TRANSCRIBER_COMPUTE_TYPE", "int8")
+BATCH_SIZE = int(os.environ.get("YT_TRANSCRIBER_BATCH_SIZE", "1"))
+KEEP_FAILED_WORKDIRS = os.environ.get("YT_TRANSCRIBER_KEEP_FAILED_WORKDIRS", "0") == "1"
 
 
 class JobRequest(BaseModel):
@@ -43,13 +46,17 @@ class JobStore:
     def __init__(self, path: Path):
         self.path = path
         self.lock = threading.RLock()
-        self.data = {"schema_version": 1, "updated_at": utc_now(), "summary": {}, "jobs": {}}
+        self.data = {
+            "schema_version": 1, "updated_at": utc_now(), "summary": {}, "jobs": {}
+        }
         if path.exists():
             self.data = json.loads(path.read_text(encoding="utf-8"))
         for job in self.data.get("jobs", {}).values():
             if job["status"] == "processing":
-                job.update(status="queued", stage_status="restart_queued",
-                           detail="API restarted; job queued from the beginning.")
+                job.update(
+                    status="queued", stage_status="restart_queued",
+                    detail="API restarted; job queued from the beginning.",
+                )
         self.save()
 
     def save(self) -> None:
@@ -67,16 +74,19 @@ class JobStore:
 
     def create(self, request: JobRequest) -> dict:
         url = str(request.url)
-        if not url.startswith(("https://www.youtube.com/", "https://youtube.com/", "https://youtu.be/")):
+        if not url.startswith(
+            ("https://www.youtube.com/", "https://youtube.com/", "https://youtu.be/")
+        ):
             raise ValueError("Only public youtube.com and youtu.be URLs are accepted")
         job_id = uuid.uuid4().hex[:16]
         stem = f"api_{job_id}_{video_label(url)}"
         job = {
             "job_id": job_id, "url": url, "label": request.label,
             "granularity": request.granularity, "pitch_floor": request.pitch_floor,
-            "pitch_ceiling": request.pitch_ceiling, "status": "queued", "stage": "waiting",
-            "stage_status": "queued", "detail": "", "created_at": utc_now(),
-            "updated_at": utc_now(), "started_at": None, "completed_at": None,
+            "pitch_ceiling": request.pitch_ceiling, "status": "queued",
+            "stage": "waiting", "stage_status": "queued", "detail": "",
+            "created_at": utc_now(), "updated_at": utc_now(), "started_at": None,
+            "completed_at": None,
             "output_path": str((RESULTS_DIR / request.label / f"{stem}.json").resolve()),
             "workdir": str((WORK_DIR / request.label / stem).resolve()),
             "record_counts": None, "error": None,
@@ -119,8 +129,10 @@ def process_job(job_id: str) -> None:
     job = runtime.store.get(job_id)
     if job is None:
         return
-    runtime.store.update(job_id, status="processing", stage="initializing",
-                         stage_status="started", started_at=utc_now(), error=None)
+    runtime.store.update(
+        job_id, status="processing", stage="initializing", stage_status="started",
+        started_at=utc_now(), error=None,
+    )
 
     def progress(stage: str, stage_status: str, detail: str) -> None:
         runtime.store.update(job_id, stage=stage, stage_status=stage_status, detail=detail)
@@ -145,8 +157,12 @@ def process_job(job_id: str) -> None:
         )
     except Exception as exc:
         log.exception("Job %s failed", job_id)
-        runtime.store.update(job_id, status="failed", stage_status="failed",
-                             error=f"{type(exc).__name__}: {exc}")
+        runtime.store.update(
+            job_id, status="failed", stage_status="failed",
+            error=f"{type(exc).__name__}: {exc}",
+        )
+        if not KEEP_FAILED_WORKDIRS:
+            shutil.rmtree(cfg.workdir, ignore_errors=True)
 
 
 async def worker() -> None:
@@ -181,13 +197,8 @@ async def lifespan(_: FastAPI):
             VocalIsolator, runtime.demucs_device, DEMUCS_MODEL
         )
         runtime.transcriber = await asyncio.to_thread(
-            GPUTranscriber,
-            runtime.device,
-            WHISPER_MODEL,
-            COMPUTE_TYPE,
-            1,
-            "en",
-            runtime.alignment_device,
+            GPUTranscriber, runtime.device, WHISPER_MODEL, COMPUTE_TYPE,
+            BATCH_SIZE, "en", runtime.alignment_device,
         )
         runtime.worker_task = asyncio.create_task(worker())
         for job in runtime.store.data["jobs"].values():
@@ -206,19 +217,24 @@ async def lifespan(_: FastAPI):
 
 
 ROOT_PATH = os.environ.get("YT_TRANSCRIBER_ROOT_PATH", "").rstrip("/")
-app = FastAPI(title="yt-transcriber", version="1.0.0", root_path=ROOT_PATH, lifespan=lifespan)
+app = FastAPI(title="yt-transcriber", version="1.1.0", root_path=ROOT_PATH, lifespan=lifespan)
 
 
 @app.get("/")
 def root() -> dict:
-    return {"service": "yt-transcriber", "docs": f"{ROOT_PATH}/docs",
-            "health": f"{ROOT_PATH}/health"}
+    return {
+        "service": "yt-transcriber", "state_backend": "local-json",
+        "docs": f"{ROOT_PATH}/docs", "health": f"{ROOT_PATH}/health",
+    }
 
 
 @app.get("/health")
 def health() -> JSONResponse:
-    body = {"service": "yt-transcriber", "ready": runtime.ready,
-            "device": getattr(runtime, "device", None), "error": runtime.startup_error}
+    body = {
+        "service": "yt-transcriber", "ready": runtime.ready,
+        "state_backend": "local-json", "device": getattr(runtime, "device", None),
+        "error": runtime.startup_error,
+    }
     return JSONResponse(body, status_code=200 if runtime.ready else 503)
 
 

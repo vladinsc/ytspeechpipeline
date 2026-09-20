@@ -1,9 +1,10 @@
 # GPU container
 
 The pipeline is packaged as one worker spanning two GPUs. WhisperX runs with
-INT8 quantization and batch size 1 on the primary GPU. Demucs and forced
-alignment run on the secondary GPU. Silero VAD and Praat run on CPU. Model
-weights are baked into the image and reused for every video.
+INT8 quantization and the configurable `YT_TRANSCRIBER_BATCH_SIZE` on the
+primary GPU. Demucs and forced alignment run on the secondary GPU. Silero VAD
+and Praat run on CPU. Model weights are baked into the image and reused for
+every video.
 
 The image also includes Deno and the matching `yt-dlp-ejs` package. They let
 yt-dlp solve the JavaScript challenges currently required by many public
@@ -94,9 +95,9 @@ curl "https://ai.asigno.ro/yt-transcriber/v1/jobs/JOB_ID"
 curl "https://ai.asigno.ro/yt-transcriber/v1/jobs/JOB_ID/result"
 ```
 
-API job state is persisted in `results/api_jobs.json`; labeled result JSON files
-are stored under `results/kids` and `results/normal`. Successful job audio is
-removed automatically.
+API job state is persisted in `results/api_jobs.json`, while every completed
+job has its own result JSON under `results/kids` or `results/normal`. Successful
+temporary audio is removed after the result JSON is written atomically.
 
 ## Run the manifest batch
 
@@ -118,24 +119,24 @@ docker compose --profile batch run --rm yt-transcriber-batch \
   batch /data/input/videos.txt \
   --output-dir /data/results \
   --work-root /data/work \
+  --state-backend json \
   --device cuda --demucs-device cuda:1 --alignment-device cuda:1 \
   --compute-type int8 --batch-size 1 \
   --language en --granularity both --retry-failed
 ```
 
 At startup, the container runs `nvidia-smi` and a PyTorch CUDA check. It exits
-before loading any models if GPU passthrough is unavailable. The initial GPU
-snapshot is also stored in the relevant job checkpoint. For live GPU
-monitoring on the host, use:
+before loading any models if GPU passthrough is unavailable and logs the
+initial GPU snapshot. For live GPU monitoring on the host, use:
 
 ```bash
 watch -n 2 nvidia-smi
 ```
 
-Inspect progress from the host:
+Inspect progress in the local checkpoint:
 
 ```bash
-python -c 'import json; print(json.load(open("results/batch_checkpoint.json"))["summary"])'
+jq '.summary' results/batch_checkpoint.json
 ```
 
 The endpoints are intentionally open and do not require application credentials.
@@ -145,6 +146,6 @@ selected videos and model repositories are public.
 ## Four-GPU Bengee batch
 
 For the four-GPU deployment, use the dedicated Compose file and instructions in
-[`BENGEE.md`](BENGEE.md). It runs four independent copies of this same pipeline,
-with quantized Whisper `large-v3` and batch size 1, rather than splitting one
-model across four devices.
+[`BENGEE.md`](BENGEE.md). It runs eight independent copies of this same pipeline,
+two per A100, with quantized Whisper `large-v3`, batch size 8, cached English
+alignment models, and shard-specific local JSON checkpoints.

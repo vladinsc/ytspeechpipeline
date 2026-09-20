@@ -1,8 +1,8 @@
 """Resumable batch runner for the CDS prosody extraction pipeline.
 
 The URL file contains one public YouTube URL per line under ``# LABEL:`` section
-markers. A JSON checkpoint is atomically updated at every major pipeline stage,
-allowing both live inspection and restart after interruption.
+markers. Each worker uses a shard-specific local JSON checkpoint and writes one
+result JSON per successfully processed video.
 """
 
 from __future__ import annotations
@@ -69,7 +69,7 @@ LABELS = {
 
 def load_manifest(path: Path) -> list[dict[str, str]]:
     videos: list[dict[str, str]] = []
-    seen: dict[str, str] = {}
+    seen: set[tuple[str, str]] = set()
     current_label: Optional[str] = None
     for raw_line in path.read_text(encoding="utf-8-sig").splitlines():
         line = raw_line.strip()
@@ -85,14 +85,13 @@ def load_manifest(path: Path) -> list[dict[str, str]]:
         url = line
         if not url.startswith(("https://www.youtube.com/", "https://youtube.com/", "https://youtu.be/")):
             raise ValueError(f"Unsupported URL in {path}: {url}")
-        if url in seen:
-            if seen[url] != current_label:
-                raise ValueError(f"URL appears under two labels ({seen[url]}, {current_label}): {url}")
-            log.warning("Skipping duplicate URL: %s", url)
-            continue
         if current_label is None:
             raise ValueError(f"URL appears before a # LABEL: section in {path}: {url}")
-        seen[url] = current_label
+        identity = (url, current_label)
+        if identity in seen:
+            log.warning("Skipping duplicate URL: %s", url)
+            continue
+        seen.add(identity)
         videos.append({"url": url, "label": current_label})
     if not videos:
         raise ValueError(f"No YouTube URLs found in {path}")
@@ -243,6 +242,13 @@ def default_checkpoint_path(output_dir: Path, shard_count: int, shard_index: int
     return output_dir / f"batch_checkpoint_shard_{shard_index}_of_{shard_count}.json"
 
 
+def positive_int(value: str) -> int:
+    parsed = int(value)
+    if parsed < 1:
+        raise argparse.ArgumentTypeError("value must be at least 1")
+    return parsed
+
+
 def parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Process a resumable list of public YouTube videos.")
     parser.add_argument("urls_file", type=Path, help="Text file containing one YouTube URL per line.")
@@ -259,10 +265,9 @@ def parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
     parser.add_argument("--compute-type", default="int8")
     parser.add_argument(
         "--batch-size",
-        type=int,
-        choices=[1],
+        type=positive_int,
         default=1,
-        help="WhisperX transcription batch size (fixed at 1 to limit GPU memory use).",
+        help="WhisperX transcription batch size (default: 1; e.g. 8 or 16 on high-memory GPUs).",
     )
     parser.add_argument("--demucs-model", default="htdemucs")
     parser.add_argument(
@@ -278,12 +283,18 @@ def parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
     parser.add_argument("--pitch-ceiling", type=float, default=600.0)
     parser.add_argument("--granularity", choices=["word", "syllable", "both"], default="both")
     parser.add_argument("--retry-failed", action="store_true",
-                        help="Retry entries marked failed in an existing checkpoint.")
+                        help="Retry failed entries in the selected state backend.")
     parser.add_argument("--stop-on-error", action="store_true")
     parser.add_argument("--keep-workdirs", action="store_true",
                         help="Keep intermediate audio even after successful videos.")
     parser.add_argument("--delete-failed-workdirs", action="store_true",
                         help="Also delete partial audio after a failed video.")
+    parser.add_argument(
+        "--state-backend",
+        choices=["json"],
+        default="json",
+        help="Durable state backend (local JSON).",
+    )
     return parser.parse_args(argv)
 
 

@@ -249,6 +249,9 @@ class GPUTranscriber:
         self.alignment_device = alignment_device or device
         self.batch_size = batch_size
         self.language = language
+        self._alignment_language: Optional[str] = None
+        self._alignment_model = None
+        self._alignment_metadata = None
 
         import whisperx
 
@@ -276,6 +279,34 @@ class GPUTranscriber:
             vad_method="silero",
         )
 
+    def _alignment_for_language(self, language: str):
+        if self._alignment_language == language and self._alignment_model is not None:
+            log.info("Reusing cached alignment model for language '%s'.", language)
+            return self._alignment_model, self._alignment_metadata
+
+        if self._alignment_model is not None:
+            log.info(
+                "Replacing cached alignment model for language '%s' with '%s'.",
+                self._alignment_language,
+                language,
+            )
+            self._alignment_model = None
+            self._alignment_metadata = None
+            if str(self.alignment_device).startswith("cuda"):
+                import torch
+
+                torch.cuda.empty_cache()
+
+        log.info("Loading alignment model for language '%s' on %s ...", language, self.alignment_device)
+        model, metadata = self._whisperx.load_align_model(
+            language_code=language,
+            device=self.alignment_device,
+        )
+        self._alignment_language = language
+        self._alignment_model = model
+        self._alignment_metadata = metadata
+        return model, metadata
+
     def transcribe(self, vocals_16k: Path) -> list[dict]:
         wx = self._whisperx
         audio = wx.load_audio(str(vocals_16k))  # float32 mono @16k
@@ -287,10 +318,8 @@ class GPUTranscriber:
         lang = result["language"]
         log.info("Detected language: %s", lang)
 
-        log.info("Loading alignment model and running forced alignment ...")
-        align_model, metadata = wx.load_align_model(
-            language_code=lang, device=self.alignment_device
-        )
+        log.info("Running forced alignment ...")
+        align_model, metadata = self._alignment_for_language(lang)
         aligned = wx.align(
             result["segments"],
             align_model,
@@ -312,13 +341,6 @@ class GPUTranscriber:
                 words.append(
                     {"word": token, "start": float(w["start"]), "end": float(w["end"])}
                 )
-
-        # free VRAM
-        del align_model
-        if self.device == "cuda":
-            import torch
-
-            torch.cuda.empty_cache()
 
         log.info("Aligned %d words.", len(words))
         return words

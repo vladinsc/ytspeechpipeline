@@ -6,6 +6,7 @@ from pathlib import Path
 
 from batch_pipeline import (
     default_checkpoint_path,
+    load_manifest,
     load_or_create_checkpoint,
     shard_manifest,
 )
@@ -61,6 +62,26 @@ class BatchShardingTests(unittest.TestCase):
         self.assertEqual(paths[2], output / "batch_checkpoint_shard_2_of_4.json")
         self.assertEqual(
             default_checkpoint_path(output, 1, 0), output / "batch_checkpoint.json"
+        )
+
+    def test_same_url_can_have_two_dataset_labels(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            manifest = Path(temporary) / "videos.txt"
+            manifest.write_text(
+                "# LABEL: KIDS\n"
+                "https://www.youtube.com/watch?v=shared123\n"
+                "# LABEL: NORMAL\n"
+                "https://www.youtube.com/watch?v=shared123\n",
+                encoding="utf-8",
+            )
+            videos = load_manifest(manifest)
+
+        self.assertEqual(
+            videos,
+            [
+                {"url": "https://www.youtube.com/watch?v=shared123", "label": "kids"},
+                {"url": "https://www.youtube.com/watch?v=shared123", "label": "normal"},
+            ],
         )
 
 

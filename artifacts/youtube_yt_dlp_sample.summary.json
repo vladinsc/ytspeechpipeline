@@ -1,0 +1,12 @@
+{
+  "kids": {
+    "total": 1000,
+    "yt_dlp_ok": 45
+  },
+  "youtube": {
+    "total": 1000,
+    "yt_dlp_ok": 8
+  },
+  "seed": 20260920,
+  "note": "Kids rows are YouTube URLs discovered from kid-oriented queries; no authentication/cookies used."
+}

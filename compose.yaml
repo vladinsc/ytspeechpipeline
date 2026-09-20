@@ -7,10 +7,12 @@ x-yt-transcriber-common: &yt-transcriber-common
       PRELOAD_MODELS: "1"
   image: yt-transcriber:cuda12.8
   environment:
+    YT_TRANSCRIBER_STATE_BACKEND: json
     YT_TRANSCRIBER_DEVICE: cuda
     YT_TRANSCRIBER_DEMUCS_DEVICE: cuda:1
     YT_TRANSCRIBER_ALIGNMENT_DEVICE: cuda:1
     YT_TRANSCRIBER_COMPUTE_TYPE: int8
+    YT_TRANSCRIBER_BATCH_SIZE: "${YT_TRANSCRIBER_BATCH_SIZE:-1}"
     YT_TRANSCRIBER_ROOT_PATH: /yt-transcriber
     YT_TRANSCRIBER_RESULTS_DIR: /data/results
     YT_TRANSCRIBER_WORK_DIR: /data/work
@@ -60,6 +62,8 @@ services:
       - /data/results
       - --work-root
       - /data/work
+      - --state-backend
+      - json
       - --device
       - cuda
       - --demucs-device
@@ -71,7 +75,7 @@ services:
       - --language
       - en
       - --batch-size
-      - "1"
+      - "${YT_TRANSCRIBER_BATCH_SIZE:-1}"
       - --granularity
       - both
     volumes:
