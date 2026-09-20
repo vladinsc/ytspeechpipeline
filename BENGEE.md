@@ -7,6 +7,8 @@ cached English alignment models. Silero VAD and Praat remain on CPU.
 No database is required. Each completed video is written as one JSON file under
 `results/kids` or `results/normal`. Eight separate checkpoint JSON files make
 the run resumable without allowing workers to overwrite each other's state.
+The workers reuse Docker's built-in bridge network because Bengee's predefined
+address pools are exhausted; Compose therefore does not allocate a new subnet.
 
 ## Input selection
 
