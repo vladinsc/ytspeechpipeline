@@ -68,14 +68,16 @@ successful video unless `--keep-workdirs` is supplied.
 
 ## Resume and retry
 
-Running the same command again resumes every shard. A completed entry is
-reprocessed only if its result JSON is missing.
+Running the same command again resumes every shard. The Bengee services pass
+`--retry-failed`, so each failed entry is attempted once per deployment. It
+does not loop repeatedly inside a worker. A completed entry is reprocessed only
+if its result JSON is missing.
 
 ```bash
 docker compose -f compose.bengee.yaml up -d
 ```
 
-To retry failures in one shard:
+To retry only one shard manually:
 
 ```bash
 docker compose -f compose.bengee.yaml run --rm \
@@ -98,6 +100,21 @@ jq -s '
 ' results/batch_checkpoint_shard_*_of_8.json
 ```
 
+## Long videos and GPU memory
+
+The complete recording and Demucs' multi-stem output accumulator remain in
+system RAM. Demucs still runs each split on CUDA. This prevents multi-hour
+recordings from allocating a full-track tensor on the GPU while preserving GPU
+acceleration. Bengee has ample RAM for two simultaneous accumulators per GPU.
+
+After pulling a version containing this fix, rebuild the image. The mounted
+results and checkpoint files are preserved:
+
+```bash
+docker compose -f compose.bengee.yaml down
+docker compose -f compose.bengee.yaml up -d --build
+```
+
 Monitor GPU memory and utilization with:
 
 ```bash
@@ -105,6 +122,8 @@ nvidia-smi --query-gpu=index,memory.used,memory.total,utilization.gpu \
   --format=csv --loop=1
 ```
 
-If a GPU approaches 38 GB, stop the deployment and lower
-`BENGEE_WHISPER_BATCH_SIZE`. Do not run another GPU workload on the same cards
-during the batch.
+If a GPU approaches 38 GB during transcription, lower
+`BENGEE_WHISPER_BATCH_SIZE`. If it still approaches 38 GB during vocal
+isolation after this fix, stop one worker on each affected GPU and finish those
+four shards in a second wave. Do not run unrelated GPU workloads on the same
+cards during the batch.

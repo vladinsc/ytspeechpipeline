@@ -216,7 +216,13 @@ class VocalIsolator:
             log.info("Separating stems on %s ...", self.device)
             sources = apply_model(
                 self.model,
-                wav[None].to(self.device),
+                # Keep the complete recording and Demucs' full-length output
+                # accumulator in system RAM. apply_model still moves each
+                # split to device for GPU inference. Putting the input on
+                # CUDA makes Demucs allocate every output stem for the entire
+                # recording on the GPU, which is unsafe with shared GPUs.
+                # CPU accumulation trades abundant RAM for bounded VRAM.
+                wav[None],
                 device=self.device,
                 split=True,          # chunked to bound VRAM
                 overlap=0.25,

@@ -14,7 +14,7 @@ x-bengee-worker: &bengee-worker
     args:
       PRELOAD_MODELS: "1"
   image: yt-transcriber:cuda12.8
-  command: ["bengee-worker"]
+  command: ["bengee-worker", "--retry-failed"]
   # Reuse Docker's built-in bridge. This preserves container isolation and
   # avoids allocating a new subnet on Bengee's exhausted address pools.
   network_mode: bridge
