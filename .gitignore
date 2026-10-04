@@ -6,3 +6,4 @@ results
 _batch_work
 data/
 server_validation_bundle/
+*.md
