@@ -75,6 +75,8 @@ def all_timed_turns(chat: Path, audio_duration: float) -> list[ChatTurn]:
 
 def sample_turns(turns: list[ChatTurn], per_speaker: int) -> list[ChatTurn]:
     """Choose turns across each speaker's full recording timeline."""
+    if per_speaker == 0:
+        return list(turns)
     selected = []
     for speaker in sorted(TIERS):
         pool = [turn for turn in turns if turn.speaker == speaker]
@@ -87,6 +89,41 @@ def sample_turns(turns: list[ChatTurn], per_speaker: int) -> list[ChatTurn]:
                        for index in range(per_speaker)}
             selected.extend(pool[index] for index in sorted(indices))
     return sorted(selected, key=lambda item: (item.start_sec, item.utterance_id))
+
+
+def timed_chat_video_turns(chat: Path, audio_duration: float) -> tuple[list[dict], dict]:
+    """Keep all timed CHAT text for review, even when a turn cannot be aligned."""
+    rows = parse_chat(chat)[1]
+    timed = []
+    missing_link = invalid_link = empty_text = 0
+    untimed_lexical = 0
+    for row in rows:
+        if row["speaker"] not in TIERS:
+            continue
+        if len(row["time_links_ms"]) != 1:
+            missing_link += 1
+            untimed_lexical += row["transcript"] is not None
+            continue
+        start_ms, end_ms = row["time_links_ms"][0]
+        if not 0 <= start_ms < end_ms <= (audio_duration + 0.05) * 1000:
+            invalid_link += 1
+            continue
+        text = row["transcript"] or row["chat_text"]
+        if not text.strip():
+            empty_text += 1
+            continue
+        timed.append({
+            "utterance_id": row["utterance_id"], "speaker": row["speaker"],
+            "start": start_ms / 1000, "end": end_ms / 1000, "text": text,
+        })
+    return timed, {
+        "raw_chat_turn_count": len(rows),
+        "timed_chat_turn_count_for_video": len(timed),
+        "chat_turns_without_single_time_link": missing_link,
+        "untimed_lexical_chat_turn_count": untimed_lexical,
+        "chat_turns_with_invalid_time_link": invalid_link,
+        "timed_chat_turns_with_empty_text": empty_text,
+    }
 
 
 def _best_mapping(overlap_seconds: dict[tuple[str, str], float]) -> dict[str, str]:
@@ -238,6 +275,7 @@ def run_pilot(args: argparse.Namespace) -> dict:
         "source_id": source_id, "audio": str(audio), "chat": str(chat),
         "audio_duration_sec": round(duration, 3),
         "timed_turns": len(turns), "guided_alignment_turns": len(sample),
+        "review_video_chat_inventory": timed_chat_video_turns(chat, duration)[1],
         "timed_turns_by_speaker": {
             tier: sum(turn.speaker == tier for turn in turns) for tier in sorted(TIERS)
         },
@@ -260,6 +298,7 @@ def run_pilot(args: argparse.Namespace) -> dict:
     for source_id, audio, chat, duration, turns, sample in selected:
         work = args.out_dir / source_id.replace(":", "_")
         work.mkdir(parents=True, exist_ok=True)
+        video_chat_turns, chat_inventory = timed_chat_video_turns(chat, duration)
         metadata = {
             "dataset": "NewmanRatner", "source_id": source_id,
             "source_chat": str(chat.resolve()),
@@ -320,6 +359,7 @@ def run_pilot(args: argparse.Namespace) -> dict:
             "schema_version": "newman_quality_pilot_v1",
             **metadata, "audio_duration_sec": round(duration, 3),
             "chat_turn_count": len(turns), "guided_alignment": evaluate_alignment(records),
+            "review_video_chat_inventory": chat_inventory,
             "independent_asr": evaluate_asr(turns, asr["asr_words"]),
             "speaker_diarization": evaluate_speakers(turns, diarization),
             "guided_status": guided_status,
@@ -356,7 +396,13 @@ def run_pilot(args: argparse.Namespace) -> dict:
                            for record in review_records):
                     continue
                 video = work / f"review_video_{clip_index + 1:02d}.mp4"
-                render(source_id, review_records, video, clip_start=clip_start)
+                render(
+                    source_id, review_records, video, clip_start=clip_start,
+                    chat_turns=video_chat_turns,
+                    asr_segments=asr["asr_segments"],
+                    asr_words=asr["asr_words"],
+                    diarization_segments=diarization,
+                )
                 videos.append(str(video.resolve()))
             report["artifacts"]["review_videos"] = videos
         _write_json(work / "report.json", report)
@@ -372,7 +418,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--root", type=Path, default=Path("data/staging/newman_ratner"))
     parser.add_argument("--out-dir", type=Path, default=Path("results/newman_quality_pilot"))
     parser.add_argument("--source-id", action="append", default=[])
-    parser.add_argument("--turns-per-speaker", type=int, default=12)
+    parser.add_argument("--turns-per-speaker", type=int, default=12,
+                        help="Guided CHAT turns per speaker; 0 aligns every eligible turn")
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument("--alignment-device", default="cuda:0")
     parser.add_argument("--whisper-model", default="large-v3")
@@ -384,8 +431,8 @@ def main(argv: list[str] | None = None) -> int:
                         help="Skip annotated audio/video review renders")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args(argv)
-    if args.turns_per_speaker < 1 or args.batch_size < 1:
-        parser.error("turns per speaker and batch size must be positive")
+    if args.turns_per_speaker < 0 or args.batch_size < 1:
+        parser.error("turns per speaker must be nonnegative and batch size positive")
     print(json.dumps(run_pilot(args), indent=2))
     return 0
 

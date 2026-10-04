@@ -55,6 +55,34 @@ class ValidationVideoTests(unittest.TestCase):
         self.assertIn("Independent ASR: hello", ass)
         self.assertEqual(counts["shown_utterances_or_clips"], 1)
 
+    def test_full_review_shows_chat_asr_and_both_word_tracks(self):
+        record = {
+            "dataset": "NewmanRatner", "start_sec": 1.0, "end_sec": 2.0,
+            "speaker": "MOT", "transcript": "hello", "words": [
+                {"word": "hello", "start_time": 1.2, "end_time": 1.7},
+            ],
+        }
+        ass, counts = build_ass(
+            [record], "NewmanRatner:18:sample:interview", 0.0, 5.0,
+            chat_turns=[
+                {"speaker": "MOT", "start": 1.0, "end": 2.0, "text": "hello"},
+                {"speaker": "CHI", "start": 1.5, "end": 2.5, "text": "yes"},
+            ],
+            asr_segments=[{"start": 1.0, "end": 2.5, "text": "hello yes"}],
+            asr_words=[{"start": 1.1, "end": 1.6, "word": "hello"},
+                       {"start": 1.8, "end": 2.3, "word": "yes"}],
+            diarization_segments=[{"start": 1.0, "end": 2.5,
+                                   "speaker": "SPEAKER_00"}],
+        )
+        self.assertIn("CHAT: MOT: hello | CHI: yes", ass)
+        self.assertIn("WhisperX transcript: hello yes", ass)
+        self.assertIn("WhisperX aligned word: [hello] yes", ass)
+        self.assertIn("CHAT-guided aligned word: [hello]", ass)
+        self.assertIn("Audio speaker cluster: SPEAKER_00", ass)
+        self.assertIn("CHAT: no timed transcript for this span", ass)
+        self.assertEqual(counts["independent_asr_words_with_timing"], 2)
+        self.assertEqual(counts["timed_chat_turns_available"], 2)
+
 
 if __name__ == "__main__":
     unittest.main()

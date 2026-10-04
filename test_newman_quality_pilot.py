@@ -47,6 +47,7 @@ class NewmanQualityPilotTests(unittest.TestCase):
         sample = sample_turns(turns, 3)
         self.assertEqual({turn.utterance_id for turn in sample if turn.speaker == "MOT"},
                          {"m0", "m4", "m9"})
+        self.assertEqual(len(sample_turns(turns, 0)), len(turns))
         records = [{"speaker": "MOT", "alignment_qc": {"reference_token_count": 10,
                                       "aligned_word_count": 8,
                                       "quality_flags": ["word_outside_CHAT_time_link"]}}]

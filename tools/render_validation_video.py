@@ -82,13 +82,15 @@ def _ass_header() -> str:
     styles = [
         ("Header", 26, "&H00FFFFFF", 24, 7),
         ("Speaker", 23, "&H0077D5FF", 78, 7),
+        ("AudioSpeaker", 21, "&H00B4E4FF", 112, 7),
         ("Transcript", 26, "&H00FFFFFF", 150, 7),
         ("ASR", 22, "&H009EE7AA", 205, 7),
-        ("Word", 31, "&H0000D7FF", 255, 7),
-        ("Phone", 26, "&H00A8FFB0", 325, 7),
-        ("Syllable", 23, "&H00C4B5FD", 365, 7),
-        ("Features", 22, "&H00FFFFFF", 410, 7),
-        ("Features2", 22, "&H00FFFFFF", 450, 7),
+        ("ASRWord", 27, "&H009EE7AA", 250, 7),
+        ("Word", 27, "&H0000D7FF", 295, 7),
+        ("Phone", 24, "&H00A8FFB0", 345, 7),
+        ("Syllable", 22, "&H00C4B5FD", 385, 7),
+        ("Features", 21, "&H00FFFFFF", 430, 7),
+        ("Features2", 21, "&H00FFFFFF", 470, 7),
         ("Flags", 18, "&H0090A0B0", 505, 7),
     ]
     style_lines = [
@@ -105,8 +107,36 @@ def _ass_header() -> str:
             + "\n\n[Events]\nFormat: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text\n")
 
 
+def _chat_caption_events(chat_turns: list[dict], clip_start: float,
+                         clip_end: float) -> list[tuple[float, float, str]]:
+    """Show every timed CHAT turn, including simultaneous speakers and gaps."""
+    boundaries = {clip_start, clip_end}
+    for turn in chat_turns:
+        start, end = float(turn["start"]), float(turn["end"])
+        if start < clip_end and end > clip_start:
+            boundaries.update((max(start, clip_start), min(end, clip_end)))
+    points = sorted(boundaries)
+    events: list[tuple[float, float, str]] = []
+    for start, end in zip(points, points[1:]):
+        if end - start < 0.01:
+            continue
+        active = [turn for turn in chat_turns
+                  if float(turn["start"]) < end and float(turn["end"]) > start]
+        caption = ("CHAT: " + " | ".join(
+            f"{turn['speaker']}: {_text(turn['text'], 105)}" for turn in active
+        )) if active else "CHAT: no timed transcript for this span"
+        if events and events[-1][1] == start and events[-1][2] == caption:
+            events[-1] = (events[-1][0], end, caption)
+        else:
+            events.append((start, end, caption))
+    return events
+
+
 def build_ass(records: list[dict], source_id: str, clip_start: float,
-              clip_duration: float) -> tuple[str, dict]:
+              clip_duration: float, *, chat_turns: list[dict] | None = None,
+              asr_segments: list[dict] | None = None,
+              asr_words: list[dict] | None = None,
+              diarization_segments: list[dict] | None = None) -> tuple[str, dict]:
     """Build timed overlays; times in feature JSONL are original-audio times."""
     if not records:
         raise ValueError(f"No feature rows for {source_id}")
@@ -117,6 +147,29 @@ def build_ass(records: list[dict], source_id: str, clip_start: float,
     )
     add(clip_start, clip_start + clip_duration, "Header",
         f"{dataset} | {source_id} | original audio, max 10 min")
+    clip_end = clip_start + clip_duration
+    chat_events = _chat_caption_events(chat_turns, clip_start, clip_end) if chat_turns is not None else []
+    for start, end, caption in chat_events:
+        add(start, end, "Transcript", caption)
+    for segment in asr_segments or []:
+        if segment.get("text"):
+            add(float(segment["start"]), float(segment["end"]), "ASR",
+                f"WhisperX transcript: {_text(segment['text'], 170)}")
+    timed_asr_words = [word for word in asr_words or []
+                       if isinstance(word.get("start"), (int, float))
+                       and isinstance(word.get("end"), (int, float))
+                       and word["end"] > word["start"]]
+    for index, word in enumerate(timed_asr_words):
+        context = " ".join(
+            f"[{timed_asr_words[position]['word']}]" if position == index
+            else str(timed_asr_words[position]["word"])
+            for position in range(max(0, index - 4), min(len(timed_asr_words), index + 5))
+        )
+        add(float(word["start"]), float(word["end"]), "ASRWord",
+            f"WhisperX aligned word: {_text(context, 150)}")
+    for segment in diarization_segments or []:
+        add(float(segment["start"]), float(segment["end"]), "AudioSpeaker",
+            f"Audio speaker cluster: {segment['speaker']}")
     shown = 0
     word_events = 0
     phone_events = 0
@@ -143,11 +196,10 @@ def build_ass(records: list[dict], source_id: str, clip_start: float,
                 speaker_text += f" (maps to {record['diarization_mapped_speaker']})"
         add(start, visual_end, "Speaker", speaker_text)
         transcript = record.get("transcript")
-        if transcript:
-            add(start, visual_end, "Transcript", f"Transcript: {_text(transcript, 170)}")
-        else:
-            add(start, visual_end, "Transcript", "No lexical transcript supplied for this clip")
-        if record.get("independent_asr_text"):
+        if chat_turns is None:
+            add(start, visual_end, "Transcript", f"Transcript: {_text(transcript, 170)}"
+                if transcript else "No lexical transcript supplied for this clip")
+        if asr_segments is None and record.get("independent_asr_text"):
             add(start, visual_end, "ASR", f"Independent ASR: {_text(record['independent_asr_text'], 170)}")
         acoustic = record.get("acoustic_features") or {}
         feature_text = (
@@ -176,7 +228,8 @@ def build_ass(records: list[dict], source_id: str, clip_start: float,
                 for k in range(first, last)
             )
             add(float(word["start_time"]), min(float(word["end_time"]), visual_end), "Word",
-                f"Aligned word: {context} | F0 {_metric(word.get('pitch_mean_hz'), ' Hz')}"
+                f"{'CHAT-guided aligned word' if chat_turns is not None else 'Aligned word'}: "
+                f"{context} | F0 {_metric(word.get('pitch_mean_hz'), ' Hz')}"
                 f" | F0 variance {_metric(word.get('pitch_variance'))}"
                 f" | pause {_metric(word.get('pause_after_sec'), ' s')}"
                 f" | rate {_metric(word.get('speech_rate_sps'), ' syll/s')}")
@@ -202,6 +255,12 @@ def build_ass(records: list[dict], source_id: str, clip_start: float,
         raise ValueError(f"No feature rows overlap the video trim for {source_id}")
     return _ass_header() + "\n".join(events) + "\n", {
         "shown_utterances_or_clips": shown,
+        "timed_chat_turns_available": len(chat_turns) if chat_turns is not None else None,
+        "chat_caption_intervals": len(chat_events),
+        "independent_asr_segments_available": len(asr_segments) if asr_segments is not None else None,
+        "independent_asr_words_available": len(asr_words) if asr_words is not None else None,
+        "independent_asr_words_with_timing": len(timed_asr_words),
+        "diarization_segments_available": len(diarization_segments) if diarization_segments is not None else None,
         "word_events": word_events,
         "phone_events": phone_events,
         "syllable_events": syllable_events,
@@ -210,7 +269,11 @@ def build_ass(records: list[dict], source_id: str, clip_start: float,
 
 
 def render(source_id: str, records: list[dict], output: Path,
-           max_seconds: float = MAX_SECONDS, clip_start: float = 0.0) -> dict:
+           max_seconds: float = MAX_SECONDS, clip_start: float = 0.0,
+           *, chat_turns: list[dict] | None = None,
+           asr_segments: list[dict] | None = None,
+           asr_words: list[dict] | None = None,
+           diarization_segments: list[dict] | None = None) -> dict:
     if not 0 < max_seconds <= MAX_SECONDS:
         raise ValueError("Validation videos must be at most 600 seconds")
     if clip_start < 0 or not math.isfinite(clip_start):
@@ -226,7 +289,11 @@ def render(source_id: str, records: list[dict], output: Path,
     duration = min(original_duration - clip_start, max_seconds)
     if not math.isfinite(duration) or duration <= 0:
         raise ValueError(f"Invalid audio duration for {audio}")
-    subtitles, counts = build_ass(records, source_id, clip_start, duration)
+    subtitles, counts = build_ass(
+        records, source_id, clip_start, duration, chat_turns=chat_turns,
+        asr_segments=asr_segments, asr_words=asr_words,
+        diarization_segments=diarization_segments,
+    )
     output.parent.mkdir(parents=True, exist_ok=True)
     ass_path = output.with_suffix(".ass")
     ass_path.write_text(subtitles, encoding="utf-8-sig")
