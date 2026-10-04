@@ -41,24 +41,26 @@ def main() -> None:
     )
     del silero_model
 
-    print("[models] Downloading the English Wav2Vec2 alignment model...")
-    import torchaudio
-
-    align_model = torchaudio.pipelines.WAV2VEC2_ASR_BASE_960H.get_model()
-    del align_model
-
     print("[models] Downloading NLTK English sentence-alignment data...")
     import nltk
 
     if not nltk.download("punkt_tab", download_dir=str(nltk_home), quiet=False):
         raise RuntimeError("NLTK punkt_tab download failed")
 
+    print("[models] Downloading WhisperX English word-alignment model...")
+    import whisperx
+
+    alignment_model, _alignment_metadata = whisperx.load_align_model(
+        language_code="en", device="cpu"
+    )
+    del alignment_model
+
     manifest = {
         "whisper_model": "large-v3",
         "whisper_path": str(whisper_path),
         "demucs_model": "htdemucs",
         "vad_model": "silero_vad",
-        "alignment_model": "WAV2VEC2_ASR_BASE_960H",
+        "alignment_model": "WhisperX English CTC; MFA english_mfa in separate Conda environment",
         "language": "en",
         "hf_cache_bytes": directory_size(hf_home),
         "torch_cache_bytes": directory_size(torch_home),

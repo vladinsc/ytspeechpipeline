@@ -4,3 +4,5 @@ _smoke_run
 .secrets/
 results
 _batch_work
+data/
+server_validation_bundle/

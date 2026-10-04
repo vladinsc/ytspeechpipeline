@@ -2,6 +2,7 @@
 FROM pytorch/pytorch:2.8.0-cuda12.8-cudnn9-runtime
 
 ARG PRELOAD_MODELS=1
+ARG INSTALL_MFA=1
 ARG DENO_VERSION=2.3.3
 
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -12,7 +13,8 @@ ENV DEBIAN_FRONTEND=noninteractive \
     TORCH_HOME=/opt/models/torch \
     NLTK_DATA=/opt/models/nltk \
     NVIDIA_VISIBLE_DEVICES=all \
-    NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    NVIDIA_DRIVER_CAPABILITIES=compute,utility \
+    YT_TRANSCRIBER_MFA_CONDA_ENV=aligner
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates curl ffmpeg git unzip \
@@ -34,12 +36,23 @@ RUN python -m pip install --upgrade pip \
     && python -m pip install --extra-index-url https://download.pytorch.org/whl/cu128 -r requirements.txt \
     && python -m pip check
 
+# Keep Kaldi/MFA dependencies separate from the CUDA Python environment.
+RUN if [ "$INSTALL_MFA" = "1" ]; then \
+      conda create -n aligner --override-channels -c conda-forge montreal-forced-aligner -y \
+      && conda run -n aligner mfa model download acoustic english_mfa \
+      && conda run -n aligner mfa model download dictionary english_us_mfa \
+      && conda clean -afy; \
+    fi
+
 COPY download_models.py ./
 RUN if [ "$PRELOAD_MODELS" = "1" ]; then python download_models.py; fi
 
-COPY speech_pipeline.py batch_pipeline.py yt_transcriber_api.py smoke_test.py container_entrypoint.sh ./
+COPY speech_pipeline.py mfa_alignment.py acoustic_features.py newman_ratner_pipeline.py run_feature_batch.py run_transcription_batch.py batch_pipeline.py yt_transcriber_api.py smoke_test.py container_entrypoint.sh ./
+COPY tools/render_validation_video.py tools/run_server_validation.py ./tools/
+COPY tools/build_transcription_manifest.py ./tools/
+COPY tools/run_newman_quality_pilot.py ./tools/
 
-RUN python -m py_compile speech_pipeline.py batch_pipeline.py yt_transcriber_api.py download_models.py smoke_test.py \
+RUN python -m py_compile speech_pipeline.py mfa_alignment.py acoustic_features.py newman_ratner_pipeline.py run_feature_batch.py run_transcription_batch.py tools/render_validation_video.py tools/run_server_validation.py tools/run_newman_quality_pilot.py batch_pipeline.py yt_transcriber_api.py download_models.py smoke_test.py \
     && python smoke_test.py
 
 RUN mkdir -p /data/input /data/results /data/work \

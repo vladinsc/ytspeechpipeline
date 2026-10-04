@@ -1,0 +1,42 @@
+name: speech-bengee-newman-quality
+
+services:
+  quality-pilot:
+    build:
+      context: .
+      args:
+        PRELOAD_MODELS: "1"
+        INSTALL_MFA: "0"
+    image: yt-transcriber:newman-quality-cuda12.8
+    network_mode: bridge
+    environment:
+      HF_TOKEN: "${HF_TOKEN:-}"
+    command:
+      - newman-quality
+      - --root
+      - data/staging/newman_ratner
+      - --out-dir
+      - results/newman_quality_pilot
+      - --device
+      - cuda:0
+      - --alignment-device
+      - cuda:0
+      - --whisper-model
+      - large-v3
+      - --compute-type
+      - float16
+      - --batch-size
+      - "4"
+      - --turns-per-speaker
+      - "12"
+    volumes:
+      - ./data/staging/newman_ratner:/app/data/staging/newman_ratner:ro
+      - ./results/newman_quality_pilot:/app/results/newman_quality_pilot
+    restart: "no"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["${BENGEE_NEWMAN_GPU:-0}"]
+              capabilities: [gpu]

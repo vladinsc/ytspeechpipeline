@@ -1,5 +1,6 @@
 .git
 .gitignore
+.env
 .secrets/
 __pycache__/
 *.py[cod]

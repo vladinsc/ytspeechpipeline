@@ -2,16 +2,16 @@
 CDS Prosody Extraction Pipeline
 ================================
 
-A GPU-accelerated pipeline that turns a YouTube URL into a word-level transcript
-enriched with prosodic / acoustic features, for comparing Child-Directed Speech
-(YouTube Kids) against adult-directed speech.
+A pipeline for YouTube audio or local recordings, producing aligned words and
+prosodic features. Montreal Forced Aligner (MFA) provides word and phone
+intervals on CPU. Audio without a transcript first uses WhisperX for ASR.
 
 Stages
 ------
 1. AudioDownloader  : yt-dlp -> ffmpeg -> WAV
 2. VocalIsolator    : Demucs (htdemucs) on CUDA  -> isolated vocals
-3. GPUTranscriber   : WhisperX (large-v3) + explicit VAD + forced alignment
-                    -> word timestamps
+3. Alignment        : MFA with a supplied or ASR transcript
+                    -> word and phone timestamps
 4. AcousticAnalyzer : Parselmouth (Praat) F0 + pause + speech-rate per word
 
 The output granularity can be `word`, `syllable`, or `both`. Syllable boundaries
@@ -25,14 +25,17 @@ separation quality. This pipeline therefore:
 
   * decodes the download to 44.1 kHz stereo for Demucs,
   * keeps the isolated vocals at 44.1 kHz for pitch analysis (finer F0 grid),
-  * produces a 16 kHz mono copy of the vocals ONLY for WhisperX.
+  * produces a 16 kHz mono copy of the vocals for alignment.
 
-All downstream analysis runs on the *isolated vocals*, never the raw audio.
+Local audio bypasses download and vocal isolation. Its original sample rate is
+preserved for prosody analysis, with a separate 16 kHz mono alignment copy.
 
 Usage
 -----
     python speech_pipeline.py "https://youtu.be/XXXX" --out result.json --workdir ./run
     python speech_pipeline.py "https://youtu.be/XXXX" --pitch-ceiling 800   # exaggerated CDS
+    python speech_pipeline.py segment.wav --transcript segment.txt \
+        --mfa-dictionary english_us_mfa --mfa-acoustic-model english_mfa
 """
 
 from __future__ import annotations
@@ -250,10 +253,10 @@ class VocalIsolator:
 
 
 # --------------------------------------------------------------------------- #
-# Stage 3 — ASR + forced alignment (WhisperX)
+# Stage 3 — ASR (WhisperX); legacy WhisperX alignment remains optional
 # --------------------------------------------------------------------------- #
 class GPUTranscriber:
-    """WhisperX large-v3 transcription with word-level forced alignment."""
+    """WhisperX ASR, with legacy word alignment available when requested."""
 
     def __init__(
         self,
@@ -326,14 +329,15 @@ class GPUTranscriber:
         self._alignment_metadata = metadata
         return model, metadata
 
-    def transcribe(self, vocals_16k: Path) -> list[dict]:
-        wx = self._whisperx
-        audio = wx.load_audio(str(vocals_16k))  # float32 mono @16k
+    def transcribe_with_alignment(self, vocals_16k: Path) -> dict:
+        """Run Silero-VAD ASR and return its independently timed transcript.
 
-        log.info("Transcribing ...")
-        result = self.model.transcribe(
-            audio, batch_size=self.batch_size, language=self.language
-        )
+        This is deliberately separate from ``align_known_transcript`` below.
+        Callers can therefore compare ASR output with a supplied annotation
+        without allowing that annotation to influence ASR segmentation or text.
+        """
+        wx = self._whisperx
+        result, audio = self._raw_transcription(vocals_16k)
         lang = result["language"]
         log.info("Detected language: %s", lang)
 
@@ -349,7 +353,9 @@ class GPUTranscriber:
         )
 
         words: list[dict] = []
+        segments: list[dict] = []
         for seg in aligned.get("segments", []):
+            segment_words = []
             for w in seg.get("words", []):
                 # Alignment occasionally fails for a token (numerals, symbols).
                 if "start" not in w or "end" not in w:
@@ -357,12 +363,110 @@ class GPUTranscriber:
                 token = str(w.get("word", "")).strip()
                 if not token:
                     continue
-                words.append(
-                    {"word": token, "start": float(w["start"]), "end": float(w["end"])}
-                )
+                item = {"word": token, "start": float(w["start"]), "end": float(w["end"])}
+                words.append(item)
+                segment_words.append(item)
+            text = str(seg.get("text", "")).strip()
+            if text and "start" in seg and "end" in seg:
+                segments.append({
+                    "text": text,
+                    "start": float(seg["start"]),
+                    "end": float(seg["end"]),
+                    "words": segment_words,
+                })
 
         log.info("Aligned %d words.", len(words))
+        return {"language": lang, "segments": segments, "words": words}
+
+    def transcribe(self, vocals_16k: Path) -> list[dict]:
+        """Compatibility wrapper returning only ASR-aligned words."""
+        return self.transcribe_with_alignment(vocals_16k)["words"]
+
+    def align_known_transcript(
+        self,
+        vocals_16k: Path,
+        transcript: str,
+        *,
+        language: str = "en",
+        start_sec: float = 0.0,
+        end_sec: float | None = None,
+    ) -> list[dict]:
+        """CTC-align supplied text without running ASR on that text.
+
+        ``start_sec`` and ``end_sec`` are a trusted annotation window within
+        ``vocals_16k``.  They guide the aligner but do not replace the resulting
+        word timestamps.  The ASR model loaded by this class still supplies
+        Silero VAD for independent transcription runs; this method itself is a
+        transcript-guided word aligner and never generates transcript text.
+        """
+        text = transcript.strip()
+        if not text:
+            raise ValueError("Cannot align an empty supplied transcript")
+        audio = self._whisperx.load_audio(str(vocals_16k))
+        duration_sec = len(audio) / 16_000
+        end = duration_sec if end_sec is None else float(end_sec)
+        start = float(start_sec)
+        if not 0 <= start < end <= duration_sec + 0.05:
+            raise ValueError(
+                f"Invalid supplied-transcript window {start:.3f}-{end:.3f} "
+                f"for {duration_sec:.3f}s audio"
+            )
+        align_model, metadata = self._alignment_for_language(language)
+        aligned = self._whisperx.align(
+            [{"text": text, "start": start, "end": min(end, duration_sec)}],
+            align_model,
+            metadata,
+            audio,
+            self.alignment_device,
+            return_char_alignments=False,
+        )
+        words: list[dict] = []
+        for segment in aligned.get("segments", []):
+            for word in segment.get("words", []):
+                if "start" not in word or "end" not in word:
+                    continue
+                token = str(word.get("word", "")).strip()
+                if token:
+                    words.append({
+                        "word": token,
+                        "start": float(word["start"]),
+                        "end": float(word["end"]),
+                    })
+        if not words:
+            raise ValueError("WhisperX could not produce word timestamps for supplied text")
         return words
+
+    def _raw_transcription(self, vocals_16k: Path):
+        audio = self._whisperx.load_audio(str(vocals_16k))  # float32 mono @16k
+        log.info("Transcribing ...")
+        result = self.model.transcribe(
+            audio, batch_size=self.batch_size, language=self.language
+        )
+        return result, audio
+
+    def transcribe_text(self, vocals_16k: Path) -> tuple[str, str]:
+        """Return text for MFA without running WhisperX word alignment."""
+        result, _audio = self._raw_transcription(vocals_16k)
+        text = " ".join(str(seg.get("text", "")).strip() for seg in result["segments"]).strip()
+        if not text:
+            raise ValueError("WhisperX produced no transcript for MFA to align")
+        return text, result["language"]
+
+    def transcribe_segments(self, vocals_16k: Path) -> tuple[list[dict], str]:
+        """Keep ASR segment times so MFA can align short clips individually."""
+        result, _audio = self._raw_transcription(vocals_16k)
+        segments = []
+        for segment in result.get("segments", []):
+            text = str(segment.get("text", "")).strip()
+            if not text:
+                continue
+            start, end = float(segment["start"]), float(segment["end"])
+            if not 0 <= start < end:
+                raise ValueError(f"Invalid ASR segment times: {segment!r}")
+            segments.append({"text": text, "start": start, "end": end})
+        if not segments:
+            raise ValueError("WhisperX produced no timed speech segments for MFA")
+        return sorted(segments, key=lambda item: item["start"]), result["language"]
 
 
 # --------------------------------------------------------------------------- #
@@ -559,12 +663,21 @@ class PipelineConfig:
     asr_sr: int = 16_000
     granularity: str = "word"
     label: Optional[str] = None
+    transcript_path: Optional[Path] = None
+    alignment_backend: str = "mfa"
+    mfa_dictionary: Optional[str] = "english_us_mfa"
+    mfa_acoustic_model: Optional[str] = "english_mfa"
+    mfa_conda_env: Optional[str] = None
 
 
 class ProsodyPipeline:
     def __init__(self, cfg: PipelineConfig, device: Optional[str] = None):
         self.cfg = cfg
-        self.device = device or resolve_device(cfg.device)
+        local_mfa = (
+            Path(cfg.url).is_file() and cfg.transcript_path is not None
+            and cfg.alignment_backend in {"auto", "mfa"}
+        )
+        self.device = device or ("cpu" if local_mfa else resolve_device(cfg.device))
         self.demucs_device = cfg.demucs_device or self.device
         self.alignment_device = cfg.alignment_device or self.device
         cfg.workdir.mkdir(parents=True, exist_ok=True)
@@ -590,34 +703,106 @@ class ProsodyPipeline:
             if progress_callback is not None:
                 progress_callback(stage, status, detail)
 
-        # 1. Download @44.1k stereo (Demucs-native)
-        progress("download", "started", cfg.url)
-        downloader = AudioDownloader(cfg.workdir)
-        raw_wav = downloader.download(cfg.url, sample_rate=44_100, stereo=True)
-        progress("download", "completed", raw_wav.name)
+        source = Path(cfg.url)
+        is_local = source.is_file()
+        if not is_local and not cfg.url.startswith(("https://", "http://")):
+            raise FileNotFoundError(f"Local audio file not found: {source}")
+        backend = "mfa" if cfg.alignment_backend == "auto" else cfg.alignment_backend
+        if backend == "whisperx" and cfg.transcript_path is not None:
+            raise ValueError("--transcript requires MFA alignment; choose --alignment-backend mfa or auto")
+        if backend == "mfa" and not (cfg.mfa_dictionary and cfg.mfa_acoustic_model):
+            raise ValueError("MFA requires --mfa-dictionary and --mfa-acoustic-model")
+        aligner = None
+        if backend == "mfa":
+            from mfa_alignment import MFAAligner
 
-        # 2. Isolate vocals (stays @44.1k for pitch fidelity)
-        progress("vocal_isolation", "started", cfg.demucs_model)
-        isolator = isolator or VocalIsolator(
-            self.demucs_device, model_name=cfg.demucs_model
-        )
-        vocals_hi = isolator.isolate(raw_wav, cfg.workdir / "vocals_44100.wav")
-        progress("vocal_isolation", "completed", vocals_hi.name)
+            aligner = MFAAligner(
+                cfg.mfa_dictionary, cfg.mfa_acoustic_model,
+                conda_env=cfg.mfa_conda_env,
+            )
+            aligner.ensure_available()
 
-        # 3. ASR + alignment on a 16k mono copy of the ISOLATED vocals
-        progress("asr_conversion", "started", f"{cfg.asr_sr} Hz mono")
-        vocals_16k = self._downsample_for_asr(vocals_hi)
-        progress("asr_conversion", "completed", vocals_16k.name)
-        progress("transcription_alignment", "started", cfg.whisper_model)
-        transcriber = transcriber or GPUTranscriber(
-            self.device,
-            model_size=cfg.whisper_model,
-            compute_type=cfg.compute_type,
-            language=cfg.language,
-            alignment_device=self.alignment_device,
-        )
-        words = transcriber.transcribe(vocals_16k)
-        progress("transcription_alignment", "completed", f"{len(words)} aligned words")
+        if is_local:
+            # Clean corpus recordings need neither a YouTube download nor Demucs.
+            progress("local_audio", "started", str(source))
+            vocals_hi = cfg.workdir / "local_analysis_mono.wav"
+            _run(["ffmpeg", "-y", "-i", str(source), "-ac", "1", "-vn",
+                  str(vocals_hi)])
+            vocals_16k = self._downsample_for_asr(vocals_hi)
+            progress("local_audio", "completed", vocals_16k.name)
+        else:
+            progress("download", "started", cfg.url)
+            downloader = AudioDownloader(cfg.workdir)
+            raw_wav = downloader.download(cfg.url, sample_rate=44_100, stereo=True)
+            progress("download", "completed", raw_wav.name)
+            progress("vocal_isolation", "started", cfg.demucs_model)
+            isolator = isolator or VocalIsolator(
+                self.demucs_device, model_name=cfg.demucs_model
+            )
+            vocals_hi = isolator.isolate(raw_wav, cfg.workdir / "vocals_44100.wav")
+            progress("vocal_isolation", "completed", vocals_hi.name)
+            progress("asr_conversion", "started", f"{cfg.asr_sr} Hz mono")
+            vocals_16k = self._downsample_for_asr(vocals_hi)
+            progress("asr_conversion", "completed", vocals_16k.name)
+
+        phones: list[dict] = []
+        detected_language = cfg.language
+        if backend == "mfa":
+            transcript = cfg.transcript_path
+            if transcript is not None:
+                progress("mfa_alignment", "started", str(transcript))
+                aligned = aligner.align(vocals_16k, transcript, cfg.workdir)
+                words, phones = aligned.words, aligned.phones
+            else:
+                transcriber = transcriber or GPUTranscriber(
+                    self.device, model_size=cfg.whisper_model,
+                    compute_type=cfg.compute_type, language=cfg.language,
+                    alignment_device=self.alignment_device,
+                )
+                segments, detected_language = transcriber.transcribe_segments(vocals_16k)
+                if (detected_language != "en" and cfg.mfa_dictionary == "english_us_mfa"
+                        and cfg.mfa_acoustic_model == "english_mfa"):
+                    raise ValueError(
+                        f"ASR detected {detected_language!r}; select MFA dictionary and "
+                        "acoustic models for that language"
+                    )
+                words, phones = [], []
+                progress("mfa_alignment", "started", f"{len(segments)} ASR segments")
+                segment_dir = Path(tempfile.mkdtemp(prefix="mfa_segments_", dir=cfg.workdir))
+                for index, segment in enumerate(segments):
+                    clip = segment_dir / f"clip_{index:05d}.wav"
+                    _run(["ffmpeg", "-y", "-i", str(vocals_16k), "-ss",
+                          str(segment["start"]), "-to", str(segment["end"]),
+                          "-ac", "1", "-ar", str(cfg.asr_sr), str(clip)])
+                    segment_transcript = segment_dir / f"clip_{index:05d}.lab"
+                    segment_transcript.write_text(segment["text"], encoding="utf-8")
+                aligned_clips = aligner.align_corpus(
+                    segment_dir, cfg.workdir / "mfa_corpus_output"
+                )
+                for index, segment in enumerate(segments):
+                    aligned = aligned_clips[f"clip_{index:05d}"]
+                    word_offset = len(words)
+                    for word in aligned.words:
+                        words.append({**word,
+                                      "start": word["start"] + segment["start"],
+                                      "end": word["end"] + segment["start"]})
+                    for phone in aligned.phones:
+                        phone_index = phone["word_index"]
+                        phones.append({**phone,
+                                       "start": phone["start"] + segment["start"],
+                                       "end": phone["end"] + segment["start"],
+                                       "word_index": (word_offset + phone_index
+                                                      if phone_index is not None else None)})
+            progress("mfa_alignment", "completed", f"{len(words)} words, {len(phones)} phones")
+        else:
+            progress("transcription_alignment", "started", cfg.whisper_model)
+            transcriber = transcriber or GPUTranscriber(
+                self.device, model_size=cfg.whisper_model,
+                compute_type=cfg.compute_type, language=cfg.language,
+                alignment_device=self.alignment_device,
+            )
+            words = transcriber.transcribe(vocals_16k)
+            progress("transcription_alignment", "completed", f"{len(words)} aligned words")
         if not words:
             log.warning("No words were transcribed/aligned; output will be empty.")
 
@@ -632,14 +817,36 @@ class ProsodyPipeline:
             record_count = len(word_payload)
         elif cfg.granularity == "syllable":
             syllable_payload = [f.to_dict() for f in analyzer.enrich_syllables(words)]
-            payload = syllable_payload
-            record_count = len(syllable_payload)
+            if backend == "mfa":
+                # Phone word_index must have a word collection to index into.
+                word_payload = [f.to_dict() for f in analyzer.enrich(words)]
+                payload = {"words": word_payload, "syllables": syllable_payload}
+                record_count = len(word_payload) + len(syllable_payload)
+            else:
+                payload = syllable_payload
+                record_count = len(syllable_payload)
         else:
             word_payload = [f.to_dict() for f in analyzer.enrich(words)]
             syllable_payload = [f.to_dict() for f in analyzer.enrich_syllables(words)]
             payload = {"words": word_payload, "syllables": syllable_payload}
             record_count = len(word_payload) + len(syllable_payload)
-        if cfg.label is not None:
+        if backend == "mfa":
+            collections = {"words": payload} if cfg.granularity == "word" else payload
+            payload = {
+                "source": str(source.resolve()) if is_local else cfg.url,
+                "granularity": cfg.granularity,
+                "language": detected_language,
+                "transcript_source": "provided" if cfg.transcript_path else "whisperx_asr",
+                "alignment_method": "mfa",
+                "phone_set": cfg.mfa_dictionary,
+                "phones": phones,
+                **collections,
+            }
+            if cfg.label is not None:
+                payload["label"] = cfg.label
+            if not is_local:
+                payload["source_url"] = cfg.url
+        elif cfg.label is not None:
             collections = (
                 {"words": payload} if cfg.granularity == "word"
                 else {"syllables": payload} if cfg.granularity == "syllable"
@@ -671,7 +878,7 @@ class ProsodyPipeline:
 # --------------------------------------------------------------------------- #
 def parse_args(argv: Optional[list[str]] = None) -> PipelineConfig:
     p = argparse.ArgumentParser(description="CDS prosody extraction pipeline.")
-    p.add_argument("url", help="YouTube URL")
+    p.add_argument("url", help="YouTube URL or local audio file")
     p.add_argument("--out", type=Path, default=Path("output.json"))
     p.add_argument("--workdir", type=Path, default=Path("./_pipeline_run"))
     p.add_argument("--device", default="auto", choices=["auto", "cuda", "cpu"])
@@ -681,8 +888,18 @@ def parse_args(argv: Optional[list[str]] = None) -> PipelineConfig:
     p.add_argument("--demucs-device", default=None,
                    help="Device for Demucs (default: same as --device).")
     p.add_argument("--alignment-device", default=None,
-                   help="Device for forced alignment (default: same as --device).")
+                   help="Device for legacy WhisperX alignment; MFA runs on CPU.")
     p.add_argument("--language", default=None, help="Force language code (e.g. 'en').")
+    p.add_argument("--transcript", type=Path, default=None,
+                   help="Trusted transcript file for MFA; skips ASR when supplied.")
+    p.add_argument("--alignment-backend", choices=["auto", "whisperx", "mfa"],
+                   default="mfa", help="MFA is the default for all alignment; WhisperX is legacy.")
+    p.add_argument("--mfa-dictionary", default="english_us_mfa",
+                   help="MFA dictionary model name or path (required for MFA).")
+    p.add_argument("--mfa-acoustic-model", default="english_mfa",
+                   help="MFA acoustic model name or path (required for MFA).")
+    p.add_argument("--mfa-conda-env", default=None,
+                   help="Run MFA in a separate Conda environment, e.g. 'aligner'.")
     p.add_argument("--pitch-floor", type=float, default=75.0)
     p.add_argument("--pitch-ceiling", type=float, default=600.0,
                    help="Raise (e.g. 800) for exaggerated CDS to avoid clipping.")
@@ -699,6 +916,9 @@ def parse_args(argv: Optional[list[str]] = None) -> PipelineConfig:
         demucs_model=a.demucs_model, language=a.language,
         pitch_floor=a.pitch_floor, pitch_ceiling=a.pitch_ceiling,
         keep_workdir=not a.clean, granularity=a.granularity, label=a.label,
+        transcript_path=a.transcript, alignment_backend=a.alignment_backend,
+        mfa_dictionary=a.mfa_dictionary, mfa_acoustic_model=a.mfa_acoustic_model,
+        mfa_conda_env=a.mfa_conda_env,
     )
 
 

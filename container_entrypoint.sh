@@ -33,6 +33,21 @@ case "$mode" in
     shift
     exec -a yt-transcriber python batch_pipeline.py "$@"
     ;;
+  transcription)
+    gpu_check
+    shift
+    exec -a yt-transcriber python run_transcription_batch.py "$@"
+    ;;
+  features)
+    gpu_check
+    shift
+    exec -a yt-transcriber python run_feature_batch.py "$@"
+    ;;
+  newman-quality)
+    gpu_check
+    shift
+    exec -a yt-transcriber python tools/run_newman_quality_pilot.py "$@"
+    ;;
   bengee-worker)
     gpu_check
     shift || true
@@ -68,7 +83,7 @@ case "$mode" in
     exec /bin/bash "$@"
     ;;
   *)
-    echo "Usage: container_entrypoint.sh {api|batch|bengee-worker|shell}" >&2
+    echo "Usage: container_entrypoint.sh {api|batch|transcription|features|newman-quality|bengee-worker|shell}" >&2
     exit 2
     ;;
 esac
