@@ -14,6 +14,16 @@
 
 ---
 
+## 🎬 Demo
+
+https://github.com/user-attachments/assets/29e0c71e-328e-44f0-8037-707e23787a7b
+
+*Pipeline output played back over the original audio. Words light up at their WhisperX-aligned times, syllables at their estimated times, and the bottom row shows the pitch, pause and speech rate measured for the current word. Rendered with [`tools/render_karaoke_video.py`](tools/render_karaoke_video.py).*
+
+<sub>Audio: [“How CRISPR lets you edit DNA” by Andrea M. Henle, TED-Ed](https://www.youtube.com/watch?v=6tw_JVz_IEc), licensed CC BY-NC-ND 4.0. First 60 seconds, used for non-commercial research demonstration.</sub>
+
+---
+
 ## What is it?
 
 When adults talk to children they change the way they speak: higher and more variable pitch, slower speech, longer pauses. Linguists call this **child-directed speech (CDS)**, as opposed to **adult-directed speech (ADS)**.
